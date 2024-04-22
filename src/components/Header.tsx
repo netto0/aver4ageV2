@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header className="bg-zinc-400 h-20 flex justify-center items-center text-2xl text-gray-900 drop-shadow-sm shadow-black">
+    <header className="bg-darkGray h-20 flex justify-center items-center text-2xl text-gray-900 drop-shadow-sm shadow-black">
       <div className="px-12">
         <h1 className="font-bold text-3xl text-gray-800 hover:cursor-pointer hover:scale-110 transition-transform">
           AVER<span className="text-cyan-700">4</span>AGE
