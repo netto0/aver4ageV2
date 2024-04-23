@@ -1,9 +1,8 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import TableRow from "./TableRow";
-import { getSubjectsService } from "../api/services/subjectServices";
+// import { getSubjectsService } from "../api/services/subjectServices";
 
 export default function Table() {
-
   const subjects = [
     {
       _id: "6626fff7b853f4fabedee780",
@@ -30,6 +29,25 @@ export default function Table() {
       __v: 0,
     },
   ];
+
+  function avaSum(list: number[]): number {
+    return list.reduce((total, currentElement) => total + currentElement);
+  }
+
+  function average(
+    ava: number,
+    pim: number,
+    exam: number,
+    rtk?: number
+  ): number {
+    // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
+    const regularMD = (7 * exam + 2 * pim + ava) / 10;
+    if (rtk) {
+      const regularMF = (regularMD + rtk!) / 2;
+      return regularMF;
+    }
+    return regularMD;
+  }
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -142,18 +160,21 @@ export default function Table() {
         </thead>
 
         <tbody>
-          {subjects.map((subject) => <TableRow
-            semester={subject.semester}
-            subject={subject.name}
-            ava={subject.avaGrades.reduce((total, currentElement) => total + currentElement)}
-            pim={subject.pimGrade}
-            exam={subject.examGrade}
-            avg={2}
-            rtk={8}
-          />)}
-          
+          {subjects.map((subject) => (
+            <TableRow
+              semester={subject.semester}
+              subject={subject.name}
+              // ava={subject.avaGrades.reduce(
+              //   (total, currentElement) => total + currentElement
+              // )}
+              ava={avaSum(subject.avaGrades)}
+              pim={subject.pimGrade}
+              exam={subject.examGrade}
+              avg={average(avaSum(subject.avaGrades),subject.pimGrade, subject.examGrade)}
+              rtk={8}
+            />
+          ))}
         </tbody>
-
       </table>
     </div>
   );
