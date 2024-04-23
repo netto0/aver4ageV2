@@ -13,7 +13,7 @@ export default function TableRow({semester, subject, ava, pim, exam, avg, rtk}: 
         <tr className="bg-white border-b dark:bg-darkerGray dark:border-gray-700">
             <th
               scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-900"
+              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-900 min-w-fit truncate"
             >
               {semester}
             </th>

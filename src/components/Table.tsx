@@ -1,15 +1,36 @@
+import { useEffect } from "react";
 import TableRow from "./TableRow";
+import { getSubjectsService } from "../api/services/subjectServices";
 
 export default function Table() {
-  const subjectEx = {
-    semester: 1,
-    subject: "Organização de Computadores",
-    ava: 8.5,
-    pim: 8,
-    exam: 3,
-    avg: 4.55,
-    rtk: 5.45,
-  };
+
+  const subjects = [
+    {
+      _id: "6626fff7b853f4fabedee780",
+      name: "Organização de Computadores",
+      semester: 1,
+      avaQtt: 4,
+      avaGrades: [4, 2, 1, 4],
+      pimGrade: 8,
+      examGrade: 3,
+      createdAt: "2024-04-23T00:25:27.857Z",
+      updatedAt: "2024-04-23T00:25:27.857Z",
+      __v: 0,
+    },
+    {
+      _id: "66270066b853f4fabedee782",
+      name: "Princípios de Sistemas de Informação",
+      semester: 1,
+      avaQtt: 4,
+      avaGrades: [8, 5, 2, 7],
+      pimGrade: 8,
+      examGrade: 8,
+      createdAt: "2024-04-23T00:27:18.185Z",
+      updatedAt: "2024-04-23T00:27:18.185Z",
+      __v: 0,
+    },
+  ];
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-700">
@@ -121,8 +142,18 @@ export default function Table() {
         </thead>
 
         <tbody>
-          <TableRow semester={subjectEx.semester} subject={subjectEx.subject} ava={subjectEx.ava} pim={subjectEx.pim} exam={subjectEx.exam} avg={subjectEx.avg} rtk={subjectEx.rtk}/>
+          {subjects.map((subject) => <TableRow
+            semester={subject.semester}
+            subject={subject.name}
+            ava={subject.avaGrades.reduce((total, currentElement) => total + currentElement)}
+            pim={subject.pimGrade}
+            exam={subject.examGrade}
+            avg={2}
+            rtk={8}
+          />)}
+          
         </tbody>
+
       </table>
     </div>
   );
