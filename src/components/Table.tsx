@@ -1,64 +1,43 @@
 // import { useEffect } from "react";
 import TableRow from "./TableRow";
-// import { getSubjectsService } from "../api/services/subjectServices";
+import { subjects } from "../api/services/subjectServices";
 
 export default function Table() {
-  const subjects = [
-    {
-      _id: "6626fff7b853f4fabedee780",
-      name: "Organização de Computadores",
-      semester: 1,
-      avaQtt: 4,
-      avaGrades: [4, 2, 1, 4],
-      pimGrade: 8,
-      examGrade: 3,
-      createdAt: "2024-04-23T00:25:27.857Z",
-      updatedAt: "2024-04-23T00:25:27.857Z",
-      __v: 0,
-    },
-    {
-      _id: "66270066b853f4fabedee782",
-      name: "Princípios de Sistemas de Informação",
-      semester: 1,
-      avaQtt: 4,
-      avaGrades: [8, 5, 2, 7],
-      pimGrade: 8,
-      examGrade: 8,
-      createdAt: "2024-04-23T00:27:18.185Z",
-      updatedAt: "2024-04-23T00:27:18.185Z",
-      __v: 0,
-    },
-  ];
-
   function avaSum(list: number[]): number {
     return list.reduce((total, currentElement) => total + currentElement);
   }
 
   function average(
     ava: number,
-    pim: number,
     exam: number,
-    rtk?: number
-  ): number {
+    pim: number | null,
+    rtk: number | null
+  ): number | null {
     // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
+    if (!pim) {
+      return null;
+    }
+
     const regularMD = (7 * exam + 2 * pim + ava) / 10;
+
     if (rtk) {
-      const regularMF = (regularMD + rtk!) / 2;
+      const regularMF = (regularMD + rtk) / 2;
       return regularMF;
     }
+
     return regularMD;
   }
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-700">
+    <div className="h-80 overflow-auto shadow-xlg sm:rounded-lg">
+      <table className="w-full text-base text-center rtl:text-right text-gray-500 dark:text-gray-900">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-darkGray dark:text-gray-900">
           <tr>
-            <th scope="col" className="px-6 py-3">
-              Semestre
+            <th scope="col" className="px-3 py-3 w-fit m-auto">
+              Sem.
             </th>
-            <th scope="col" className="px-6 py-3">
-              <div className="flex items-center">
+            <th scope="col" className="px-3 py-3">
+              <div className="flex items-center w-fit m-auto">
                 Matéria
                 <a href="#">
                   <svg
@@ -73,8 +52,8 @@ export default function Table() {
                 </a>
               </div>
             </th>
-            <th scope="col" className="px-6 py-3">
-              <div className="flex items-center">
+            <th scope="col" className="px-3 py-3">
+              <div className="flex items-center w-fit m-auto">
                 AVA
                 <a href="#">
                   <svg
@@ -89,8 +68,8 @@ export default function Table() {
                 </a>
               </div>
             </th>
-            <th scope="col" className="px-6 py-3">
-              <div className="flex items-center">
+            <th scope="col" className="px-3 py-3">
+              <div className="flex items-center w-fit m-auto">
                 PIM
                 <a href="#">
                   <svg
@@ -105,8 +84,8 @@ export default function Table() {
                 </a>
               </div>
             </th>
-            <th scope="col" className="px-6 py-3">
-              <div className="flex items-center">
+            <th scope="col" className="px-3 py-3">
+              <div className="flex items-center w-fit m-auto">
                 Prova
                 <a href="#">
                   <svg
@@ -121,8 +100,8 @@ export default function Table() {
                 </a>
               </div>
             </th>
-            <th scope="col" className="px-6 py-3">
-              <div className="flex items-center">
+            <th scope="col" className="px-3 py-3">
+              <div className="flex items-center w-fit m-auto">
                 Média
                 <a href="#">
                   <svg
@@ -137,8 +116,8 @@ export default function Table() {
                 </a>
               </div>
             </th>
-            <th scope="col" className="px-6 py-3">
-              <div className="flex items-center">
+            <th scope="col" className="px-3 py-3">
+              <div className="flex items-center w-fit m-auto">
                 Exame
                 <a href="#">
                   <svg
@@ -164,14 +143,16 @@ export default function Table() {
             <TableRow
               semester={subject.semester}
               subject={subject.name}
-              // ava={subject.avaGrades.reduce(
-              //   (total, currentElement) => total + currentElement
-              // )}
               ava={avaSum(subject.avaGrades)}
               pim={subject.pimGrade}
               exam={subject.examGrade}
-              avg={average(avaSum(subject.avaGrades),subject.pimGrade, subject.examGrade)}
-              rtk={8}
+              avg={average(
+                avaSum(subject.avaGrades),
+                subject.examGrade,
+                subject.pimGrade,
+                subject.retakeGrade
+              )}
+              rtk={subject.retakeGrade}
             />
           ))}
         </tbody>

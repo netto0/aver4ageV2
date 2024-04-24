@@ -16,17 +16,24 @@ export default function Body() {
 
   return (
     <main className="w-screen bg-lightGray grow px-36 py-7">
-      <div id="searchBarField" className="p-2 flex justify-around gap-4 mb-2">
-        <Button texto="+" funcao={teste} />
-        <Input
-          placeholder="Digite o que deseja buscar..."
-          name="search"
-          value={search}
-          handleChange={handleChange}
-        />
-        <Button texto="OK" />
+      <div className="relative bg-red-300 h-full flex flex-col">
+        <div
+          id="searchBarField"
+          className="flex justify-around gap-4 py-4 bg-green-300"
+        >
+          <Button texto="+" funcao={teste} />
+          <Input
+            placeholder="Digite o que deseja buscar..."
+            name="search"
+            value={search}
+            handleChange={handleChange}
+          />
+          <Button texto="OK" />
+        </div>
+        <div className="h- bg-yellow-200 ">
+          <Table />
+        </div>
       </div>
-      <Table />
     </main>
   );
 }

@@ -1,36 +1,50 @@
+import Dot from "./Dot";
+
 interface Props {
-    semester: number;
-    subject: string;
-    ava: number;
-    pim: number;
-    exam: number;
-    avg: number;
-    rtk: number
+  semester: number;
+  subject: string;
+  ava: number;
+  exam: number;
+  avg: number | null;
+  pim: number | null;
+  rtk: number | null;
 }
 
-export default function TableRow({semester, subject, ava, pim, exam, avg, rtk}: Props) {
-    return (
-        <tr className="bg-white border-b dark:bg-darkerGray dark:border-gray-700">
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-900 min-w-fit truncate"
-            >
-              {semester}
-            </th>
-            <td className="px-6 py-4 truncate bg-red-500">{subject}</td>
-            <td className="px-6 py-4">{ava}</td>
-            <td className="px-6 py-4">{pim}</td>
-            <td className="px-6 py-4">{exam}</td>
-            <td className="px-6 py-4">{avg}</td>
-            <td className="px-6 py-4">{rtk}</td>
-            {/* <td className="px-6 py-4 text-right">
-              <a
-                href="#"
-                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </a>
-            </td> */}
-          </tr>
-    )
+export default function TableRow({
+  semester,
+  subject,
+  ava,
+  pim,
+  exam,
+  avg,
+  rtk,
+}: Props) {
+  return (
+    <tr className="bg-white border-b dark:bg-darkerGray dark:border-gray-700">
+      <td className="py-4 w-24">
+        {semester}
+      </td>
+      <td className="truncate">{subject}</td>
+      <td className="relative w-24">
+        {!ava ? "∅" : ava}
+        {!ava && <Dot />}
+      </td>
+      <td className="relative w-24">
+        {!pim ? "∅" : pim}
+        {!pim && <Dot />}
+      </td>
+      <td className="relative w-24">
+        {!exam ? "∅" : exam}
+        {!exam && <Dot />}
+      </td>
+      <td className="relative w-24">
+        {!avg ? "∅" : avg}
+        {!avg && <Dot />}
+      </td>
+      <td className="relative w-24">
+        {!rtk ? "∅" : rtk}
+        {!rtk && <Dot />}
+      </td>
+    </tr>
+  );
 }
