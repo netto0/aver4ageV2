@@ -1,6 +1,7 @@
 import Dot from "./Dot";
 
 interface Props {
+  id: string;
   semester: number;
   subject: string;
   ava: number;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export default function TableRow({
+  id,
   semester,
   subject,
   ava,
@@ -20,30 +22,30 @@ export default function TableRow({
   rtk,
 }: Props) {
   return (
-    <tr className="bg-white border-b dark:bg-darkerGray dark:border-gray-700 flex">
-      <td className="py-4 w-[10%] bg-blue-400">{semester}</td>
-      <td className="w-[30%] px-6 py-2 truncate bg-blue-600">{subject}</td>
-      <td className="relative w-[10%] bg-blue-400">
+    <tr className="bg-darkGray border-b border-gray-500 flex items-center" key={id}>
+      <td className="py-4 w-[10%] ">{semester}</td>
+      <td className="w-[30%] px-6 py-2 truncate ">{subject}</td>
+      <td className="relative w-[10%] ">
         {!ava ? "∅" : ava}
         {!ava && <Dot />}
       </td>
-      <td className="relative w-[10%] bg-blue-600">
+      <td className="relative w-[10%] ">
         {!pim ? "∅" : pim}
         {!pim && <Dot />}
       </td>
-      <td className="relative w-[10%] bg-blue-400">
+      <td className="relative w-[10%] ">
         {!exam ? "∅" : exam}
         {!exam && <Dot />}
       </td>
-      <td className="relative w-[10%] bg-blue-600">
+      <td className="relative w-[10%] ">
         {!avg ? "∅" : avg}
         {!avg && <Dot />}
       </td>
-      <td className="relative w-[10%] bg-blue-400">
+      <td className="relative w-[10%] ">
         {!rtk ? "∅" : rtk}
         {!rtk && <Dot />}
       </td>
-      <td className="relative w-[10%] bg-blue-600">
+      <td className="relative w-[10%] ">
         <a
           href="#"
           className="font-medium text-blue-600 dark:text-blue-500 hover:underline"

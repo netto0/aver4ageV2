@@ -160,39 +160,41 @@ export default function Table() {
   //   </div>
   // );
   return (
-    <div className="overflow-x-auto shadow-md sm:rounded-lg table-fixed border-collapse">
-      <table className="text-base text-center rtl:text-right text-gray-500 dark:text-gray-900 w-full">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-darkGray dark:text-gray-900">
+    <div className="overflow-auto shadow-md sm:rounded-lg border-collapse">
+      <table className="text-base text-center rtl:text-right text-gray-900 w-full">
+        <thead className="text-xs uppercase bg-darkerGray text-gray-900 drop-shadow-md">
           <tr className="flex w-full">
-            <th scope="col" className="px-6 py-3 w-[10%] bg-pink-400">
+            <th scope="col" className="px-6 py-3 w-[10%]">
               Semestre
             </th>
-            <th scope="col" className="px-6 py-3 w-[30%] bg-pink-600">
+            <th scope="col" className="px-6 py-3 w-[30%]">
               Matéria
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%] bg-pink-400">
+            <th scope="col" className="px-6 py-3 w-[10%]">
               Ava
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%] bg-pink-600">
+            <th scope="col" className="px-6 py-3 w-[10%]">
               Pim
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%] bg-pink-400">
+            <th scope="col" className="px-6 py-3 w-[10%]">
               Prova
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%] bg-pink-600">
+            <th scope="col" className="px-6 py-3 w-[10%]">
               Média
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%] bg-pink-400">
+            <th scope="col" className="px-6 py-3 w-[10%]">
               Exame
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%] bg-pink-600">
+            <th scope="col" className="px-6 py-3 w-[10%]">
               Ação
             </th>
           </tr>
         </thead>
-        <tbody className="block overflow-auto h-96 w-full bg-yellow-200">
-          {subjects.map((subject) => (
+        <tbody className="block scroll overflow-y-auto h-[587px]  no-scrollbar">
+          {subjects.map((subject, i) => (
             <TableRow
+              key={i}
+              id={subject._id}
               semester={subject.semester}
               subject={subject.name}
               ava={avaSum(subject.avaGrades)}

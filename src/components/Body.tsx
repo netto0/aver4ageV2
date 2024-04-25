@@ -15,11 +15,11 @@ export default function Body() {
   };
 
   return (
-    <main className="w-full bg-lightGray grow px-[8%] py-7">
-      <div className="relative flex flex-col">
+    <main className="w-full bg-lightGray grow px-[8%] flex flex-col justify-center">
+      <div className="relative flex flex-col gap-4">
         <div
           id="searchBarField"
-          className="flex justify-around gap-4 py-4 bg-green-300"
+          className="flex justify-around gap-4"
         >
           <Button texto="+" funcao={teste} />
           <Input
@@ -30,7 +30,7 @@ export default function Body() {
           />
           <Button texto="OK" />
         </div>
-        <Table />
+          <Table />
       </div>
     </main>
   );

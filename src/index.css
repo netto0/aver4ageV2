@@ -7,3 +7,20 @@
 #docs-root {
     --darkGray: "zinc-400"
 }
+
+@layer utilities {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        background-color: #8a8a8a;
+        width: 2px;
+    }
+    
+    .no-scrollbar::-webkit-scrollbar-track {
+    }
+    
+    .no-scrollbar::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        background-color: #444444;
+      }
+
+}
