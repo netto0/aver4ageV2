@@ -15,8 +15,8 @@ export default function Body() {
   };
 
   return (
-    <main className="w-screen bg-lightGray grow px-36 py-7">
-      <div className="relative bg-red-300 h-full flex flex-col">
+    <main className="w-full bg-lightGray grow px-[8%] py-7">
+      <div className="relative flex flex-col">
         <div
           id="searchBarField"
           className="flex justify-around gap-4 py-4 bg-green-300"
@@ -30,9 +30,7 @@ export default function Body() {
           />
           <Button texto="OK" />
         </div>
-        <div className="h- bg-yellow-200 ">
-          <Table />
-        </div>
+        <Table />
       </div>
     </main>
   );
