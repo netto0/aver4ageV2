@@ -8,16 +8,66 @@ export default function AddSubModal({ setShow }: Props) {
   const [formFields, setFormFields] = useState({
     name: "",
     semester: null,
-    avaQtt: null,
+    avaQtt: 1,
     pim: null,
     exam: null,
-    avaGrades: null,
+    avaGrades: [],
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.name);
-    setFormFields({ ...formFields, [e.target.name]: e.target.value });
+  const [showAva, setShowAva] = useState(true);
+
+  const toggleAva = () => {
+    setShowAva(!showAva);
   };
+  let gradesObj = {}
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const targetNames = ["name", "semester", "avaQtt", "pim", "exam"]
+    let grades = formFields.avaGrades
+
+    // AO CRIAR UMA NOVA NOTA JÁ INSERIR NO FORMULÁRIO COMO 0
+    // CLONAR O ARRAY DO FORMULÁRIO / ALTERAR O ÍNDICE ENCONTRADO / SUBSTITUIR O ARRAY DO FORMULÁRIO
+    
+    console.log(grades)
+    if(targetNames.includes(e.target.name)) {
+      setFormFields({ ...formFields, [e.target.name]: e.target.value });
+    }
+    else {
+      gradesObj = {...gradesObj, [e.target.name]: e.target.value}
+      console.log(gradesObj)
+      console.log(e.target.value)
+      // setFormFields({ ...formFields, avaGrades: [] });
+    }
+  };
+
+  // const changeAvaGrades = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFormFields({ ...formFields, [e.target.name]: e.target.value });
+  // };
+
+  const avaList = [];
+  for (let i = 1; i <= formFields.avaQtt; i++) {
+    avaList.push(
+      <div className="col-span-1 sm:col-span-1" key={i}>
+        <label
+          htmlFor={`ava${i}`}
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          {`AVA ${i}`}
+        </label>
+        <input
+          type="number"
+          name={`ava${i}`}
+          id={`ava${i}`}
+          value={formFields.avaGrades[i]}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          placeholder="1"
+          min={0}
+          onChange={handleChange}
+        />
+      </div>
+    );
+  }
+
 
   return (
     <>
@@ -113,21 +163,40 @@ export default function AddSubModal({ setShow }: Props) {
                       type="button"
                       className="text-gray-400  hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                       data-modal-toggle="crud-modal"
-                      // onClick = SHOW AVA GRADES TO EDIT
+                      onClick={toggleAva}
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        className ="bi bi-caret-down-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                      </svg>
-                      <span className="sr-only">Close modal</span>
+                      {showAva ? (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-caret-up-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                        </svg>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-caret-down-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                      )}
                     </button>
                   </div>
+                </div>
+                <div
+                  className={`col-span-2 flex w-full h-fit bg-gray-600 ${
+                    !showAva && "hidden"
+                  } flex-wrap justify-between`}
+                >
+                  {avaList}
                 </div>
                 <div className="col-span-2 sm:col-span-1">
                   <label
