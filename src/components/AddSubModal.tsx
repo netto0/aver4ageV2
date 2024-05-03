@@ -9,9 +9,10 @@ export default function AddSubModal({ setShow }: Props) {
     name: "",
     semester: null,
     avaQtt: 0,
+    avaGrades: {},
     pim: null,
     exam: null,
-    avaGrades: {},
+    retake: null,
   });
 
   const [showAva, setShowAva] = useState(false);

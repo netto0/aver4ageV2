@@ -1,11 +1,13 @@
 // import { useEffect } from "react";
 import TableRow from "./TableRow";
 import { subjects } from "../api/services/subjectServices";
-import Dot from "./Dot";
 
 export default function Table() {
-  function avaSum(list: number[]): number {
-    return list.reduce((total, currentElement) => total + currentElement);
+  
+  function avaSum(gradesObject: {[key:string] : number}): number {
+    const list = Object.values(gradesObject)
+    const sum = list.reduce((total, current) => total + current)
+    return sum 
   }
 
   function average(
