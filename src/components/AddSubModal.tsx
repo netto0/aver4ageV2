@@ -8,41 +8,34 @@ export default function AddSubModal({ setShow }: Props) {
   const [formFields, setFormFields] = useState({
     name: "",
     semester: null,
-    avaQtt: 1,
+    avaQtt: 0,
     pim: null,
     exam: null,
-    avaGrades: [],
+    avaGrades: {},
   });
 
-  const [showAva, setShowAva] = useState(true);
+  const [showAva, setShowAva] = useState(false);
 
   const toggleAva = () => {
-    setShowAva(!showAva);
+    if (formFields.avaQtt != 0) {
+      setShowAva(!showAva);
+    }
   };
-  let gradesObj = {}
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const targetNames = ["name", "semester", "avaQtt", "pim", "exam"]
-    let grades = formFields.avaGrades
+    const targetNames = ["name", "semester", "avaQtt", "pim", "exam"];
+    let grades = formFields.avaGrades;
 
     // AO CRIAR UMA NOVA NOTA JÁ INSERIR NO FORMULÁRIO COMO 0
     // CLONAR O ARRAY DO FORMULÁRIO / ALTERAR O ÍNDICE ENCONTRADO / SUBSTITUIR O ARRAY DO FORMULÁRIO
-    
-    console.log(grades)
-    if(targetNames.includes(e.target.name)) {
+
+    if (targetNames.includes(e.target.name)) {
       setFormFields({ ...formFields, [e.target.name]: e.target.value });
-    }
-    else {
-      gradesObj = {...gradesObj, [e.target.name]: e.target.value}
-      console.log(gradesObj)
-      console.log(e.target.value)
-      // setFormFields({ ...formFields, avaGrades: [] });
+    } else {
+      grades = { ...grades, [e.target.name]: e.target.value };
+      setFormFields({ ...formFields, avaGrades: grades });
     }
   };
-
-  // const changeAvaGrades = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setFormFields({ ...formFields, [e.target.name]: e.target.value });
-  // };
 
   const avaList = [];
   for (let i = 1; i <= formFields.avaQtt; i++) {
@@ -58,16 +51,15 @@ export default function AddSubModal({ setShow }: Props) {
           type="number"
           name={`ava${i}`}
           id={`ava${i}`}
-          value={formFields.avaGrades[i]}
+          // value={formFields.avaGrades}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          placeholder="1"
+          placeholder="Insira a nota da aula..."
           min={0}
           onChange={handleChange}
         />
       </div>
     );
   }
-
 
   return (
     <>
@@ -113,7 +105,7 @@ export default function AddSubModal({ setShow }: Props) {
                     htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Nome
+                    Nome *
                   </label>
                   <input
                     type="text"
@@ -130,7 +122,7 @@ export default function AddSubModal({ setShow }: Props) {
                     htmlFor="semester"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Semestre
+                    Semestre *
                   </label>
                   <input
                     type="number"
@@ -147,7 +139,7 @@ export default function AddSubModal({ setShow }: Props) {
                     htmlFor="avaQtt"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Quantidade AVA
+                    Quantidade AVA *
                   </label>
                   <div className="flex gap-1 items-center">
                     <input
@@ -155,7 +147,7 @@ export default function AddSubModal({ setShow }: Props) {
                       name="avaQtt"
                       id="avaQtt"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder="1"
+                      placeholder="0"
                       min={0}
                       onChange={handleChange}
                     />
@@ -192,7 +184,7 @@ export default function AddSubModal({ setShow }: Props) {
                   </div>
                 </div>
                 <div
-                  className={`col-span-2 flex w-full h-fit bg-gray-600 ${
+                  className={`col-span-2 flex w-full h-fit max-h-[155px] overflow-auto no-scrollbar gap-3 ${
                     !showAva && "hidden"
                   } flex-wrap justify-between`}
                 >
@@ -235,7 +227,7 @@ export default function AddSubModal({ setShow }: Props) {
               </div>
               <button
                 type="submit"
-                className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-white inline-flex items-center bg-green-600 hover:bg-green-700 focus:ring-2 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 <svg
                   className="me-1 -ms-1 w-5 h-5"
@@ -252,7 +244,7 @@ export default function AddSubModal({ setShow }: Props) {
                 Adicionar Matéria
               </button>
 
-              {JSON.stringify(formFields)}
+              {/* {JSON.stringify(formFields)} */}
             </form>
           </div>
         </div>
