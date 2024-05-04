@@ -1,4 +1,15 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+type Subject = {
+  name: string;
+  semester: number | null;
+  avaQtt: number;
+  avaGrades: { [k: string]: number } | {};
+  pim: number | null;
+  exam: number | null;
+  retake: number | null;
+};
 
 interface Props {
   setShow: () => void;
@@ -16,6 +27,19 @@ export default function AddSubModal({ setShow }: Props) {
   });
 
   const [showAva, setShowAva] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Subject>();
+
+  const onSubmit = handleSubmit((data) => {
+    alert(JSON.stringify(data));
+  });
+
+  // const sendForm = (e:React.SyntheticEvent):void => {
+  //   e.preventDefault()
+  // }
 
   const toggleAva = () => {
     if (formFields.avaQtt != 0) {
@@ -99,7 +123,7 @@ export default function AddSubModal({ setShow }: Props) {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
-            <form className="p-4 md:p-5">
+            <form className="p-4 md:p-5" onSubmit={onSubmit}>
               <div className="grid gap-4 mb-4 grid-cols-2">
                 <div className="col-span-2">
                   <label
@@ -109,6 +133,9 @@ export default function AddSubModal({ setShow }: Props) {
                     Nome *
                   </label>
                   <input
+                    {...register("name", { minLength: 3 })}
+                    // {...register("name", { required: true })}
+                    // https://react-hook-form.com/advanced-usage
                     type="text"
                     name="name"
                     id="name"
@@ -117,6 +144,11 @@ export default function AddSubModal({ setShow }: Props) {
                     placeholder="Digite o nome da matéria..."
                     onChange={handleChange}
                   />
+                  {errors.name && (
+                    <span className="text-red-500 text-sm">
+                      O nome precisa ter no mínimo 3 letras
+                    </span>
+                  )}
                 </div>
                 <div className="col-span-2 sm:col-span-1">
                   <label
@@ -126,6 +158,7 @@ export default function AddSubModal({ setShow }: Props) {
                     Semestre *
                   </label>
                   <input
+                    {...register("semester", { required: true })}
                     type="number"
                     name="semester"
                     id="semester"
@@ -134,6 +167,11 @@ export default function AddSubModal({ setShow }: Props) {
                     min={1}
                     onChange={handleChange}
                   />
+                  {errors.semester && (
+                    <span className="text-red-500 text-sm">
+                      Campo obrigatório
+                    </span>
+                  )}
                 </div>
                 <div className="col-span-2 sm:col-span-1">
                   <label
@@ -142,46 +180,54 @@ export default function AddSubModal({ setShow }: Props) {
                   >
                     Quantidade AVA *
                   </label>
-                  <div className="flex gap-1 items-center">
-                    <input
-                      type="number"
-                      name="avaQtt"
-                      id="avaQtt"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder="0"
-                      min={0}
-                      onChange={handleChange}
-                    />
-                    <button
-                      type="button"
-                      className="text-gray-400  hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                      data-modal-toggle="crud-modal"
-                      onClick={toggleAva}
-                    >
-                      {showAva ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          className="bi bi-caret-up-fill"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
-                        </svg>
-                      ) : (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          className="bi bi-caret-down-fill"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
+                  <div className="flex flex-col">
+                    <div className="flex gap-1 items-center">
+                      <input
+                        {...register("avaQtt", { required: true })}
+                        type="number"
+                        name="avaQtt"
+                        id="avaQtt"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="0"
+                        min={0}
+                        onChange={handleChange}
+                      />
+                      <button
+                        type="button"
+                        className="text-gray-400  hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-toggle="crud-modal"
+                        onClick={toggleAva}
+                      >
+                        {showAva ? (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-caret-up-fill"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-caret-down-fill"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+                      {errors.avaQtt && (
+                        <span className="text-red-500 text-sm">
+                          Campo obrigatório
+                        </span>
                       )}
-                    </button>
                   </div>
                 </div>
                 <div
