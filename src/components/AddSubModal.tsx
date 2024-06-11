@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { createSubjectService } from "../api/services/subjectServices";
 
 type Subject = {
   name: string;
@@ -33,13 +34,28 @@ export default function AddSubModal({ setShow }: Props) {
     formState: { errors },
   } = useForm<Subject>();
 
-  const onSubmit = handleSubmit((data) => {
-    alert(JSON.stringify(data));
+// ===================================================================
+
+  // VER ANOTAÇÕES FEITAS NO OBSIDIAN SOBRE A LIB "CORS"
+
+  // const postSubject = async () => {
+  //   const response = await createSubjectService(formFields);
+  //   if (response) {
+  //     return response;
+  //   } else {
+  //     console.log("Algo deu errado");
+  //   }
+  // };
+
+  // const onSubmit = handleSubmit(() => {
+  //   postSubject()
+  // });
+
+  const onSubmit = handleSubmit(() => {
+    alert(JSON.stringify(formFields))
   });
 
-  // const sendForm = (e:React.SyntheticEvent):void => {
-  //   e.preventDefault()
-  // }
+// ===================================================================
 
   const toggleAva = () => {
     if (formFields.avaQtt != 0) {
@@ -50,9 +66,6 @@ export default function AddSubModal({ setShow }: Props) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const targetNames = ["name", "semester", "avaQtt", "pim", "exam"];
     let grades = formFields.avaGrades;
-
-    // AO CRIAR UMA NOVA NOTA JÁ INSERIR NO FORMULÁRIO COMO 0
-    // CLONAR O ARRAY DO FORMULÁRIO / ALTERAR O ÍNDICE ENCONTRADO / SUBSTITUIR O ARRAY DO FORMULÁRIO
 
     if (targetNames.includes(e.target.name)) {
       setFormFields({ ...formFields, [e.target.name]: e.target.value });
@@ -223,11 +236,11 @@ export default function AddSubModal({ setShow }: Props) {
                         )}
                       </button>
                     </div>
-                      {errors.avaQtt && (
-                        <span className="text-red-500 text-sm">
-                          Campo obrigatório
-                        </span>
-                      )}
+                    {errors.avaQtt && (
+                      <span className="text-red-500 text-sm">
+                        Campo obrigatório
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div
@@ -291,7 +304,7 @@ export default function AddSubModal({ setShow }: Props) {
                 Adicionar Matéria
               </button>
 
-              {/* {JSON.stringify(formFields)} */}
+              {JSON.stringify(formFields)}
             </form>
           </div>
         </div>

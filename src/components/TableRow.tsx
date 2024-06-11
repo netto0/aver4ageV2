@@ -5,7 +5,7 @@ interface Props {
   semester: number;
   subject: string;
   ava: number;
-  exam: number;
+  exam: number | null;
   avg: number | null;
   pim: number | null;
   rtk: number | null;

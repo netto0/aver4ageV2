@@ -1,37 +1,66 @@
-// import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TableRow from "./TableRow";
-import { subjects } from "../api/services/subjectServices";
+import { getSubjectsService } from "../api/services/subjectServices";
+import ISubject from "../interfaces/ISubject";
+
+// interface ISubjects {
+//   _id: string,
+//   name: string,
+//   semester: number,
+//   avaQtt: number,
+//   avaGrades: {},
+//   createdAt: string,
+//   updatedAt: string,
+//   __v: number,
+//   examGrade: number | null,
+//   pimGrade: number | null,
+//   retakeGrade: number | null
+// }
 
 export default function Table() {
   
-  function avaSum(gradesObject: {[key:string] : number}): number {
-    const list = Object.values(gradesObject)
-    const sum = list.reduce((total, current) => total + current)
-    return sum 
+  function avaSum(gradesObject: { [key: string]: number }): number {
+    const list = Object.values(gradesObject);
+    const sum = list.reduce((total, current) => total + current);
+    return sum;
   }
 
   function average(
-    ava: number,
-    exam: number,
+    ava: number | null,
+    exam: number | null,
     pim: number | null,
     rtk: number | null
   ): number | null {
-    // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
-    if (!pim) {
-      return null;
+
+    if(ava && exam && pim && rtk) {
+      let regularMD:number
+      // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
+      regularMD = (7 * exam + 2 * pim + ava) / 10;
+      if(rtk){
+        return (regularMD + rtk) / 2;
+      } else {
+        return regularMD
+      }
+    } else {
+      return null
     }
-
-    const regularMD = (7 * exam + 2 * pim + ava) / 10;
-
-    if (rtk) {
-      const regularMF = (regularMD + rtk) / 2;
-      return regularMF;
-    }
-
-    return regularMD;
   }
+
+  const [subjectsList, setSubjectsList] = useState<ISubject[]>([]);
+
+  useEffect(() => {
+    const getSubjects = async () => {
+      const response = await getSubjectsService();
+      if (response) {
+        setSubjectsList(response);
+      }
+    };
+    getSubjects()
+  }, []);
+
   return (
     <div className="overflow-auto shadow-md sm:rounded-lg border-collapse">
+      {/* {JSON.stringify(subjectsList)} */}
       <table className="text-base text-center rtl:text-right text-gray-900 w-full">
         <thead className="text-xs uppercase bg-darkerGray text-gray-900 drop-shadow-md">
           <tr className="flex w-full">
@@ -62,7 +91,7 @@ export default function Table() {
           </tr>
         </thead>
         <tbody className="block scroll overflow-y-auto h-[587px] no-scrollbar bg-darkerGray">
-          {subjects.map((subject, i) => (
+          {subjectsList.map((subject, i) => (
             <TableRow
               key={i}
               id={subject._id}

@@ -5,15 +5,6 @@ import Table from "./Table";
 import AddSubModal from "./AddSubModal";
 
 export default function Body() {
-  // interface formFields {
-  //   name: string,
-  //   semester: number,
-  //   avaQtt: number,
-  //   pim: number,
-  //   exam: number,
-  //   avaGrades?: [number]
-  // }
-
   const toggleModal = () => {
     setShowModal(!showModal);
   };
