@@ -1,6 +1,5 @@
 import axios from "axios";
 import { baseUrl } from "../axios.ts";
-// import ISubject from "../../interfaces/ISubject.ts";
 
 const getSubjectsService = async () => {
   try {

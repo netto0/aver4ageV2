@@ -6,10 +6,10 @@ type Subject = {
   name: string;
   semester: number | null;
   avaQtt: number;
-  avaGrades: { [k: string]: number } | {};
-  pim: number | null;
-  exam: number | null;
-  retake: number | null;
+  avaGrades: { [k: string]: number } | undefined;
+  examGrade: number | null;
+  pimGrade: number | null;
+  retakeGrade: number | null;
 };
 
 interface Props {
@@ -22,9 +22,9 @@ export default function AddSubModal({ setShow }: Props) {
     semester: null,
     avaQtt: 0,
     avaGrades: {},
-    pim: null,
-    exam: null,
-    retake: null,
+    examGrade: null,
+    pimGrade: null,
+    retakeGrade: null,
   });
 
   const [showAva, setShowAva] = useState(false);
@@ -38,22 +38,22 @@ export default function AddSubModal({ setShow }: Props) {
 
   // VER ANOTAÇÕES FEITAS NO OBSIDIAN SOBRE A LIB "CORS"
 
-  // const postSubject = async () => {
-  //   const response = await createSubjectService(formFields);
-  //   if (response) {
-  //     return response;
-  //   } else {
-  //     console.log("Algo deu errado");
-  //   }
-  // };
-
-  // const onSubmit = handleSubmit(() => {
-  //   postSubject()
-  // });
+  const postSubject = async () => {
+    const response = await createSubjectService(formFields);
+    if (response) {
+      return response;
+    } else {
+      console.log("Algo deu errado");
+    }
+  };
 
   const onSubmit = handleSubmit(() => {
-    alert(JSON.stringify(formFields))
+    postSubject()
   });
+
+  // const onSubmit = handleSubmit(() => {
+  //   alert(JSON.stringify(formFields))
+  // });
 
 // ===================================================================
 
@@ -86,12 +86,14 @@ export default function AddSubModal({ setShow }: Props) {
           {`AVA ${i}`}
         </label>
         <input
+          // {...register(`ava${i}`, { required: true })}
           type="number"
           name={`ava${i}`}
           id={`ava${i}`}
-          // value={formFields.avaGrades}
+          // value={formFields.avaGrades[]}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          placeholder="Insira a nota da aula..."
+          // placeholder="Insira a nota da aula..."
+          placeholder= "0"
           min={0}
           onChange={handleChange}
         />

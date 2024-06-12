@@ -3,23 +3,12 @@ import TableRow from "./TableRow";
 import { getSubjectsService } from "../api/services/subjectServices";
 import ISubject from "../interfaces/ISubject";
 
-// interface ISubjects {
-//   _id: string,
-//   name: string,
-//   semester: number,
-//   avaQtt: number,
-//   avaGrades: {},
-//   createdAt: string,
-//   updatedAt: string,
-//   __v: number,
-//   examGrade: number | null,
-//   pimGrade: number | null,
-//   retakeGrade: number | null
-// }
-
 export default function Table() {
   
-  function avaSum(gradesObject: { [key: string]: number }): number {
+  function avaSum(gradesObject: { [key: string]: number } | undefined): number {
+    if(!gradesObject) {
+      return 0
+    } 
     const list = Object.values(gradesObject);
     const sum = list.reduce((total, current) => total + current);
     return sum;
