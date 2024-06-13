@@ -16,7 +16,7 @@ interface Props {
   setShow: () => void;
 }
 
-export default function AddSubModal({ setShow }: Props) {
+export default function DelSubModal({ setShow }: Props) {
   const [formFields, setFormFields] = useState({
     name: "",
     semester: null,
@@ -27,7 +27,7 @@ export default function AddSubModal({ setShow }: Props) {
     retakeGrade: null,
   });
 
-  const [showAva, setShowAva] = useState<boolean|string>(false);
+  const [showAva, setShowAva] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const {

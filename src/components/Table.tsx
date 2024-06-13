@@ -3,12 +3,16 @@ import TableRow from "./TableRow";
 import { getSubjectsService } from "../api/services/subjectServices";
 import ISubject from "../interfaces/ISubject";
 
-export default function Table() {
-  
+interface Props {
+  setDelModal: () => void;
+  delModalStatus: boolean;
+}
+
+export default function Table({setDelModal, delModalStatus}: Props) {
   function avaSum(gradesObject: { [key: string]: number } | undefined): number {
-    if(!gradesObject) {
-      return 0
-    } 
+    if (!gradesObject) {
+      return 0;
+    }
     const list = Object.values(gradesObject);
     const sum = list.reduce((total, current) => total + current);
     return sum;
@@ -20,31 +24,31 @@ export default function Table() {
     pim: number | null,
     rtk: number | null
   ): number | null {
-
-    if(ava && exam && pim && rtk) {
-      let regularMD:number
+    if (ava && exam && pim && rtk) {
+      let regularMD: number;
       // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
       regularMD = (7 * exam + 2 * pim + ava) / 10;
-      if(rtk){
+      if (rtk) {
         return (regularMD + rtk) / 2;
       } else {
-        return regularMD
+        return regularMD;
       }
     } else {
-      return null
+      return null;
     }
   }
 
   const [subjectsList, setSubjectsList] = useState<ISubject[]>([]);
 
+  const getSubjects = async () => {
+    const response = await getSubjectsService();
+    if (response) {
+      setSubjectsList(response);
+    }
+  };
+
   useEffect(() => {
-    const getSubjects = async () => {
-      const response = await getSubjectsService();
-      if (response) {
-        setSubjectsList(response);
-      }
-    };
-    getSubjects()
+    getSubjects();
   }, []);
 
   return (
@@ -96,6 +100,7 @@ export default function Table() {
                 subject.retakeGrade
               )}
               rtk={subject.retakeGrade}
+              
             />
           ))}
         </tbody>
@@ -103,3 +108,5 @@ export default function Table() {
     </div>
   );
 }
+
+export { getSubjectsService };
