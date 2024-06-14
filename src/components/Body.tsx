@@ -4,19 +4,11 @@ import Input from "./Input";
 import Table from "./Table";
 import AddSubModal from "./AddSubModal";
 import DelSubModal from "./DelSubModal";
+import { GlobalContext } from "../providers/GlobalContext";
 
 export default function Body() {
-  const toggleAddModal = () => {
-    setAddModal(!addModal);
-  };
-
-  const toggleDelModal = () => {
-    setDelModal(!delModal);
-  };
-
+  const { addModal, toggleAddModal, delModal, toggleDelModal } = React.useContext(GlobalContext)
   const [search, setSearch] = useState("");
-  const [addModal, setAddModal] = useState(false);
-  const [delModal, setDelModal] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -41,7 +33,7 @@ export default function Body() {
           />
           <Button texto="OK" />
         </div>
-        <Table delModalStatus={delModal} setDelModal={setDelModal}/>
+        <Table />
         {addModal && <AddSubModal setShow={toggleAddModal} />}
         {delModal && <DelSubModal setShow={toggleDelModal} />}
       </div>

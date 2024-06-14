@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import TableRow from "./TableRow";
 import { getSubjectsService } from "../api/services/subjectServices";
-import ISubject from "../interfaces/ISubject";
+import { GlobalContext } from "../providers/GlobalContext";
 
-interface Props {
-  setDelModal: () => void;
-  delModalStatus: boolean;
-}
-
-export default function Table({setDelModal, delModalStatus}: Props) {
+export default function Table() {
   function avaSum(gradesObject: { [key: string]: number } | undefined): number {
     if (!gradesObject) {
       return 0;
@@ -38,14 +33,7 @@ export default function Table({setDelModal, delModalStatus}: Props) {
     }
   }
 
-  const [subjectsList, setSubjectsList] = useState<ISubject[]>([]);
-
-  const getSubjects = async () => {
-    const response = await getSubjectsService();
-    if (response) {
-      setSubjectsList(response);
-    }
-  };
+  const { subjectsList, getSubjects } = React.useContext(GlobalContext)
 
   useEffect(() => {
     getSubjects();

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { createSubjectService } from "../api/services/subjectServices";
+import { GlobalContext } from "../providers/GlobalContext";
 
 type Subject = {
   name: string;
@@ -27,8 +28,9 @@ export default function AddSubModal({ setShow }: Props) {
     retakeGrade: null,
   });
 
-  const [showAva, setShowAva] = useState<boolean|string>(false);
+  const [showAva, setShowAva] = useState<boolean | string>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const { getSubjects, toggleAddModal } = React.useContext(GlobalContext);
 
   const {
     register,
@@ -42,7 +44,8 @@ export default function AddSubModal({ setShow }: Props) {
     setLoading(true);
     const response = await createSubjectService(formFields);
     if (response) {
-      window.location.reload()
+      toggleAddModal();
+      getSubjects();
       return response;
     } else {
       console.log("Algo deu errado");
