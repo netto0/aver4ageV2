@@ -7,7 +7,10 @@ import DelSubModal from "./DelSubModal";
 import { GlobalContext } from "../providers/GlobalContext";
 
 export default function Body() {
-  const { addModal, toggleAddModal, delModal, toggleDelModal } = React.useContext(GlobalContext)
+  const {
+    activeModal,
+    setActiveModal,
+  } = React.useContext(GlobalContext);
   const [search, setSearch] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,26 +19,33 @@ export default function Body() {
 
   return (
     <main className="w-full bg-lightGray grow px-[8%] flex flex-col justify-center">
+      <span className="z-50">{activeModal ? activeModal : "false"}</span>
       <div
-        className={`absolute w-screen h-screen left-0 z-50 backdrop-blur-sm ${
-          !addModal && "hidden"
+        className={`absolute w-screen h-screen left-0 z-40 backdrop-blur-sm ${
+          !activeModal && "hidden"
         }`}
-        onClick={toggleAddModal}
+        onClick={() => setActiveModal(false)}
       />
       <div className="relative flex flex-col gap-4">
         <div id="searchBarField" className="flex justify-around gap-4">
-          <Button texto="+" funcao={toggleAddModal} />
+          <Button text="+" func={() => setActiveModal("add")} />
           <Input
             placeholder="Digite o que deseja buscar..."
             name="search"
             value={search}
             handleChange={handleChange}
           />
-          <Button texto="OK" />
+          <Button text="OK" />
         </div>
         <Table />
-        {addModal && <AddSubModal setShow={toggleAddModal} />}
-        {delModal && <DelSubModal setShow={toggleDelModal} />}
+        {activeModal &&
+          (activeModal == "add" ? (
+            <AddSubModal />
+          ) : (
+            <DelSubModal />
+          ))}
+        {/* {addModal && <AddSubModal setShow={toggleAddModal} />}
+        {delModal && <DelSubModal setShow={toggleDelModal} />} */}
       </div>
     </main>
   );

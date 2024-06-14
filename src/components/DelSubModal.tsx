@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { createSubjectService } from "../api/services/subjectServices";
+import { GlobalContext } from "../providers/GlobalContext";
 
 type Subject = {
   name: string;
@@ -12,11 +13,7 @@ type Subject = {
   retakeGrade: number | null;
 };
 
-interface Props {
-  setShow: () => void;
-}
-
-export default function DelSubModal({ setShow }: Props) {
+export default function DelSubModal() {
   const [formFields, setFormFields] = useState({
     name: "",
     semester: null,
@@ -29,6 +26,8 @@ export default function DelSubModal({ setShow }: Props) {
 
   const [showAva, setShowAva] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const { setActiveModal } = React.useContext(GlobalContext);
 
   const {
     register,
@@ -116,7 +115,7 @@ export default function DelSubModal({ setShow }: Props) {
                 type="button"
                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-toggle="crud-modal"
-                onClick={setShow}
+                onClick={() => setActiveModal(false)}
               >
                 <svg
                   className="w-3 h-3"
