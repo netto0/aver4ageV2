@@ -41,6 +41,8 @@ export default function AddSubModal() {
     const response = await createSubjectService(formFields);
     if (response) {
       setActiveModal(false);
+      // Descer o scroll da tabela até o fim para mostrar a adição
+      // Inserir mensagem popup de confirmação
       getSubjects();
       return response;
     } else {
@@ -100,13 +102,7 @@ export default function AddSubModal() {
 
   return (
     <>
-      <div
-        id="crud-modal"
-        aria-hidden="true"
-        onClick={() => setActiveModal(false)}
-        className="overflow-y-auto overflow-x-hidden absolute z-50 justify-center items-center md:inset-0 h-full max-h-full transition-all flex"
-      >
-        <div className="relative p-4 w-full max-w-md max-h-full">
+        <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -308,7 +304,6 @@ export default function AddSubModal() {
             </form>
           </div>
         </div>
-      </div>
     </>
   );
 }

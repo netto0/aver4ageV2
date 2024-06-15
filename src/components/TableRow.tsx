@@ -1,48 +1,82 @@
+import React, { useRef } from "react";
 import Dot from "./Dot";
+import { GlobalContext } from "../providers/GlobalContext";
+import ISubject from "../interfaces/ISubject";
 
 interface Props {
-  id: string;
-  semester: number;
-  subject: string;
-  ava: number;
-  exam: number | null;
-  avg: number | null;
-  pim: number | null;
-  rtk: number | null;
+  subject: ISubject;
 }
 
-export default function TableRow({
-  id,
-  semester,
-  subject,
-  ava,
-  pim,
-  exam,
-  avg,
-  rtk,
-}: Props) {
+export default function TableRow({ subject }: Props) {
+  const { setActiveModal } = React.useContext(GlobalContext);
+  const fatherRef = useRef<any>(null);
+
+  function handleClick() {
+    console.log(fatherRef.current.id);
+    setActiveModal("del");
+  }
+
+  function avaSum(gradesObject: { [key: string]: number } | undefined): number {
+    if (!gradesObject) {
+      return 0;
+    }
+    const list = Object.values(gradesObject);
+    const sum = list.reduce((total, current) => total + current);
+    return sum;
+  }
+
+  function average(
+    ava: number | null,
+    exam: number | null,
+    pim: number | null,
+    rtk: number | null
+  ): number | null {
+    if (ava && exam && pim && rtk) {
+      let regularMD: number;
+      // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
+      regularMD = (7 * exam + 2 * pim + ava) / 10;
+      if (rtk) {
+        return (regularMD + rtk) / 2;
+      } else {
+        return regularMD;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  const ava = avaSum(subject.avaGrades);
+  const avg = average(
+    ava,
+    subject.examGrade,
+    subject.pimGrade,
+    subject.retakeGrade
+  );
+
   return (
     <tr
       className="bg-darkGray border-b border-gray-500 flex items-center h-14 text-center"
-      key={id}
+      key={subject._id}
+      ref={fatherRef}
+      id={JSON.stringify(subject)}
     >
       <td className="w-[10%] h-full flex flex-col justify-center">
-        {semester}
+        {subject.semester}
       </td>
       <td className="w-[30%] truncate h-full flex flex-col justify-center">
-        {subject}
+        {subject.name}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
         {!ava ? "∅" : ava}
         {!ava && <Dot />}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
-        {!pim ? "∅" : pim}
-        {!pim && <Dot />}
+        {!subject.pimGrade ? "∅" : subject.pimGrade}
+        {!subject.pimGrade && <Dot />}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
-        {!exam && <Dot />}
-        {!exam ? "∅" : exam}
+        {!subject.examGrade && <Dot />}
+        {!subject.examGrade ? "∅" : subject.examGrade}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
         {!avg ? "∅" : avg}
@@ -50,8 +84,8 @@ export default function TableRow({
         {avg && avg! < 7 && <Dot color={2} />}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
-        {!rtk ? "∅" : rtk}
-        {!rtk && <Dot />}
+        {!subject.retakeGrade ? "∅" : subject.retakeGrade}
+        {!subject.retakeGrade && <Dot />}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
         <div className="flex w-full max-w-24 self-center justify-around items-center h-full">
@@ -59,7 +93,6 @@ export default function TableRow({
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
-            // fill="darkerGray"
             className="bi bi-pencil-fill fill-gray-600  hover:cursor-pointer transition-all hover:fill-green-500"
             viewBox="0 0 16 16"
           >
@@ -72,6 +105,7 @@ export default function TableRow({
             fill="currentColor"
             className="bi bi-trash-fill fill-gray-600 hover:cursor-pointer transition-all hover:fill-red-500"
             viewBox="0 0 16 16"
+            onClick={() => handleClick()}
           >
             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
           </svg>

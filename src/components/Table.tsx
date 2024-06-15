@@ -4,35 +4,6 @@ import { getSubjectsService } from "../api/services/subjectServices";
 import { GlobalContext } from "../providers/GlobalContext";
 
 export default function Table() {
-  function avaSum(gradesObject: { [key: string]: number } | undefined): number {
-    if (!gradesObject) {
-      return 0;
-    }
-    const list = Object.values(gradesObject);
-    const sum = list.reduce((total, current) => total + current);
-    return sum;
-  }
-
-  function average(
-    ava: number | null,
-    exam: number | null,
-    pim: number | null,
-    rtk: number | null
-  ): number | null {
-    if (ava && exam && pim && rtk) {
-      let regularMD: number;
-      // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
-      regularMD = (7 * exam + 2 * pim + ava) / 10;
-      if (rtk) {
-        return (regularMD + rtk) / 2;
-      } else {
-        return regularMD;
-      }
-    } else {
-      return null;
-    }
-  }
-
   const { subjectsList, getSubjects } = React.useContext(GlobalContext)
 
   useEffect(() => {
@@ -75,20 +46,7 @@ export default function Table() {
           {subjectsList.map((subject, i) => (
             <TableRow
               key={i}
-              id={subject._id}
-              semester={subject.semester}
-              subject={subject.name}
-              ava={avaSum(subject.avaGrades)}
-              pim={subject.pimGrade}
-              exam={subject.examGrade}
-              avg={average(
-                avaSum(subject.avaGrades),
-                subject.examGrade,
-                subject.pimGrade,
-                subject.retakeGrade
-              )}
-              rtk={subject.retakeGrade}
-              
+              subject={subject}
             />
           ))}
         </tbody>

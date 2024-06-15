@@ -24,10 +24,9 @@ export default function DelSubModal() {
     retakeGrade: null,
   });
 
-  const [showAva, setShowAva] = useState<boolean>(false);
+  const [showAva, setShowAva] = useState<boolean | string>(false);
   const [loading, setLoading] = useState<boolean>(false);
-
-  const { setActiveModal } = React.useContext(GlobalContext);
+  const { getSubjects, setActiveModal } = React.useContext(GlobalContext);
 
   const {
     register,
@@ -41,7 +40,10 @@ export default function DelSubModal() {
     setLoading(true);
     const response = await createSubjectService(formFields);
     if (response) {
-      window.location.reload()
+      setActiveModal(false);
+      // Descer o scroll da tabela até o fim para mostrar a adição
+      // Inserir mensagem popup de confirmação
+      getSubjects();
       return response;
     } else {
       console.log("Algo deu errado");
@@ -100,22 +102,17 @@ export default function DelSubModal() {
 
   return (
     <>
-      <div
-        id="crud-modal"
-        aria-hidden="true"
-        className="overflow-y-auto overflow-x-hidden absolute z-50 justify-center items-center md:inset-0 h-full max-h-full transition-all flex"
-      >
-        <div className="relative p-4 w-full max-w-md max-h-full">
+        <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Adicionar nova matéria
+                Excluir matéria
               </h3>
               <button
                 type="button"
                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-toggle="crud-modal"
-                onClick={() => setActiveModal(false)}
+                onClick={()=> setActiveModal(false)}
               >
                 <svg
                   className="w-3 h-3"
@@ -307,7 +304,6 @@ export default function DelSubModal() {
             </form>
           </div>
         </div>
-      </div>
     </>
   );
 }
