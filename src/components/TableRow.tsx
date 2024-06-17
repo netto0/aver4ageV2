@@ -14,6 +14,7 @@ export default function TableRow({ subject }: Props) {
   function handleClick() {
     console.log(fatherRef.current.id);
     setActiveModal("del");
+    // SETAR UM FORM NO GLOBAL CONTEXT COM TODAS AS INFORMAÇÕES DA MATÉRIA ATUAL
   }
 
   function avaSum(gradesObject: { [key: string]: number } | undefined): number {
@@ -31,7 +32,7 @@ export default function TableRow({ subject }: Props) {
     pim: number | null,
     rtk: number | null
   ): number | null {
-    if (ava && exam && pim && rtk) {
+    if (ava && exam && pim) {
       let regularMD: number;
       // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
       regularMD = (7 * exam + 2 * pim + ava) / 10;
@@ -62,6 +63,7 @@ export default function TableRow({ subject }: Props) {
     >
       <td className="w-[10%] h-full flex flex-col justify-center">
         {subject.semester}
+        {/* <span className= "text-red-700 bg-blue-300 z-50">{`${subject.semester} ${subject.name} ${subject.pimGrade} ${subject.examGrade}`}</span> */}
       </td>
       <td className="w-[30%] truncate h-full flex flex-col justify-center">
         {subject.name}

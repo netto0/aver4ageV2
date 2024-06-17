@@ -26,7 +26,8 @@ export const GlobalContext =
 export const GlobalProvider = ({ children }: Props) => {
   
   const [subjectsList, setSubjectsList] = useState<ISubject[]>([]);
-  const [activeModal, setActiveModal] = useState<boolean | string>(false);
+  const [activeModal, setActiveModal] = useState<boolean | string>("del");
+  // const [activeModal, setActiveModal] = useState<boolean | string>(false);
 
   const getSubjects = async () => {
     const response = await getSubjectsService();
