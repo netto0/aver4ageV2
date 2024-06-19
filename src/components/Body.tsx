@@ -10,6 +10,7 @@ export default function Body() {
   const {
     activeModal,
     setActiveModal,
+    deleteSubject
   } = React.useContext(GlobalContext);
   const [search, setSearch] = useState("");
 
@@ -20,6 +21,7 @@ export default function Body() {
   return (
     <main className="w-full bg-lightGray grow px-[8%] flex flex-col justify-center">
       <span className="z-50">{activeModal ? activeModal : "false"}</span>
+      <span className="z-50">{JSON.stringify(deleteSubject)}</span>
       <div
         className={`absolute w-screen h-screen left-0 z-40 backdrop-blur-sm ${
           !activeModal && "hidden"

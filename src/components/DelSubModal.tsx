@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { createSubjectService } from "../api/services/subjectServices";
+import { deleteSubjectService } from "../api/services/subjectServices";
 import { GlobalContext } from "../providers/GlobalContext";
 
 type Subject = {
@@ -24,9 +24,9 @@ export default function DelSubModal() {
     retakeGrade: null,
   });
 
-  const [showAva, setShowAva] = useState<boolean | string>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const { getSubjects, setActiveModal } = React.useContext(GlobalContext);
+  const { getSubjects, setActiveModal, deleteSubject, setDeleteSubject } =
+    React.useContext(GlobalContext);
 
   const {
     register,
@@ -36,12 +36,11 @@ export default function DelSubModal() {
 
   // ===================================================================
 
-  const postSubject = async () => {
+  const deleteSbj = async () => {
     setLoading(true);
-    const response = await createSubjectService(formFields);
+    const response = await deleteSubjectService(deleteSubject._id);
     if (response) {
-      setActiveModal(false);
-      // Descer o scroll da tabela até o fim para mostrar a adição
+      closeModal();
       // Inserir mensagem popup de confirmação
       getSubjects();
       return response;
@@ -51,16 +50,18 @@ export default function DelSubModal() {
   };
 
   const onSubmit = handleSubmit(() => {
-    postSubject();
+    deleteSbj();
   });
 
-  // ===================================================================
-
-  const toggleAva = () => {
-    if (formFields.avaQtt != 0) {
-      setShowAva(!showAva);
-    }
+  const closeModal = () => {
+    setActiveModal(false);
+    setDeleteSubject({
+      _id: "",
+      name: "",
+    });
   };
+
+  // ===================================================================
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const targetNames = ["name", "semester", "avaQtt", "pim", "exam"];
@@ -85,13 +86,10 @@ export default function DelSubModal() {
           {`AVA ${i}`}
         </label>
         <input
-          // {...register(`ava${i}`, { required: true })}
           type="number"
           name={`ava${i}`}
           id={`ava${i}`}
-          // value={formFields.avaGrades[]}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          // placeholder="Insira a nota da aula..."
           placeholder="0"
           min={0}
           onChange={handleChange}
@@ -102,73 +100,66 @@ export default function DelSubModal() {
 
   return (
     <>
-        <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
-          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Excluir matéria
-              </h3>
-              <button
-                type="button"
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                data-modal-toggle="crud-modal"
-                onClick={()=> setActiveModal(false)}
+      <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
+        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div className="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              Excluir matéria ?
+            </h3>
+            <button
+              type="button"
+              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              data-modal-toggle="crud-modal"
+              onClick={closeModal}
+            >
+              <svg
+                className="w-3 h-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 14"
               >
-                <svg
-                  className="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 14"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="3"
-                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  />
-                </svg>
-                <span className="sr-only">Close modal</span>
-              </button>
-            </div>
-            <form className="p-4 md:p-5" onSubmit={onSubmit}>
-              <div className="grid gap-4 mb-4 grid-cols-2">
-                <div className="col-span-2">
-                  <label
-                    htmlFor="name"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Nome
-                  </label>
-                  <input
-                    {...register("name", { minLength: 3 })}
-                    type="text"
-                    name="name"
-                    id="name"
-                    value={formFields.name}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Digite o nome da matéria..."
-                    onChange={handleChange}
-                  />
-                  {errors.name && (
-                    <span className="text-red-500 text-sm">
-                      O nome precisa ter no mínimo 3 letras
-                    </span>
-                  )}
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="text-white inline-flex items-center bg-red-500 hover:bg-red-700 focus:ring-2 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              >
-                {loading ? "Excluindo..." : "Excluir Matéria"}
-              </button>
-
-              {JSON.stringify(formFields)}
-            </form>
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="3"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                />
+              </svg>
+              <span className="sr-only">Close modal</span>
+            </button>
           </div>
+          <form className="p-4 md:p-5" onSubmit={onSubmit}>
+            <div className="grid gap-4 mb-4 grid-cols-2">
+              <div className="col-span-2">
+                <input
+                  {...register("name", { minLength: 3 })}
+                  type="text"
+                  name="name"
+                  readOnly={true}
+                  id="name"
+                  value={deleteSubject.name}
+                  className="bg-gray-600 border border-gray-500 text-white text-m font-semibold rounded-lg block w-full p-2.5 outline-none hover:cursor-auto"
+                  placeholder="Digite o nome da matéria..."
+                  onChange={handleChange}
+                />
+                {errors.name && (
+                  <span className="text-red-500 text-sm">
+                    O nome precisa ter no mínimo 3 letras
+                  </span>
+                )}
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="text-white inline-flex items-center bg-red-500 hover:bg-red-700 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+              {loading ? "Excluindo..." : "Excluir Matéria"}
+            </button>
+          </form>
         </div>
+      </div>
     </>
   );
 }

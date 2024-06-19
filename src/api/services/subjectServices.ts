@@ -20,7 +20,15 @@ const createSubjectService = async (body:{}) => {
     return error;
   }
 }
-
+const deleteSubjectService = async (id:string) => {
+  try {
+    const response = await axios.delete(`${baseUrl}/subject/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
 //     {
 //       "_id": "662841e39d2cbf042e0f84ed",
 //       "name": "Economia e Mercado",
@@ -40,5 +48,5 @@ const createSubjectService = async (body:{}) => {
 //       "retakeGrade": null
 //     }
 
-export { getSubjectsService, createSubjectService };
+export { getSubjectsService, createSubjectService, deleteSubjectService };
 

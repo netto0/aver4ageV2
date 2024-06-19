@@ -8,13 +8,15 @@ interface Props {
 }
 
 export default function TableRow({ subject }: Props) {
-  const { setActiveModal } = React.useContext(GlobalContext);
+  const { setActiveModal, setDeleteSubject } = React.useContext(GlobalContext);
   const fatherRef = useRef<any>(null);
 
   function handleClick() {
-    console.log(fatherRef.current.id);
+    const subjectInfos = JSON.parse(fatherRef.current.id)
+    const deleteObj = {_id:subjectInfos._id, name: subjectInfos.name} 
+    console.log(subjectInfos._id);
+    setDeleteSubject(deleteObj)
     setActiveModal("del");
-    // SETAR UM FORM NO GLOBAL CONTEXT COM TODAS AS INFORMAÇÕES DA MATÉRIA ATUAL
   }
 
   function avaSum(gradesObject: { [key: string]: number } | undefined): number {

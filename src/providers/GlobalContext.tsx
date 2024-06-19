@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Dispatch } from "react";
 import ISubject from "../interfaces/ISubject";
 import { getSubjectsService } from "../components/Table";
 
@@ -10,24 +10,35 @@ type GlobalContextType = {
   subjectsList: ISubject[];
   getSubjects: () => void;
   activeModal: boolean | string;
-  setActiveModal: (state:boolean|string) => void;
+  setActiveModal: (state: boolean | string) => void;
+  deleteSubject: IDelete;
+  setDeleteSubject: Dispatch<IDelete>;
 };
+
+interface IDelete {
+  _id: string;
+  name: string;
+}
 
 const initialValue = {
   subjectsList: [],
   getSubjects: () => {},
-  activeModal: false,
+  activeModal: "del",
   setActiveModal: () => {},
+  deleteSubject: {
+    _id: "",
+    name: "",
+  },
+  setDeleteSubject: () => {},
 };
 
 export const GlobalContext =
   React.createContext<GlobalContextType>(initialValue);
 
 export const GlobalProvider = ({ children }: Props) => {
-  
+  const [deleteSubject, setDeleteSubject] = useState<IDelete>(initialValue.deleteSubject);
   const [subjectsList, setSubjectsList] = useState<ISubject[]>([]);
-  const [activeModal, setActiveModal] = useState<boolean | string>("del");
-  // const [activeModal, setActiveModal] = useState<boolean | string>(false);
+  const [activeModal, setActiveModal] = useState<boolean | string>(initialValue.activeModal);
 
   const getSubjects = async () => {
     const response = await getSubjectsService();
@@ -43,6 +54,8 @@ export const GlobalProvider = ({ children }: Props) => {
         getSubjects,
         activeModal,
         setActiveModal,
+        deleteSubject,
+        setDeleteSubject,
       }}
     >
       {children}
