@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { deleteSubjectService } from "../api/services/subjectServices";
 import { GlobalContext } from "../providers/GlobalContext";
+import { toast } from "react-toastify";
 
 type Subject = {
   name: string;
@@ -25,7 +26,7 @@ export default function DelSubModal() {
   });
 
   const [loading, setLoading] = useState<boolean>(false);
-  const { getSubjects, setActiveModal, deleteSubject, setDeleteSubject } =
+  const { getSubjects, setActiveModal, deleteSubject, setDeleteSubject, successToast } =
     React.useContext(GlobalContext);
 
   const {
@@ -40,6 +41,7 @@ export default function DelSubModal() {
     setLoading(true);
     const response = await deleteSubjectService(deleteSubject._id);
     if (response) {
+      toast.success("Matéria excluída com sucesso", successToast);
       closeModal();
       // Inserir mensagem popup de confirmação
       getSubjects();
@@ -100,6 +102,7 @@ export default function DelSubModal() {
 
   return (
     <>
+      {/* <ToastContainer /> */}
       <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">

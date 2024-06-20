@@ -14,7 +14,6 @@ export default function TableRow({ subject }: Props) {
   function handleClick() {
     const subjectInfos = JSON.parse(fatherRef.current.id)
     const deleteObj = {_id:subjectInfos._id, name: subjectInfos.name} 
-    console.log(subjectInfos._id);
     setDeleteSubject(deleteObj)
     setActiveModal("del");
   }

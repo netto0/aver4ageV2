@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { createSubjectService } from "../api/services/subjectServices";
 import { GlobalContext } from "../providers/GlobalContext";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 type Subject = {
   name: string;
   semester: number | null;
@@ -26,7 +29,7 @@ export default function AddSubModal() {
 
   const [showAva, setShowAva] = useState<boolean | string>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const { getSubjects, setActiveModal } = React.useContext(GlobalContext);
+  const { getSubjects, setActiveModal, successToast, resetScrollInsideTable } = React.useContext(GlobalContext);
 
   const {
     register,
@@ -42,6 +45,8 @@ export default function AddSubModal() {
     if (response) {
       setActiveModal(false);
       getSubjects();
+      toast.success("Matéria incluída com sucesso!", successToast)
+      setInterval(resetScrollInsideTable, 500)
       return response;
     } else {
       console.log("Algo deu errado");
@@ -90,7 +95,9 @@ export default function AddSubModal() {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
           placeholder="0"
           min={0}
-          onClick={(e)=>console.log(e.currentTarget.name + " " + e.currentTarget.value)}
+          onClick={(e) =>
+            console.log(e.currentTarget.name + " " + e.currentTarget.value)
+          }
           onChange={handleChange}
         />
       </div>

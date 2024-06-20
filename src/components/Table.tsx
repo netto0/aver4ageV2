@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import TableRow from "./TableRow";
 import { getSubjectsService } from "../api/services/subjectServices";
 import { GlobalContext } from "../providers/GlobalContext";
 
 export default function Table() {
   const { subjectsList, getSubjects } = React.useContext(GlobalContext)
+  const myRef = useRef<any>(null);
 
   useEffect(() => {
     getSubjects();
@@ -13,7 +14,7 @@ export default function Table() {
   return (
     <div className="overflow-auto shadow-md sm:rounded-lg border-collapse">
       {/* {JSON.stringify(subjectsList)} */}
-      <table className="text-base text-center rtl:text-right text-gray-900 w-full">
+      <table className="text-base text-center rtl:text-right text-gray-900 w-full" ref={myRef}>
         <thead className="text-xs uppercase bg-darkerGray text-gray-900 drop-shadow-md">
           <tr className="flex w-full">
             <th scope="col" className="px-6 py-3 w-[10%]">
@@ -42,7 +43,7 @@ export default function Table() {
             </th>
           </tr>
         </thead>
-        <tbody className="block scroll overflow-y-auto h-[587px] no-scrollbar bg-darkerGray">
+        <tbody id="table" className="block scroll overflow-y-auto h-[587px] no-scrollbar bg-darkerGray scroll-smooth">
           {subjectsList.map((subject, i) => (
             <TableRow
               key={i}
