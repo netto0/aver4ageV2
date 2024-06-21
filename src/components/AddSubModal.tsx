@@ -5,6 +5,7 @@ import { GlobalContext } from "../providers/GlobalContext";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ISubject from "../interfaces/ISubject";
 
 type Subject = {
   name: string;
@@ -16,20 +17,37 @@ type Subject = {
   retakeGrade: number | null;
 };
 
-export default function AddSubModal() {
-  const [formFields, setFormFields] = useState({
-    name: "",
-    semester: null,
-    avaQtt: 0,
-    avaGrades: {},
-    examGrade: null,
-    pimGrade: null,
-    retakeGrade: null,
-  });
+interface Props {
+  edit?: boolean;
+}
 
+export default function AddSubModal({ edit }: Props) {
   const [showAva, setShowAva] = useState<boolean | string>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const { getSubjects, setActiveModal, successToast, resetScrollInsideTable } = React.useContext(GlobalContext);
+  let initSubObject: ISubject;
+  const {
+    getSubjects,
+    setActiveModal,
+    successToast,
+    resetScrollInsideTable,
+    currentSubject,
+  } = React.useContext(GlobalContext);
+
+  if (edit) {
+    initSubObject = currentSubject;
+  } else {
+    initSubObject = {
+      name: "",
+      semester: "",
+      avaQtt: 0,
+      avaGrades: {},
+      examGrade: "",
+      pimGrade: "",
+      retakeGrade: "",
+    };
+  }
+
+  const [formFields, setFormFields] = useState(initSubObject);
 
   const {
     register,
@@ -45,8 +63,8 @@ export default function AddSubModal() {
     if (response) {
       setActiveModal(false);
       getSubjects();
-      toast.success("Matéria incluída com sucesso!", successToast)
-      setInterval(resetScrollInsideTable, 500)
+      toast.success("Matéria incluída com sucesso!", successToast);
+      setInterval(resetScrollInsideTable, 500);
       return response;
     } else {
       console.log("Algo deu errado");
@@ -67,6 +85,8 @@ export default function AddSubModal() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const targetNames = ["name", "semester", "avaQtt", "pimGrade", "examGrade"];
+    console.log(e.target.name);
+    console.log(e.target.value);
     let grades = formFields.avaGrades;
 
     if (targetNames.includes(e.target.name)) {
@@ -79,30 +99,35 @@ export default function AddSubModal() {
 
   const avaList = [];
 
-  for (let i = 1; i <= formFields.avaQtt; i++) {
-    avaList.push(
-      <div className="col-span-1 sm:col-span-1" key={i}>
-        <label
-          htmlFor={`ava${i}`}
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          {`AVA ${i}`}
-        </label>
-        <input
-          type="number"
-          name={`ava${i}`}
-          id={`ava${i}`}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          placeholder="0"
-          min={0}
-          onClick={(e) =>
-            console.log(e.currentTarget.name + " " + e.currentTarget.value)
-          }
-          onChange={handleChange}
-        />
-      </div>
-    );
+  // REMOVER ABAIXO
+  //==============================================================================================
+  if (formFields.avaQtt != "") {
+    for (let i = 1; i <= formFields.avaQtt; i++) {
+      avaList.push(
+        <div className="col-span-1 sm:col-span-1" key={i}>
+          <label
+            htmlFor={`ava${i}`}
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            {`AVA ${i}`}
+          </label>
+          <input
+            type="number"
+            name={`ava${i}`}
+            id={`ava${i}`}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="0"
+            min={0}
+            onClick={(e) =>
+              console.log(e.currentTarget.name + " " + e.currentTarget.value)
+            }
+            onChange={handleChange}
+          />
+        </div>
+      );
+    }
   }
+  //==============================================================================================
 
   return (
     <>
@@ -110,7 +135,7 @@ export default function AddSubModal() {
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Adicionar nova matéria
+              {edit ? "Editar matéria" : "Adicionar nova matéria"}
             </h3>
             <button
               type="button"
@@ -147,8 +172,6 @@ export default function AddSubModal() {
                 </label>
                 <input
                   {...register("name", { minLength: 3 })}
-                  // {...register("name", { required: true })}
-                  // https://react-hook-form.com/advanced-usage
                   type="text"
                   name="name"
                   id="name"
@@ -175,6 +198,7 @@ export default function AddSubModal() {
                   type="number"
                   name="semester"
                   id="semester"
+                  value={formFields.semester!}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="1"
                   min={1}
@@ -200,6 +224,7 @@ export default function AddSubModal() {
                       type="number"
                       name="avaQtt"
                       id="avaQtt"
+                      value={formFields.avaQtt!}
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="0"
                       min={0}
@@ -261,6 +286,7 @@ export default function AddSubModal() {
                   type="number"
                   name="pimGrade"
                   id="pimGrade"
+                  value={formFields.pimGrade!}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="1"
                   min={0}
@@ -278,6 +304,7 @@ export default function AddSubModal() {
                   type="number"
                   name="examGrade"
                   id="examGrade"
+                  value={formFields.examGrade!}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="1"
                   min={0}

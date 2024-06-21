@@ -8,7 +8,8 @@ import { GlobalContext } from "../providers/GlobalContext";
 import { ToastContainer } from "react-toastify";
 
 export default function Body() {
-  const { activeModal, setActiveModal, deleteSubject } =
+  const { activeModal, setActiveModal, currentSubject } =
+  // const { activeModal, setActiveModal, deleteSubject } =
     React.useContext(GlobalContext);
   const [search, setSearch] = useState("");
 
@@ -18,7 +19,8 @@ export default function Body() {
 
   return (
     <main className="w-full bg-lightGray grow px-[8%] flex flex-col justify-center">
-      <span className="z-50 text-red-600 pb-1">Modal: {activeModal ? activeModal : "false"} | Delete: {JSON.stringify(deleteSubject)}</span>
+      <span className="z-50 text-red-600 pb-1">Modal: {activeModal ? activeModal : "false"} | Delete: {JSON.stringify(currentSubject)}</span>
+      {/* <span className="z-50 text-red-600 pb-1">Modal: {activeModal ? activeModal : "false"} | Delete: {JSON.stringify(deleteSubject)}</span> */}
       <div
         className={`absolute w-screen h-screen left-0 z-40 backdrop-blur-sm ${
           !activeModal && "hidden"
@@ -37,8 +39,11 @@ export default function Body() {
           <Button text="OK" />
         </div>
         <Table />
-        {activeModal &&
-          (activeModal == "add" ? <AddSubModal /> : <DelSubModal />)}
+        {activeModal == "add" && <AddSubModal />}
+        {activeModal == "del" && <DelSubModal />}
+        {activeModal == "edit" && <AddSubModal edit={true}/>}
+        {/* {activeModal &&
+          (activeModal == "add" ? <AddSubModal /> : <DelSubModal />)} */}
       </div>
       <ToastContainer />
     </main>

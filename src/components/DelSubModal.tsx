@@ -26,7 +26,14 @@ export default function DelSubModal() {
   });
 
   const [loading, setLoading] = useState<boolean>(false);
-  const { getSubjects, setActiveModal, deleteSubject, setDeleteSubject, successToast } =
+  const {
+    getSubjects,
+    setActiveModal,
+    currentSubject,
+    setCurrentSubject,
+    successToast,
+  } =
+    // const { getSubjects, setActiveModal, deleteSubject, setDeleteSubject, successToast } =
     React.useContext(GlobalContext);
 
   const {
@@ -39,7 +46,8 @@ export default function DelSubModal() {
 
   const deleteSbj = async () => {
     setLoading(true);
-    const response = await deleteSubjectService(deleteSubject._id);
+    const response = await deleteSubjectService(currentSubject._id!);
+    // const response = await deleteSubjectService(deleteSubject._id);
     if (response) {
       toast.success("Matéria excluída com sucesso", successToast);
       closeModal();
@@ -57,10 +65,23 @@ export default function DelSubModal() {
 
   const closeModal = () => {
     setActiveModal(false);
-    setDeleteSubject({
+    setCurrentSubject({
       _id: "",
       name: "",
+      semester: "",
+      avaQtt: "",
+      avaGrades: {},
+      createdAt: "",
+      updatedAt: "",
+      __v: "",
+      examGrade: "",
+      pimGrade: "",
+      retakeGrade: "",
     });
+    // setDeleteSubject({
+    //   _id: "",
+    //   name: "",
+    // });
   };
 
   // ===================================================================
@@ -142,7 +163,8 @@ export default function DelSubModal() {
                   name="name"
                   readOnly={true}
                   id="name"
-                  value={deleteSubject.name}
+                  value={currentSubject.name}
+                  // value={deleteSubject.name}
                   className="bg-gray-600 border border-gray-500 text-white text-m font-semibold rounded-lg block w-full p-2.5 outline-none hover:cursor-auto"
                   placeholder="Digite o nome da matéria..."
                   onChange={handleChange}

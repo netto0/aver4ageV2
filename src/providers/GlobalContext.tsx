@@ -12,40 +12,44 @@ type GlobalContextType = {
   getSubjects: () => void;
   activeModal: boolean | string;
   setActiveModal: (state: boolean | string) => void;
-  deleteSubject: IDelete;
-  setDeleteSubject: Dispatch<IDelete>;
+  currentSubject: ISubject;
+  setCurrentSubject: Dispatch<ISubject>;
   successToast: object;
   resetScrollInsideTable: () => void
 };
-
-interface IDelete {
-  _id: string;
-  name: string;
-}
 
 const initialValue = {
   subjectsList: [],
   getSubjects: () => {},
   activeModal: false,
   setActiveModal: () => {},
-  deleteSubject: {
+  currentSubject: {
     _id: "",
     name: "",
+    semester: "",
+    avaQtt: "",
+    avaGrades: {},
+    createdAt: "",
+    updatedAt: "",
+    __v: "",
+    examGrade: "",
+    pimGrade: "",
+    retakeGrade: ""
   },
-  setDeleteSubject: () => {},
+  setCurrentSubject: () => {},
   successToast:{},
   resetScrollInsideTable: () => {}
 };
 
 const successToast: ToastOptions = {
   position: "top-center",
-  autoClose: 1500,
+  autoClose: 2000,
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
-  theme: "colored",
+  theme: "light",
 };
 
 function resetScrollInsideTable() {
@@ -57,7 +61,7 @@ export const GlobalContext =
   React.createContext<GlobalContextType>(initialValue);
 
 export const GlobalProvider = ({ children }: Props) => {
-  const [deleteSubject, setDeleteSubject] = useState<IDelete>(initialValue.deleteSubject);
+  const [currentSubject, setCurrentSubject] = useState<ISubject>(initialValue.currentSubject);
   const [subjectsList, setSubjectsList] = useState<ISubject[]>([]);
   const [activeModal, setActiveModal] = useState<boolean | string>(initialValue.activeModal);
 
@@ -75,8 +79,8 @@ export const GlobalProvider = ({ children }: Props) => {
         getSubjects,
         activeModal,
         setActiveModal,
-        deleteSubject,
-        setDeleteSubject,
+        currentSubject,
+        setCurrentSubject,
         successToast,
         resetScrollInsideTable
       }}
