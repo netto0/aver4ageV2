@@ -7,55 +7,26 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ISubject from "../interfaces/ISubject";
 
-type Subject = {
-  name: string;
-  semester: number | null;
-  avaQtt: number;
-  avaGrades: { [k: string]: number } | undefined;
-  examGrade: number | null;
-  pimGrade: number | null;
-  retakeGrade: number | null;
-};
-
 interface Props {
   edit?: boolean;
 }
 
 export default function AddSubModal({ edit }: Props) {
-  const [showAva, setShowAva] = useState<boolean | string>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  let initSubObject: ISubject;
   const {
     getSubjects,
     setActiveModal,
     successToast,
     resetScrollInsideTable,
-    currentSubject,
+    formFields,
+    setFormFields,
   } = React.useContext(GlobalContext);
-
-  if (edit) {
-    initSubObject = currentSubject;
-  } else {
-    initSubObject = {
-      name: "",
-      semester: "",
-      avaQtt: 0,
-      avaGrades: {},
-      examGrade: "",
-      pimGrade: "",
-      retakeGrade: "",
-    };
-  }
-
-  const [formFields, setFormFields] = useState(initSubObject);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Subject>();
-
-  // ===================================================================
+  } = useForm<ISubject>();
 
   const postSubject = async () => {
     setLoading(true);
@@ -75,59 +46,12 @@ export default function AddSubModal({ edit }: Props) {
     postSubject();
   });
 
-  // ===================================================================
-
-  const toggleAva = () => {
-    if (formFields.avaQtt != 0) {
-      setShowAva(!showAva);
-    }
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const targetNames = ["name", "semester", "avaQtt", "pimGrade", "examGrade"];
     console.log(e.target.name);
     console.log(e.target.value);
-    let grades = formFields.avaGrades;
 
-    if (targetNames.includes(e.target.name)) {
-      setFormFields({ ...formFields, [e.target.name]: e.target.value });
-    } else {
-      grades = { ...grades, [e.target.name]: parseFloat(e.target.value) };
-      setFormFields({ ...formFields, avaGrades: grades });
-    }
+    setFormFields({ ...formFields, [e.target.name]: e.target.value });
   };
-
-  const avaList = [];
-
-  // REMOVER ABAIXO
-  //==============================================================================================
-  if (formFields.avaQtt != "") {
-    for (let i = 1; i <= formFields.avaQtt; i++) {
-      avaList.push(
-        <div className="col-span-1 sm:col-span-1" key={i}>
-          <label
-            htmlFor={`ava${i}`}
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            {`AVA ${i}`}
-          </label>
-          <input
-            type="number"
-            name={`ava${i}`}
-            id={`ava${i}`}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="0"
-            min={0}
-            onClick={(e) =>
-              console.log(e.currentTarget.name + " " + e.currentTarget.value)
-            }
-            onChange={handleChange}
-          />
-        </div>
-      );
-    }
-  }
-  //==============================================================================================
 
   return (
     <>
@@ -175,7 +99,7 @@ export default function AddSubModal({ edit }: Props) {
                   type="text"
                   name="name"
                   id="name"
-                  value={formFields.name}
+                  value={formFields.name ? formFields.name : ""}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Digite o nome da matéria..."
                   onChange={handleChange}
@@ -198,7 +122,7 @@ export default function AddSubModal({ edit }: Props) {
                   type="number"
                   name="semester"
                   id="semester"
-                  value={formFields.semester!}
+                  value={formFields.semester ? formFields.semester : ""}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="1"
                   min={1}
@@ -215,65 +139,22 @@ export default function AddSubModal({ edit }: Props) {
                   htmlFor="avaQtt"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Quantidade AVA *
+                  Nota AVA
                 </label>
                 <div className="flex flex-col">
                   <div className="flex gap-1 items-center">
                     <input
-                      {...register("avaQtt", { required: true })}
                       type="number"
-                      name="avaQtt"
-                      id="avaQtt"
-                      value={formFields.avaQtt!}
+                      name="avaGrade"
+                      id="avaGrade"
+                      value={formFields.avaGrade ? formFields.avaGrade : ""}
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="0"
                       min={0}
                       onChange={handleChange}
                     />
-                    <button
-                      type="button"
-                      className="text-gray-400  hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                      data-modal-toggle="crud-modal"
-                      onClick={toggleAva}
-                    >
-                      {showAva ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          className="bi bi-caret-up-fill"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
-                        </svg>
-                      ) : (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          className="bi bi-caret-down-fill"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
-                      )}
-                    </button>
                   </div>
-                  {errors.avaQtt && (
-                    <span className="text-red-500 text-sm">
-                      Campo obrigatório
-                    </span>
-                  )}
                 </div>
-              </div>
-              <div
-                className={`col-span-2 flex w-full h-fit max-h-[155px] overflow-auto no-scrollbar gap-3 ${
-                  !showAva && "hidden"
-                } flex-wrap justify-between`}
-              >
-                {avaList}
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <label
@@ -286,7 +167,7 @@ export default function AddSubModal({ edit }: Props) {
                   type="number"
                   name="pimGrade"
                   id="pimGrade"
-                  value={formFields.pimGrade!}
+                  value={formFields.pimGrade ? formFields.pimGrade : ""}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="1"
                   min={0}
@@ -304,7 +185,7 @@ export default function AddSubModal({ edit }: Props) {
                   type="number"
                   name="examGrade"
                   id="examGrade"
-                  value={formFields.examGrade!}
+                  value={formFields.examGrade ? formFields.examGrade : ""}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="1"
                   min={0}
