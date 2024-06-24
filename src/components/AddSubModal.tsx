@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { createSubjectService } from "../api/services/subjectServices";
+import {
+  createSubjectService,
+  updateSubjectService,
+} from "../api/services/subjectServices";
 import { GlobalContext } from "../providers/GlobalContext";
 
 import { toast } from "react-toastify";
@@ -20,6 +23,7 @@ export default function AddSubModal({ edit }: Props) {
     resetScrollInsideTable,
     formFields,
     setFormFields,
+    defaultForm,
   } = React.useContext(GlobalContext);
 
   const {
@@ -33,6 +37,7 @@ export default function AddSubModal({ edit }: Props) {
     const response = await createSubjectService(formFields);
     if (response) {
       setActiveModal(false);
+      setFormFields(defaultForm);
       getSubjects();
       toast.success("Matéria incluída com sucesso!", successToast);
       setInterval(resetScrollInsideTable, 500);
@@ -42,14 +47,30 @@ export default function AddSubModal({ edit }: Props) {
     }
   };
 
+  const editSubject = async (id: string) => {
+    setLoading(true);
+    const response = await updateSubjectService(id, formFields);
+    if (response) {
+      setActiveModal(false);
+      setFormFields(defaultForm);
+      getSubjects();
+      toast.success("Matéria alterada com sucesso!", successToast);
+      setInterval(resetScrollInsideTable, 500);
+      return response;
+    } else {
+      console.log("Algo deu errado");
+    }
+  };
+
   const onSubmit = handleSubmit(() => {
-    postSubject();
+    if (edit) {
+      editSubject(formFields._id!);
+    } else {
+      postSubject();
+    }
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
-
     setFormFields({ ...formFields, [e.target.name]: e.target.value });
   };
 
@@ -103,6 +124,7 @@ export default function AddSubModal({ edit }: Props) {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Digite o nome da matéria..."
                   onChange={handleChange}
+                  readOnly={edit}
                 />
                 {errors.name && (
                   <span className="text-red-500 text-sm">
@@ -127,6 +149,7 @@ export default function AddSubModal({ edit }: Props) {
                   placeholder="1"
                   min={1}
                   onChange={handleChange}
+                  readOnly={edit}
                 />
                 {errors.semester && (
                   <span className="text-red-500 text-sm">
@@ -211,8 +234,9 @@ export default function AddSubModal({ edit }: Props) {
               </svg>
               {loading ? "Enviando..." : "Adicionar Matéria"}
             </button>
-
-            {JSON.stringify(formFields)}
+            <p className="w-full overflow-auto text-yellow-400">
+              {JSON.stringify(formFields)}
+            </p>
           </form>
         </div>
       </div>

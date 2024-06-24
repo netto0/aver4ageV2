@@ -17,6 +17,7 @@ type GlobalContextType = {
   setFormFields: Dispatch<IForm>;
   successToast: object;
   resetScrollInsideTable: () => void;
+  defaultForm: IForm
 };
 
 const defaultForm = {
@@ -37,6 +38,7 @@ const initialValue = {
   setFormFields: () => {},
   successToast: {},
   resetScrollInsideTable: () => {},
+  defaultForm
 };
 
 const successToast: ToastOptions = {
@@ -83,6 +85,7 @@ export const GlobalProvider = ({ children }: Props) => {
         setFormFields,
         successToast,
         resetScrollInsideTable,
+        defaultForm
       }}
     >
       {children}

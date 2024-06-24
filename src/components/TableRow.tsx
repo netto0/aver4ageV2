@@ -8,27 +8,18 @@ interface Props {
 }
 
 export default function TableRow({ subject }: Props) {
-  const { setActiveModal, setCurrentSubject } = React.useContext(GlobalContext);
+  const { setActiveModal, setFormFields } = React.useContext(GlobalContext);
   const fatherRef = useRef<any>(null);
 
   function handleClick(modalType: "del" | "edit") {
-    const subjectInfos = JSON.parse(fatherRef.current.id)
-    console.log(subjectInfos)
-    setCurrentSubject(subjectInfos)
+    const subjectInfos = JSON.parse(fatherRef.current.id);
+    console.log(subjectInfos);
+    setFormFields(subjectInfos);
     setActiveModal(modalType);
   }
 
-  function avaSum(gradesObject: { [key: string]: number } | undefined): number {
-    if (!gradesObject) {
-      return 0;
-    }
-    const list = Object.values(gradesObject);
-    const sum = list.reduce((total, current) => total + current);
-    return sum;
-  }
-
   function average(
-    ava: number | null,
+    ava?: number | null,
     exam?: number | null,
     pim?: number | null,
     rtk?: number | null
@@ -47,9 +38,8 @@ export default function TableRow({ subject }: Props) {
     }
   }
 
-  const ava = avaSum(subject.avaGrades);
   const avg = average(
-    ava,
+    subject.avaGrade,
     subject.examGrade,
     subject.pimGrade,
     subject.retakeGrade
@@ -64,14 +54,13 @@ export default function TableRow({ subject }: Props) {
     >
       <td className="w-[10%] h-full flex flex-col justify-center">
         {subject.semester}
-        {/* <span className= "text-red-700 bg-blue-300 z-50">{`${subject.semester} ${subject.name} ${subject.pimGrade} ${subject.examGrade}`}</span> */}
       </td>
       <td className="w-[30%] truncate h-full flex flex-col justify-center">
         {subject.name}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
-        {!ava ? "∅" : ava}
-        {!ava && <Dot />}
+        {!subject.avaGrade ? "∅" : subject.avaGrade}
+        {!subject.avaGrade && <Dot />}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
         {!subject.pimGrade ? "∅" : subject.pimGrade}

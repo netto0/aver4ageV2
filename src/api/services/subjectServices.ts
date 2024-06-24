@@ -6,7 +6,6 @@ const getSubjectsService = async () => {
     const response = await axios.get(`${baseUrl}/subject`);
     return response.data;
   } catch (error) {
-    // console.log(error);
     return error;
   }
 };
@@ -31,4 +30,15 @@ const deleteSubjectService = async (id: string) => {
   }
 };
 
-export { getSubjectsService, createSubjectService, deleteSubjectService };
+const updateSubjectService = async (id: string, body:{}) => {
+  try {
+    const response = await axios.patch(`${baseUrl}/subject/${id}`, body);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+
+export { getSubjectsService, createSubjectService, deleteSubjectService, updateSubjectService };
