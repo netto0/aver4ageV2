@@ -8,8 +8,10 @@ export default {
         "darkerGray": "#6b7280",
         "lightGray": "#d4d4d8",
       },
-      
     },
+    classes: {
+      "readOnlyField": "bg-gray-600 border border-gray-500 text-white text-m font-semibold rounded-lg block w-full p-2.5 outline-none hover:cursor-auto"
+    }
   },
   plugins: [],
 };

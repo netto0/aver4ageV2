@@ -40,8 +40,6 @@ export default function Body() {
         {activeModal == "add" && <AddSubModal />}
         {activeModal == "del" && <DelSubModal />}
         {activeModal == "edit" && <AddSubModal edit={true}/>}
-        {/* {activeModal &&
-          (activeModal == "add" ? <AddSubModal /> : <DelSubModal />)} */}
       </div>
       <ToastContainer />
     </main>

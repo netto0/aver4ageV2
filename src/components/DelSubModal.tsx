@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { deleteSubjectService } from "../api/services/subjectServices";
 import { GlobalContext } from "../providers/GlobalContext";
 import { toast } from "react-toastify";
+import styles from "../index.css"
 
 type Subject = {
   name: string;
@@ -15,26 +16,15 @@ type Subject = {
 };
 
 export default function DelSubModal() {
-  const [formFields, setFormFields] = useState({
-    name: "",
-    semester: null,
-    avaQtt: 0,
-    avaGrades: {},
-    examGrade: null,
-    pimGrade: null,
-    retakeGrade: null,
-  });
-
   const [loading, setLoading] = useState<boolean>(false);
   const {
     getSubjects,
     setActiveModal,
-    currentSubject,
-    setCurrentSubject,
+    formFields,
+    setFormFields,
     successToast,
-  } =
-    // const { getSubjects, setActiveModal, deleteSubject, setDeleteSubject, successToast } =
-    React.useContext(GlobalContext);
+    defaultForm,
+  } = React.useContext(GlobalContext);
 
   const {
     register,
@@ -46,12 +36,10 @@ export default function DelSubModal() {
 
   const deleteSbj = async () => {
     setLoading(true);
-    const response = await deleteSubjectService(currentSubject._id!);
-    // const response = await deleteSubjectService(deleteSubject._id);
+    const response = await deleteSubjectService(formFields._id!);
     if (response) {
       toast.success("Matéria excluída com sucesso", successToast);
       closeModal();
-      // Inserir mensagem popup de confirmação
       getSubjects();
       return response;
     } else {
@@ -65,61 +53,12 @@ export default function DelSubModal() {
 
   const closeModal = () => {
     setActiveModal(false);
-    setCurrentSubject({
-      _id: "",
-      name: "",
-      semester: "",
-      avaQtt: "",
-      avaGrades: {},
-      createdAt: "",
-      updatedAt: "",
-      __v: "",
-      examGrade: "",
-      pimGrade: "",
-      retakeGrade: "",
-    });
-    // setDeleteSubject({
-    //   _id: "",
-    //   name: "",
-    // });
+    setFormFields(defaultForm);
   };
-
-  // ===================================================================
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const targetNames = ["name", "semester", "avaQtt", "pim", "exam"];
-    let grades = formFields.avaGrades;
-
-    if (targetNames.includes(e.target.name)) {
-      setFormFields({ ...formFields, [e.target.name]: e.target.value });
-    } else {
-      grades = { ...grades, [e.target.name]: e.target.value };
-      setFormFields({ ...formFields, avaGrades: grades });
-    }
+    setFormFields({ ...formFields, [e.target.name]: e.target.value });
   };
-
-  const avaList = [];
-  for (let i = 1; i <= formFields.avaQtt; i++) {
-    avaList.push(
-      <div className="col-span-1 sm:col-span-1" key={i}>
-        <label
-          htmlFor={`ava${i}`}
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          {`AVA ${i}`}
-        </label>
-        <input
-          type="number"
-          name={`ava${i}`}
-          id={`ava${i}`}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          placeholder="0"
-          min={0}
-          onChange={handleChange}
-        />
-      </div>
-    );
-  }
 
   return (
     <>
@@ -163,8 +102,7 @@ export default function DelSubModal() {
                   name="name"
                   readOnly={true}
                   id="name"
-                  value={currentSubject.name}
-                  // value={deleteSubject.name}
+                  value={formFields.name!}
                   className="bg-gray-600 border border-gray-500 text-white text-m font-semibold rounded-lg block w-full p-2.5 outline-none hover:cursor-auto"
                   placeholder="Digite o nome da matéria..."
                   onChange={handleChange}

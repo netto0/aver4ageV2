@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function TableRow({ subject }: Props) {
-  const { setActiveModal, setFormFields } = React.useContext(GlobalContext);
+  const { setActiveModal, setFormFields, average } = React.useContext(GlobalContext);
   const fatherRef = useRef<any>(null);
 
   function handleClick(modalType: "del" | "edit") {
@@ -18,25 +18,25 @@ export default function TableRow({ subject }: Props) {
     setActiveModal(modalType);
   }
 
-  function average(
-    ava?: number | null,
-    exam?: number | null,
-    pim?: number | null,
-    rtk?: number | null
-  ): number | null {
-    if (ava && exam && pim) {
-      let regularMD: number;
-      // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
-      regularMD = (7 * exam + 2 * pim + ava) / 10;
-      if (rtk) {
-        return (regularMD + rtk) / 2;
-      } else {
-        return regularMD;
-      }
-    } else {
-      return null;
-    }
-  }
+  // function average(
+  //   ava?: number | null,
+  //   exam?: number | null,
+  //   pim?: number | null,
+  //   rtk?: number | null
+  // ): number | null {
+  //   if (ava && exam && pim) {
+  //     let regularMD: number;
+  //     // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
+  //     regularMD = (7 * exam + 2 * pim + ava) / 10;
+  //     if (rtk) {
+  //       return (regularMD + rtk) / 2;
+  //     } else {
+  //       return regularMD;
+  //     }
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   const avg = average(
     subject.avaGrade,
@@ -73,7 +73,7 @@ export default function TableRow({ subject }: Props) {
       <td className="relative w-[10%] h-full flex flex-col justify-center">
         {!avg ? "∅" : avg}
         {!avg && <Dot />}
-        {avg && avg! < 7 && <Dot color={2} />}
+        {/* {avg && avg! < 7 && <Dot color={2} />} */}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
         {!subject.retakeGrade ? "∅" : subject.retakeGrade}

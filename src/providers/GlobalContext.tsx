@@ -17,7 +17,14 @@ type GlobalContextType = {
   setFormFields: Dispatch<IForm>;
   successToast: object;
   resetScrollInsideTable: () => void;
-  defaultForm: IForm
+  defaultForm: IForm;
+  closeModal: () => void;
+  average: (
+    ava?: number | null,
+    exam?: number | null,
+    pim?: number | null,
+    rtk?: number | null
+  ) => number | void | null;
 };
 
 const defaultForm = {
@@ -26,7 +33,7 @@ const defaultForm = {
   avaGrade: null,
   examGrade: null,
   pimGrade: null,
-  retakeGrade: null
+  retakeGrade: null,
 };
 
 const initialValue = {
@@ -38,7 +45,9 @@ const initialValue = {
   setFormFields: () => {},
   successToast: {},
   resetScrollInsideTable: () => {},
-  defaultForm
+  defaultForm,
+  closeModal: () => {},
+  average: () => {},
 };
 
 const successToast: ToastOptions = {
@@ -74,6 +83,31 @@ export const GlobalProvider = ({ children }: Props) => {
     }
   };
 
+  const closeModal = () => {
+    setActiveModal(false);
+    setFormFields(defaultForm);
+  };
+
+  function average(
+    ava?: number | null,
+    exam?: number | null,
+    pim?: number | null,
+    rtk?: number | null
+  ): number | null {
+    if (ava && exam && pim) {
+      let regularMD: number;
+      // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
+      regularMD = (7 * exam + 2 * pim + ava) / 10;
+      if (rtk) {
+        return (regularMD + rtk) / 2;
+      } else {
+        return regularMD;
+      }
+    } else {
+      return null;
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -85,7 +119,9 @@ export const GlobalProvider = ({ children }: Props) => {
         setFormFields,
         successToast,
         resetScrollInsideTable,
-        defaultForm
+        defaultForm,
+        closeModal,
+        average,
       }}
     >
       {children}
