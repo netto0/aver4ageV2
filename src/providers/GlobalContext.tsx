@@ -20,12 +20,39 @@ type GlobalContextType = {
   defaultForm: IForm;
   closeModal: () => void;
   average: (
-    ava?: number | null,
-    exam?: number | null,
-    pim?: number | null,
+    ava: number | null,
+    exam: number | null,
+    pim: number | null,
     rtk?: number | null
   ) => number | void | null;
 };
+
+function average(
+  ava: number | null,
+  exam: number | null,
+  pim: number | null,
+  rtk?: number | null
+): number | null {
+  // console.log(
+  //   `AVA: ${ava}\nPIM: ${pim}\nProva: ${exam}\n7 x ${exam} = ${
+  //     7 * exam!
+  //   } + \n2 x ${pim} = ${2 * pim!} + \n${ava}\n------------\n     10     \n------------\n    ${
+  //     (7 * exam! + 2 * pim! + ava!) / 10
+  //   }`
+  // );
+  if (ava && exam && pim) {
+    let regularMD: number;
+    // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
+    regularMD = (7 * exam + 2 * pim + ava) / 10;
+    if (rtk) {
+      return (regularMD + rtk) / 2;
+    } else {
+      return regularMD;
+    }
+  } else {
+    return null;
+  }
+}
 
 const defaultForm = {
   name: null,
@@ -87,26 +114,6 @@ export const GlobalProvider = ({ children }: Props) => {
     setActiveModal(false);
     setFormFields(defaultForm);
   };
-
-  function average(
-    ava?: number | null,
-    exam?: number | null,
-    pim?: number | null,
-    rtk?: number | null
-  ): number | null {
-    if (ava && exam && pim) {
-      let regularMD: number;
-      // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
-      regularMD = (7 * exam + 2 * pim + ava) / 10;
-      if (rtk) {
-        return (regularMD + rtk) / 2;
-      } else {
-        return regularMD;
-      }
-    } else {
-      return null;
-    }
-  }
 
   return (
     <GlobalContext.Provider

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   createSubjectService,
@@ -17,6 +17,7 @@ interface Props {
 export default function AddSubModal({ edit }: Props) {
   const [loading, setLoading] = useState<boolean>(false);
   const [avg, setAvg] = useState<null | number | void>(null);
+  const [showDiv, setShowDiv] = useState<boolean>(false);
 
   const {
     getSubjects,
@@ -71,7 +72,16 @@ export default function AddSubModal({ edit }: Props) {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormFields({ ...formFields, [e.target.name]: e.target.value });
+    if (e.target.name != "name" && e.target.name != "semester") {
+      setFormFields({
+        ...formFields,
+        [e.target.name]: parseFloat(e.target.value),
+      });
+    } else {
+      setFormFields({ ...formFields, [e.target.name]: e.target.value });
+    }
+  };
+  useEffect(() => {
     setAvg(
       average(
         formFields.avaGrade!,
@@ -80,7 +90,29 @@ export default function AddSubModal({ edit }: Props) {
         formFields.retakeGrade!
       )
     );
-  };
+    if (formFields.retakeGrade != null) {
+      setShowDiv(true);
+    } else {
+      if (
+        average(
+          formFields.avaGrade!,
+          formFields.examGrade!,
+          formFields.pimGrade!,
+          formFields.retakeGrade!
+        ) != null &&
+        average(
+          formFields.avaGrade!,
+          formFields.examGrade!,
+          formFields.pimGrade!,
+          formFields.retakeGrade!
+        )! < 7
+      ) {
+        setShowDiv(true);
+      } else {
+        setShowDiv(false);
+      }
+    }
+  }, [formFields]);
 
   return (
     <>
@@ -177,7 +209,7 @@ export default function AddSubModal({ edit }: Props) {
                   htmlFor="avaQtt"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Nota AVA
+                  Nota AVA {typeof formFields.avaGrade}
                 </label>
                 <div className="flex flex-col">
                   <div className="flex gap-1 items-center">
@@ -200,7 +232,7 @@ export default function AddSubModal({ edit }: Props) {
                   htmlFor="pimGrade"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  PIM
+                  PIM {typeof formFields.pimGrade}
                 </label>
                 <input
                   type="number"
@@ -219,7 +251,7 @@ export default function AddSubModal({ edit }: Props) {
                   htmlFor="examGrade"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Prova
+                  Prova {typeof formFields.examGrade}
                 </label>
                 <input
                   type="number"
@@ -233,7 +265,7 @@ export default function AddSubModal({ edit }: Props) {
                   onChange={handleChange}
                 />
               </div>
-              {avg != null && avg < 7 && (
+              {showDiv && (
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="examGrade"

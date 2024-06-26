@@ -18,7 +18,7 @@ export default function Body() {
 
   return (
     <main className="w-full bg-lightGray grow px-[8%] flex flex-col justify-center">
-      <span className="z-50 text-red-600 pb-1">Modal: {activeModal ? activeModal : "false"} | Delete: {JSON.stringify(formFields)}</span>
+      <span className="z-50 text-red-600 pb-1">Modal: {activeModal ? activeModal : "false"} | Form: {JSON.stringify(formFields)}</span>
       <div
         className={`absolute w-screen h-screen left-0 z-40 backdrop-blur-sm ${
           !activeModal && "hidden"
