@@ -82,6 +82,12 @@ export default function AddSubModal({ edit }: Props) {
     }
   };
   useEffect(() => {
+    let media = average(
+      formFields.avaGrade!,
+      formFields.examGrade!,
+      formFields.pimGrade!
+    )!;
+    const rtkNull = !formFields.retakeGrade;
     setAvg(
       average(
         formFields.avaGrade!,
@@ -90,26 +96,17 @@ export default function AddSubModal({ edit }: Props) {
         formFields.retakeGrade!
       )
     );
-    if (formFields.retakeGrade != null) {
+    if (!rtkNull) {
       setShowDiv(true);
     } else {
-      if (
-        average(
-          formFields.avaGrade!,
-          formFields.examGrade!,
-          formFields.pimGrade!,
-          formFields.retakeGrade!
-        ) != null &&
-        average(
-          formFields.avaGrade!,
-          formFields.examGrade!,
-          formFields.pimGrade!,
-          formFields.retakeGrade!
-        )! < 7
-      ) {
-        setShowDiv(true);
-      } else {
+      if (media == null) {
         setShowDiv(false);
+      } else {
+        if (media > 7) {
+          setShowDiv(false);
+        } else {
+          setShowDiv(true);
+        }
       }
     }
   }, [formFields]);
@@ -159,6 +156,7 @@ export default function AddSubModal({ edit }: Props) {
                   type="text"
                   name="name"
                   id="name"
+                  autoFocus={true}
                   value={formFields.name ? formFields.name : ""}
                   className={`bg-gray-600 border border-gray-500 text-white text-sm rounded-lg block w-full p-2.5 ${
                     edit
@@ -306,10 +304,22 @@ export default function AddSubModal({ edit }: Props) {
               </svg>
               {loading ? "Enviando..." : "Adicionar Matéria"}
             </button>
-            {/* <p className="w-full overflow-auto text-yellow-400">
-              {JSON.stringify(formFields)}
-            </p> */}
-            {JSON.stringify(avg)}
+            {
+              <p className="w-full text-yellow-400">
+                {JSON.stringify(formFields)}
+              </p>
+            }
+
+            {
+              <p className="w-full text-yellow-400">
+                Média: {JSON.stringify(avg)}
+              </p>
+            }
+            {
+              <p className="w-full text-yellow-400">
+                ShowDiv: {showDiv ? "Sim" : "Não"}
+              </p>
+            }
           </form>
         </div>
       </div>

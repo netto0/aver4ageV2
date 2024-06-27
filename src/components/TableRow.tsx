@@ -18,33 +18,28 @@ export default function TableRow({ subject }: Props) {
     setActiveModal(modalType);
   }
 
-  // function average(
-  //   ava?: number | null,
-  //   exam?: number | null,
-  //   pim?: number | null,
-  //   rtk?: number | null
-  // ): number | null {
-  //   if (ava && exam && pim) {
-  //     let regularMD: number;
-  //     // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
-  //     regularMD = (7 * exam + 2 * pim + ava) / 10;
-  //     if (rtk) {
-  //       return (regularMD + rtk) / 2;
-  //     } else {
-  //       return regularMD;
-  //     }
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
-  const avg = average(
-    subject.avaGrade,
-    subject.examGrade,
-    subject.pimGrade,
-    subject.retakeGrade
+  const avg: number|null = average(
+    subject.avaGrade!,
+    subject.examGrade!,
+    subject.pimGrade!,
+    subject.retakeGrade!
   );
 
+  const approved = () => {
+    if(subject.retakeGrade) {
+      if (avg! >= 5) {
+        return true
+      } else {
+        return false
+      }
+    } else {
+      if (avg! >= 7) {
+        return true
+      } else {
+        return false
+      }
+    }
+  }
   return (
     <tr
       className="bg-darkGray border-b border-gray-500 flex items-center h-14 text-center"
@@ -55,29 +50,28 @@ export default function TableRow({ subject }: Props) {
       <td className="w-[10%] h-full flex flex-col justify-center">
         {subject.semester}
       </td>
-      <td className="w-[30%] truncate h-full flex flex-col justify-center">
+      <td className="w-[30%] truncate h-full flex flex-col justify-center text-left">
         {subject.name}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
-        {!subject.avaGrade ? "∅" : subject.avaGrade}
+        {!subject.avaGrade?.toFixed(2) ? "∅" : subject.avaGrade}
         {!subject.avaGrade && <Dot />}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
-        {!subject.pimGrade ? "∅" : subject.pimGrade}
+        {!subject.pimGrade?.toFixed(2) ? "∅" : subject.pimGrade}
         {!subject.pimGrade && <Dot />}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
-        {!subject.examGrade && <Dot />}
+        {!subject.examGrade?.toFixed(2) && <Dot />}
         {!subject.examGrade ? "∅" : subject.examGrade}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
-        {!avg ? "∅" : avg}
+        {!avg ? "∅" : avg.toFixed(2)}
         {!avg && <Dot />}
-        {/* {avg && avg! < 7 && <Dot color={2} />} */}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
-        {!subject.retakeGrade ? "∅" : subject.retakeGrade}
-        {!subject.retakeGrade && <Dot />}
+        {!subject.retakeGrade ? "x" : subject.retakeGrade}
+        {!approved && <Dot color={2}/>}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
         <div className="flex w-full max-w-24 self-center justify-around items-center h-full">

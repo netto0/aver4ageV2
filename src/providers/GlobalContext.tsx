@@ -24,7 +24,7 @@ type GlobalContextType = {
     exam: number | null,
     pim: number | null,
     rtk?: number | null
-  ) => number | void | null;
+  ) => number | null;
 };
 
 function average(
@@ -33,18 +33,13 @@ function average(
   pim: number | null,
   rtk?: number | null
 ): number | null {
-  // console.log(
-  //   `AVA: ${ava}\nPIM: ${pim}\nProva: ${exam}\n7 x ${exam} = ${
-  //     7 * exam!
-  //   } + \n2 x ${pim} = ${2 * pim!} + \n${ava}\n------------\n     10     \n------------\n    ${
-  //     (7 * exam! + 2 * pim! + ava!) / 10
-  //   }`
-  // );
   if (ava && exam && pim) {
     let regularMD: number;
     // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
     regularMD = (7 * exam + 2 * pim + ava) / 10;
+    console.log("MD: ", regularMD)
     if (rtk) {
+      console.log("MF: ", (regularMD + rtk) / 2)
       return (regularMD + rtk) / 2;
     } else {
       return regularMD;
@@ -66,7 +61,7 @@ const defaultForm = {
 const initialValue = {
   subjectsList: [],
   getSubjects: () => {},
-  activeModal: "add",
+  activeModal: false,
   setActiveModal: () => {},
   formFields: defaultForm,
   setFormFields: () => {},
