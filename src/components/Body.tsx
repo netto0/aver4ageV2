@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
 import Table from "./Table";
-import AddSubModal from "./AddSubModal";
-import DelSubModal from "./DelSubModal";
+import AddSubModal from "./modals/AddSubModal";
+import DelSubModal from "./modals/DelSubModal";
 import { GlobalContext } from "../providers/GlobalContext";
 import { ToastContainer } from "react-toastify";
 
@@ -27,10 +27,11 @@ export default function Body() {
       />
       <div className="relative flex flex-col gap-4">
         <div id="searchBarField" className="flex justify-around gap-4">
-          <Button text="+" func={() => setActiveModal("add")} />
+          <Button text="+" func={() => setActiveModal("add")} /> 
           <Input
-            placeholder="Digite o que deseja buscar..."
             name="search"
+            type="text"
+            placeholder="Digite o que deseja buscar..."
             value={search}
             handleChange={handleChange}
           />

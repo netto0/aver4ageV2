@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { deleteSubjectService } from "../api/services/subjectServices";
-import { GlobalContext } from "../providers/GlobalContext";
+import { deleteSubjectService } from "../../api/services/subjectServices";
+import { GlobalContext } from "../../providers/GlobalContext";
 import { toast } from "react-toastify";
-import styles from "../index.css"
 
 type Subject = {
   name: string;

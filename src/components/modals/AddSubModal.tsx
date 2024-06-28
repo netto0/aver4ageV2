@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import {
   createSubjectService,
   updateSubjectService,
-} from "../api/services/subjectServices";
-import { GlobalContext } from "../providers/GlobalContext";
+} from "../../api/services/subjectServices";
+import { GlobalContext } from "../../providers/GlobalContext";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ISubject from "../interfaces/ISubject";
+import ISubject from "../../interfaces/ISubject";
+import Input from "../Input";
 
 interface Props {
   edit?: boolean;
@@ -261,6 +262,20 @@ export default function AddSubModal({ edit }: Props) {
                   placeholder="1"
                   min={0}
                   onChange={handleChange}
+                />
+              </div>
+              <div className="col-span-2 sm:col-span-1">
+                <label
+                  htmlFor="examGrade"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Teste
+                </label>
+                <Input
+                  name="retakeGrade"
+                  type="number"
+                  // value={formFields.retakeGrade ? formFields.retakeGrade : ""}
+                  handleChange={handleChange}
                 />
               </div>
               {showDiv && (

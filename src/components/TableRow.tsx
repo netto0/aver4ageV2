@@ -8,7 +8,8 @@ interface Props {
 }
 
 export default function TableRow({ subject }: Props) {
-  const { setActiveModal, setFormFields, average } = React.useContext(GlobalContext);
+  const { setActiveModal, setFormFields, average } =
+    React.useContext(GlobalContext);
   const fatherRef = useRef<any>(null);
 
   function handleClick(modalType: "del" | "edit") {
@@ -18,7 +19,7 @@ export default function TableRow({ subject }: Props) {
     setActiveModal(modalType);
   }
 
-  const avg: number|null = average(
+  const avg: number | null | void = average(
     subject.avaGrade!,
     subject.examGrade!,
     subject.pimGrade!,
@@ -26,20 +27,20 @@ export default function TableRow({ subject }: Props) {
   );
 
   const approved = () => {
-    if(subject.retakeGrade) {
+    if (subject.retakeGrade) {
       if (avg! >= 5) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
     } else {
       if (avg! >= 7) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
     }
-  }
+  };
   return (
     <tr
       className="bg-darkGray border-b border-gray-500 flex items-center h-14 text-center"
@@ -68,10 +69,10 @@ export default function TableRow({ subject }: Props) {
       <td className="relative w-[10%] h-full flex flex-col justify-center">
         {!avg ? "∅" : avg.toFixed(2)}
         {!avg && <Dot />}
+        {!approved() && <Dot color={2} />}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
         {!subject.retakeGrade ? "x" : subject.retakeGrade}
-        {!approved && <Dot color={2}/>}
       </td>
       <td className="relative w-[10%] h-full flex flex-col justify-center">
         <div className="flex w-full max-w-24 self-center justify-around items-center h-full">

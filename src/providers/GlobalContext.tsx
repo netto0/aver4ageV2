@@ -24,7 +24,7 @@ type GlobalContextType = {
     exam: number | null,
     pim: number | null,
     rtk?: number | null
-  ) => number | null;
+  ) => number | null | void;
 };
 
 function average(
@@ -37,9 +37,9 @@ function average(
     let regularMD: number;
     // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
     regularMD = (7 * exam + 2 * pim + ava) / 10;
-    console.log("MD: ", regularMD)
+    // console.log("MD: ", regularMD)
     if (rtk) {
-      console.log("MF: ", (regularMD + rtk) / 2)
+      // console.log("MF: ", (regularMD + rtk) / 2)
       return (regularMD + rtk) / 2;
     } else {
       return regularMD;
