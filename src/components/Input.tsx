@@ -23,6 +23,11 @@ export default function Input({
 }: Props) {
   const { formFields } = React.useContext(GlobalContext);
   let inputValue;
+  if (value == null) {
+    inputValue = "";
+  } else {
+    inputValue = value;
+  }
   if (value) {
     inputValue = value;
   } else {
@@ -43,8 +48,8 @@ export default function Input({
       )}
 
       <input
-        id={name}
         {...register}
+        id={name}
         name={name}
         type={type}
         value={inputValue}
@@ -52,8 +57,6 @@ export default function Input({
         onChange={handleChange}
         {...rest}
       />
-      {/* {errors} */}
-      {/* {JSON.stringify(errors)} */}
       {error && <span className="text-red-500 text-sm">{error.message}</span>}
     </>
   );

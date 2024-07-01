@@ -193,7 +193,7 @@ export default function AddSubModal({ edit }: Props) {
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <Input
-                  register={{ ...register("name") }}
+                  register={{ ...register("semester") }}
                   name="semester"
                   label="Semestre"
                   type="number"
@@ -203,97 +203,48 @@ export default function AddSubModal({ edit }: Props) {
                 />
               </div>
               <div className="col-span-2 sm:col-span-1">
-                <label
-                  htmlFor="avaQtt"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Nota AVA {typeof formFields.avaGrade}
-                </label>
-                <div className="flex flex-col">
-                  <div className="flex gap-1 items-center">
-                    <input
-                      type="number"
-                      name="avaGrade"
-                      id="avaGrade"
-                      step="0.01"
-                      value={formFields.avaGrade ? formFields.avaGrade : ""}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder="0"
-                      min={0}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-span-2 sm:col-span-1">
-                <label
-                  htmlFor="pimGrade"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  PIM {typeof formFields.pimGrade}
-                </label>
-                <input
-                  type="number"
-                  name="pimGrade"
-                  id="pimGrade"
-                  step="0.01"
-                  value={formFields.pimGrade ? formFields.pimGrade : ""}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="1"
-                  min={0}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="col-span-2 sm:col-span-1">
-                <label
-                  htmlFor="examGrade"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Prova {typeof formFields.examGrade}
-                </label>
-                <input
-                  type="number"
-                  name="examGrade"
-                  id="examGrade"
-                  step="0.01"
-                  value={formFields.examGrade ? formFields.examGrade : ""}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="1"
-                  min={0}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="col-span-2 sm:col-span-1">
-                <label
-                  htmlFor="examGrade"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Teste
-                </label>
-                {/* <Input
-                  name="retakeGrade"
+                <Input
+                  register={{ ...register("avaGrade") }}
+                  name="avaGrade"
+                  label="AVA"
                   type="number"
                   handleChange={handleChange}
-                /> */}
+                  placeholder="1"
+                  error={errors.avaGrade}
+                />
+              </div>
+              <div className="col-span-2 sm:col-span-1">
+                <Input
+                  register={{ ...register("pimGrade") }}
+                  name="pimGrade"
+                  label="PIM"
+                  type="number"
+                  handleChange={handleChange}
+                  placeholder="1"
+                  error={errors.pimGrade}
+                />
+              </div>
+              <div className="col-span-2 sm:col-span-1">
+                <Input
+                  register={{ ...register("examGrade") }}
+                  name="examGrade"
+                  label="Prova"
+                  type="number"
+                  handleChange={handleChange}
+                  placeholder="1"
+                  error={errors.examGrade}
+                />
               </div>
               {showDiv && (
                 <div className="col-span-2 sm:col-span-1">
-                  <label
-                    htmlFor="examGrade"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Exame
-                  </label>
-                  <input
-                    type="number"
+                  <Input
+                    register={{ ...register("retakeGrade") }}
                     name="retakeGrade"
-                    id="retakeGrade"
-                    step="0.01"
-                    value={formFields.retakeGrade ? formFields.retakeGrade : ""}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    label="Exame"
+                    type="number"
+                    handleChange={handleChange}
                     placeholder="1"
-                    min={0}
-                    onChange={handleChange}
+                    error={errors.retakeGrade}
                   />
                 </div>
               )}
@@ -317,22 +268,6 @@ export default function AddSubModal({ edit }: Props) {
               </svg>
               {loading ? "Enviando..." : "Adicionar Matéria"}
             </button>
-            {
-              <p className="w-full text-yellow-400">
-                {JSON.stringify(formFields)}
-              </p>
-            }
-
-            {
-              <p className="w-full text-yellow-400">
-                Média: {JSON.stringify(avg)}
-              </p>
-            }
-            {
-              <p className="w-full text-yellow-400">
-                ShowDiv: {showDiv ? "Sim" : "Não"}
-              </p>
-            }
           </form>
         </div>
       </div>
