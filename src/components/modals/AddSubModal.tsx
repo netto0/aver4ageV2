@@ -1,19 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import {
-  createSubjectService,
-  updateSubjectService,
-} from "../../api/services/subjectServices";
+import { useForm, Resolver } from "react-hook-form";
 import { GlobalContext } from "../../providers/GlobalContext";
-
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ISubject from "../../interfaces/ISubject";
 import Input from "../Input";
+import {
+  createSubjectService,
+  updateSubjectService,
+} from "../../api/services/subjectServices";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 interface Props {
   edit?: boolean;
 }
+
+interface IFormFields {
+  name: string;
+  semester: number | null;
+  avaGrade: number | null;
+  pimGrade: number | null;
+  examGrade: number | null;
+  retakeGrade: number | null;
+}
+
+const defaultValues: IFormFields = {
+  name: "",
+  semester: null,
+  avaGrade: null,
+  pimGrade: null,
+  examGrade: null,
+  retakeGrade: null,
+};
+
+const validationSchema = yup.object({
+  name: yup
+    .string()
+    .required("Insira o nome da matéria!")
+    .min(3, "O nome precisa ter 3 letras"),
+  semester: yup.number().required("Informe o semestre"),
+  avaGrade: yup.number().required(),
+  pimGrade: yup.number().required(),
+  examGrade: yup.number().required(),
+  retakeGrade: yup.number().required(),
+});
 
 export default function AddSubModal({ edit }: Props) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -34,7 +65,10 @@ export default function AddSubModal({ edit }: Props) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ISubject>();
+  } = useForm<IFormFields>({
+    defaultValues,
+    resolver: yupResolver<IFormFields>(validationSchema),
+  });
 
   const postSubject = async () => {
     setLoading(true);
@@ -146,62 +180,27 @@ export default function AddSubModal({ edit }: Props) {
           <form className="p-4 md:p-5" onSubmit={onSubmit}>
             <div className="grid gap-4 mb-4 grid-cols-2">
               <div className="col-span-2">
-                <label
-                  htmlFor="name"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Nome *
-                </label>
-                <input
-                  {...register("name", { minLength: 3 })}
-                  type="text"
+                <Input
+                  register={{ ...register("name") }}
                   name="name"
-                  id="name"
+                  label="Nome"
+                  type="text"
+                  handleChange={handleChange}
                   autoFocus={true}
-                  value={formFields.name ? formFields.name : ""}
-                  className={`bg-gray-600 border border-gray-500 text-white text-sm rounded-lg block w-full p-2.5 ${
-                    edit
-                      ? "outline-none hover:cursor-auto"
-                      : "focus:ring-primary-600 focus:border-primary-600"
-                  }`}
                   placeholder="Digite o nome da matéria..."
-                  onChange={handleChange}
-                  readOnly={edit}
+                  error={errors.name}
                 />
-                {errors.name && (
-                  <span className="text-red-500 text-sm">
-                    O nome precisa ter no mínimo 3 letras
-                  </span>
-                )}
               </div>
               <div className="col-span-2 sm:col-span-1">
-                <label
-                  htmlFor="semester"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Semestre *
-                </label>
-                <input
-                  {...register("semester", { required: true })}
-                  type="number"
+                <Input
+                  register={{ ...register("name") }}
                   name="semester"
-                  id="semester"
-                  value={formFields.semester ? formFields.semester : ""}
-                  className={`bg-gray-600 border border-gray-500 text-white text-sm rounded-lg block w-full p-2.5 ${
-                    edit
-                      ? "outline-none hover:cursor-auto"
-                      : "focus:ring-primary-600 focus:border-primary-600"
-                  }`}
+                  label="Semestre"
+                  type="number"
+                  handleChange={handleChange}
                   placeholder="1"
-                  min={1}
-                  onChange={handleChange}
-                  readOnly={edit}
+                  error={errors.semester}
                 />
-                {errors.semester && (
-                  <span className="text-red-500 text-sm">
-                    Campo obrigatório
-                  </span>
-                )}
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <label
@@ -271,12 +270,11 @@ export default function AddSubModal({ edit }: Props) {
                 >
                   Teste
                 </label>
-                <Input
+                {/* <Input
                   name="retakeGrade"
                   type="number"
-                  // value={formFields.retakeGrade ? formFields.retakeGrade : ""}
                   handleChange={handleChange}
-                />
+                /> */}
               </div>
               {showDiv && (
                 <div className="col-span-2 sm:col-span-1">

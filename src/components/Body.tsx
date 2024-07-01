@@ -31,9 +31,9 @@ export default function Body() {
           <Input
             name="search"
             type="text"
-            placeholder="Digite o que deseja buscar..."
-            value={search}
             handleChange={handleChange}
+            value={search}
+            placeholder="Digite o que deseja buscar..."
           />
           <Button text="OK" />
         </div>
