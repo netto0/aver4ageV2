@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useForm, Resolver } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { GlobalContext } from "../../providers/GlobalContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ISubject from "../../interfaces/ISubject";
+// import ISubject from "../../interfaces/ISubject";
 import Input from "../Input";
 import {
   createSubjectService,
@@ -48,7 +48,7 @@ const validationSchema = yup.object({
 
 export default function AddSubModal({ edit }: Props) {
   const [loading, setLoading] = useState<boolean>(false);
-  const [avg, setAvg] = useState<null | number | void>(null);
+  const [avg, setAvg] = useState<any>(null);
   const [showDiv, setShowDiv] = useState<boolean>(false);
 
   const {
@@ -120,17 +120,11 @@ export default function AddSubModal({ edit }: Props) {
     let media = average(
       formFields.avaGrade!,
       formFields.examGrade!,
-      formFields.pimGrade!
+      formFields.pimGrade!,
+      formFields.retakeGrade!
     )!;
     const rtkNull = !formFields.retakeGrade;
-    setAvg(
-      average(
-        formFields.avaGrade!,
-        formFields.examGrade!,
-        formFields.pimGrade!,
-        formFields.retakeGrade!
-      )
-    );
+    setAvg(media);
     if (!rtkNull) {
       setShowDiv(true);
     } else {
@@ -154,6 +148,7 @@ export default function AddSubModal({ edit }: Props) {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               {edit ? "Editar matéria" : "Adicionar nova matéria"}
             </h3>
+            <span className="bg-yellow-200">{avg}</span>
             <button
               type="button"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -249,7 +244,6 @@ export default function AddSubModal({ edit }: Props) {
                 </div>
               )}
             </div>
-
             <button
               type="submit"
               className="text-white inline-flex items-center bg-green-600 hover:bg-green-700 focus:ring-2 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center"

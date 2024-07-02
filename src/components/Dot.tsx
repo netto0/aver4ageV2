@@ -1,11 +1,15 @@
 interface Props {
-  color?: number;
+  color?: string;
 }
 
-export default function Dot({ color = 1 }: Props) {
-    if(color == 1) {
-        return <div className={"w-2 h-2 bg-yellow-500 rounded absolute top-2 right-[30%]"} />
-    } else {
-        return <div className={"w-2 h-2 bg-red-500 rounded absolute top-2 right-[30%]"} />
-    }
+export default function Dot({ color = "yellow" }: Props) {
+  if(color == "yellow") {
+      return <div className={"w-2 h-2 bg-yellow-500 rounded absolute top-2 right-[30%]"} />
+  }
+  if(color == "red") {
+      return <div className={"w-2 h-2 bg-red-500 rounded absolute top-2 right-[30%]"} />
+  }
+  if(color == "green") {
+      return <div className={"w-2 h-2 bg-green-500 rounded absolute top-2 right-[30%]"} />
+  }
 }
