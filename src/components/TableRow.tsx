@@ -14,7 +14,6 @@ export default function TableRow({ subject }: Props) {
 
   function handleClick(modalType: "del" | "edit") {
     const subjectInfos = JSON.parse(fatherRef.current.id);
-    console.log(subjectInfos);
     setFormFields(subjectInfos);
     setActiveModal(modalType);
   }

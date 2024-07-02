@@ -1,18 +1,8 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { deleteSubjectService } from "../../api/services/subjectServices";
 import { GlobalContext } from "../../providers/GlobalContext";
 import { toast } from "react-toastify";
-
-type Subject = {
-  name: string;
-  semester: number | null;
-  avaQtt: number;
-  avaGrades: { [k: string]: number } | undefined;
-  examGrade: number | null;
-  pimGrade: number | null;
-  retakeGrade: number | null;
-};
+import Input from "../Input";
 
 export default function DelSubModal() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,14 +14,6 @@ export default function DelSubModal() {
     successToast,
     defaultForm,
   } = React.useContext(GlobalContext);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Subject>();
-
-  // ===================================================================
 
   const deleteSbj = async () => {
     setLoading(true);
@@ -46,22 +28,13 @@ export default function DelSubModal() {
     }
   };
 
-  const onSubmit = handleSubmit(() => {
-    deleteSbj();
-  });
-
   const closeModal = () => {
     setActiveModal(false);
     setFormFields(defaultForm);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormFields({ ...formFields, [e.target.name]: e.target.value });
-  };
-
   return (
     <>
-      {/* <ToastContainer /> */}
       <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
@@ -92,25 +65,10 @@ export default function DelSubModal() {
               <span className="sr-only">Close modal</span>
             </button>
           </div>
-          <form className="p-4 md:p-5" onSubmit={onSubmit}>
+          <form className="p-4 md:p-5" onSubmit={deleteSbj}>
             <div className="grid gap-4 mb-4 grid-cols-2">
               <div className="col-span-2">
-                <input
-                  {...register("name", { minLength: 3 })}
-                  type="text"
-                  name="name"
-                  readOnly={true}
-                  id="name"
-                  value={formFields.name!}
-                  className="bg-gray-600 border border-gray-500 text-white text-m font-semibold rounded-lg block w-full p-2.5 outline-none hover:cursor-auto"
-                  placeholder="Digite o nome da matéria..."
-                  onChange={handleChange}
-                />
-                {errors.name && (
-                  <span className="text-red-500 text-sm">
-                    O nome precisa ter no mínimo 3 letras
-                  </span>
-                )}
+                <Input name="name" type="text" readOnly={true} />
               </div>
             </div>
             <button

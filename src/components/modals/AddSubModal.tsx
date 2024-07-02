@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { GlobalContext } from "../../providers/GlobalContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import ISubject from "../../interfaces/ISubject";
 import Input from "../Input";
 import {
   createSubjectService,
@@ -11,28 +10,11 @@ import {
 } from "../../api/services/subjectServices";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import IForm from "../../interfaces/IForm";
 
 interface Props {
   edit?: boolean;
 }
-
-interface IFormFields {
-  name: string;
-  semester: number | null;
-  avaGrade: number | null;
-  pimGrade: number | null;
-  examGrade: number | null;
-  retakeGrade: number | null;
-}
-
-const defaultValues: IFormFields = {
-  name: "",
-  semester: null,
-  avaGrade: null,
-  pimGrade: null,
-  examGrade: null,
-  retakeGrade: null,
-};
 
 const validationSchema = yup.object({
   name: yup
@@ -40,10 +22,6 @@ const validationSchema = yup.object({
     .required("Insira o nome da matéria!")
     .min(3, "O nome precisa ter 3 letras"),
   semester: yup.number().required("Informe o semestre"),
-  avaGrade: yup.number().required(),
-  pimGrade: yup.number().required(),
-  examGrade: yup.number().required(),
-  retakeGrade: yup.number().required(),
 });
 
 export default function AddSubModal({ edit }: Props) {
@@ -65,9 +43,8 @@ export default function AddSubModal({ edit }: Props) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormFields>({
-    defaultValues,
-    resolver: yupResolver<IFormFields>(validationSchema),
+  } = useForm<IForm>({
+    resolver: yupResolver<any>(validationSchema),
   });
 
   const postSubject = async () => {
