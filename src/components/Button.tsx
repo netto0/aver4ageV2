@@ -1,15 +1,24 @@
 interface Props {
-  text: string;
   func?: () => void;
+  children?: any;
+  clickFunc: () => void;
+  color: "gray" | "green" | "red"
 }
 
-export default function Button({ text, func }: Props) {
+export default function Button({ clickFunc, children, color, ...rest }: Props) {
+  let btnClass:string
+  if(color="green") {
+    btnClass = "text-white inline-flex items-center bg-green-600 hover:bg-green-700 focus:ring-2 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+  }
+
+  
   return (
     <button
-      className="bg-darkGray px-4 py-2 rounded-md text-gray-800 font-bold drop-shadow-md hover:scale-105 active:bg-darkerGray active:scale-100 transition min-w-12"
-      onClick={func}
+      className={btnClass}
+      onClick={clickFunc}
+      {...rest}
     >
-      {text}
+      {children}
     </button>
   );
 }

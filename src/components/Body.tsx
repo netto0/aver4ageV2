@@ -38,7 +38,7 @@ export default function Body() {
             value={search}
             placeholder="Digite o que deseja buscar..."
           />
-          <Button text="OK" />
+          <Button clickFunc={() => console.log("au")}>OK</Button>
         </div>
         <Table />
         {activeModal == "add" && <AddSubModal />}

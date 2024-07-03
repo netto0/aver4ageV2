@@ -5,6 +5,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label?: string;
   type: "number" | "text";
+  readonly?: boolean;
   handleChange?: any;
   value?: any;
   register?: any;
@@ -15,8 +16,9 @@ export default function Input({
   name,
   label,
   type,
-  value,
+  readOnly,
   handleChange,
+  value,
   register,
   error,
   ...rest
