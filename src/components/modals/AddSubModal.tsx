@@ -12,6 +12,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import IForm from "../../interfaces/IForm";
 import CloseBtn from "../CloseBtn";
+import Button from "../Button";
 
 interface Props {
   edit?: boolean;
@@ -22,12 +23,15 @@ const validationSchema = yup.object({
     .string()
     .required("Insira o nome da matéria!")
     .min(3, "O nome precisa ter 3 letras"),
-  semester: yup.number().required("Informe o semestre"),
+  semester: yup
+  .number()
+  .required("Informe o semestre")
+  .min(3,"Informe um valor")
+  
 });
 
 export default function AddSubModal({ edit }: Props) {
   const [loading, setLoading] = useState<boolean>(false);
-  const [setAvg] = useState<any>(null);
   const [showDiv, setShowDiv] = useState<boolean>(false);
 
   const {
@@ -102,7 +106,6 @@ export default function AddSubModal({ edit }: Props) {
       formFields.retakeGrade!
     )!;
     const rtkNull = !formFields.retakeGrade;
-    setAvg(media);
     if (!rtkNull) {
       setShowDiv(true);
     } else {
@@ -200,24 +203,9 @@ export default function AddSubModal({ edit }: Props) {
                 </div>
               )}
             </div>
-            <button
-              type="submit"
-              className="text-white inline-flex items-center bg-green-600 hover:bg-green-700 focus:ring-2 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            >
-              <svg
-                className="me-1 -ms-1 w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-              {loading ? "Enviando..." : "Adicionar Matéria"}
-            </button>
+            <Button type="submit" color="green">
+              {loading ? <p>Enviando...</p> : <p>+ Adicionar Matéria</p>}
+            </Button>
           </form>
         </div>
       </div>

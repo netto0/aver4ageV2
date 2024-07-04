@@ -16,6 +16,14 @@ export default function Body() {
     setSearch(e.target.value);
   };
 
+  const logValues = () => {
+    let columns = document.querySelectorAll('.custom');
+    console.log(columns)
+    columns.forEach(c => c.addEventListener("click", (event) => {
+        console.log(event.target!)
+    }))
+  }
+logValues()
   return (
     <main className="w-full bg-lightGray grow px-[8%] flex flex-col justify-center">
       <span className="z-50 text-red-600 pb-1">
@@ -30,7 +38,7 @@ export default function Body() {
       />
       <div className="relative flex flex-col gap-4">
         <div id="searchBarField" className="flex justify-around gap-4">
-          <Button text="+" func={() => setActiveModal("add")} />
+          <Button clickFunc={() => setActiveModal("add")}>+</Button>
           <Input
             name="search"
             type="text"
@@ -38,7 +46,7 @@ export default function Body() {
             value={search}
             placeholder="Digite o que deseja buscar..."
           />
-          <Button clickFunc={() => console.log("au")}>OK</Button>
+          <Button clickFunc={logValues}>OK</Button>
         </div>
         <Table />
         {activeModal == "add" && <AddSubModal />}

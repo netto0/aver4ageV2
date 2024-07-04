@@ -4,6 +4,7 @@ import { GlobalContext } from "../../providers/GlobalContext";
 import { toast } from "react-toastify";
 import Input from "../Input";
 import CloseBtn from "../CloseBtn";
+import Button from "../Button";
 
 export default function DelSubModal() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -50,12 +51,10 @@ export default function DelSubModal() {
                 <Input name="name" type="text" readOnly={true} />
               </div>
             </div>
-            <button
-              type="submit"
-              className="text-white inline-flex items-center bg-red-500 hover:bg-red-700 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            >
-              {loading ? "Excluindo..." : "Excluir Matéria"}
-            </button>
+            <Button type="submit" color="red">
+            {loading ? "Excluindo..." : "Excluir Matéria"}
+
+            </Button>
           </form>
         </div>
       </div>

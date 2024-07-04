@@ -1,23 +1,23 @@
 interface Props {
-  func?: () => void;
+  type?: "submit" | undefined;
   children?: any;
-  clickFunc: () => void;
-  color: "gray" | "green" | "red"
+  clickFunc?: () => void;
+  color?: "gray" | "green" | "red";
 }
 
-export default function Button({ clickFunc, children, color, ...rest }: Props) {
-  let btnClass:string
-  if(color="green") {
-    btnClass = "text-white inline-flex items-center bg-green-600 hover:bg-green-700 focus:ring-2 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-  }
+export default function Button({
+  type,
+  clickFunc,
+  children,
+  color = "gray",
+  ...rest
+}: Props) {
+  let btnClass: string;
+  btnClass = `text-white inline-flex items-center bg-${color}-600 hover:bg-${color}-700 focus:ring-2 focus:outline-none focus:ring-${color}-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm`;
+  // btnClass = `text-white inline-flex items-center bg-${color}-600 hover:bg-${color}-700 focus:ring-2 focus:outline-none focus:ring-${color}-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm`;
 
-  
   return (
-    <button
-      className={btnClass}
-      onClick={clickFunc}
-      {...rest}
-    >
+    <button type={type} className={btnClass} onClick={clickFunc} {...rest}>
       {children}
     </button>
   );

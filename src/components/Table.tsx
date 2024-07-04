@@ -17,28 +17,28 @@ export default function Table() {
       <table className="text-base text-center rtl:text-right text-gray-900 w-full" ref={myRef}>
         <thead className="text-xs uppercase bg-darkerGray text-gray-900 drop-shadow-md">
           <tr className="flex w-full">
-            <th scope="col" className="px-6 py-3 w-[10%]">
+            <th scope="col" className={`px-6 py-3 w-[10%] ${"custom"}`}>
               Semestre
             </th>
-            <th scope="col" className="px-6 py-3 w-[30%]">
+            <th scope="col" className={`px-6 py-3 w-[30%] ${"custom"}`}>
               Matéria
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%]">
+            <th scope="col" className={`px-6 py-3 w-[10%] ${"custom"}`}>
               Ava
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%]">
+            <th scope="col" className={`px-6 py-3 w-[10%] ${"custom"}`}>
               Pim
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%]">
+            <th scope="col" className={`px-6 py-3 w-[10%] ${"custom"}`}>
               Prova
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%]">
+            <th scope="col" className={`px-6 py-3 w-[10%] ${"custom"}`}>
               Média
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%]">
+            <th scope="col" className={`px-6 py-3 w-[10%] ${"custom"}`}>
               Exame
             </th>
-            <th scope="col" className="px-6 py-3 w-[10%]">
+            <th scope="col" className={`px-6 py-3 w-[10%] ${"custom"}`}>
               Ação
             </th>
           </tr>
