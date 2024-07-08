@@ -48,12 +48,11 @@ export default function DelSubModal() {
           <form className="p-4 md:p-5" onSubmit={deleteSbj}>
             <div className="grid gap-4 mb-4 grid-cols-2">
               <div className="col-span-2">
-                <Input name="name" type="text" readOnly={true} />
+                <Input name="name" type="text" readOnly={true}/>
               </div>
             </div>
             <Button type="submit" color="red">
-            {loading ? "Excluindo..." : "Excluir Matéria"}
-
+              {loading ? "Excluindo..." : "Excluir Matéria"}
             </Button>
           </form>
         </div>

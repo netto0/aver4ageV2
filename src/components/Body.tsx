@@ -16,14 +16,14 @@ export default function Body() {
     setSearch(e.target.value);
   };
 
-  const logValues = () => {
-    let columns = document.querySelectorAll('.custom');
-    console.log(columns)
-    columns.forEach(c => c.addEventListener("click", (event) => {
-        console.log(event.target!)
-    }))
-  }
-logValues()
+//   const logValues = () => {
+//     let columns = document.querySelectorAll('.custom');
+//     console.log(columns)
+//     columns.forEach(c => c.addEventListener("click", (event) => {
+//         console.log(event.target!)
+//     }))
+//   }
+// logValues()
   return (
     <main className="w-full bg-lightGray grow px-[8%] flex flex-col justify-center">
       <span className="z-50 text-red-600 pb-1">
@@ -46,7 +46,8 @@ logValues()
             value={search}
             placeholder="Digite o que deseja buscar..."
           />
-          <Button clickFunc={logValues}>OK</Button>
+          {/* <Button clickFunc={logValues}>OK</Button> */}
+          <Button clickFunc={() => console.log("Nada ainda")}>OK</Button>
         </div>
         <Table />
         {activeModal == "add" && <AddSubModal />}

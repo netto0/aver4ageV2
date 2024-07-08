@@ -26,7 +26,7 @@ const validationSchema = yup.object({
   semester: yup
   .number()
   .required("Informe o semestre")
-  .min(3,"Informe um valor")
+  .min(1,"Informe um semestre válido")
   
 });
 

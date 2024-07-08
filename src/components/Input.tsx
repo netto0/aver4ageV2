@@ -10,13 +10,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   value?: any;
   register?: any;
   error?: any;
+  rest?:any
 }
 
 export default function Input({
   name,
   label,
   type,
-  readOnly,
+  // readOnly,
   handleChange,
   value,
   register,
