@@ -10,6 +10,7 @@ type Props = {
 
 type GlobalContextType = {
   subjectsList: ISubject[];
+  setSubjectsList: any;
   getSubjects: () => void;
   activeModal: boolean | string;
   setActiveModal: (state: boolean | string) => void;
@@ -60,6 +61,7 @@ const defaultForm = {
 
 const initialValue = {
   subjectsList: [],
+  setSubjectsList: () => {},
   getSubjects: () => {},
   activeModal: false,
   setActiveModal: () => {},
@@ -114,6 +116,7 @@ export const GlobalProvider = ({ children }: Props) => {
     <GlobalContext.Provider
       value={{
         subjectsList,
+        setSubjectsList,
         getSubjects,
         activeModal,
         setActiveModal,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import Input from "./Input";
 import Table from "./Table";
@@ -8,7 +8,7 @@ import { GlobalContext } from "../providers/GlobalContext";
 import { ToastContainer } from "react-toastify";
 
 export default function Body() {
-  const { activeModal, setActiveModal, formFields } =
+  const { activeModal, setActiveModal, formFields, getSubjects } =
     React.useContext(GlobalContext);
   const [search, setSearch] = useState("");
 
@@ -16,14 +16,17 @@ export default function Body() {
     setSearch(e.target.value);
   };
 
-//   const logValues = () => {
-//     let columns = document.querySelectorAll('.custom');
-//     console.log(columns)
-//     columns.forEach(c => c.addEventListener("click", (event) => {
-//         console.log(event.target!)
-//     }))
-//   }
-// logValues()
+  //   const logValues = () => {
+  //     let columns = document.querySelectorAll('.custom');
+  //     console.log(columns)
+  //     columns.forEach(c => c.addEventListener("click", (event) => {
+  //         console.log(event.target!)
+  //     }))
+  //   }
+  // logValues()
+  useEffect(() => {
+    getSubjects();
+  }, []);
   return (
     <main className="w-full bg-lightGray grow px-[8%] flex flex-col justify-center">
       <span className="z-50 text-red-600 pb-1">

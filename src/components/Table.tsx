@@ -1,24 +1,47 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TableRow from "./TableRow";
 import { getSubjectsService } from "../api/services/subjectServices";
 import { GlobalContext } from "../providers/GlobalContext";
 
 export default function Table() {
-  const { subjectsList, getSubjects } = React.useContext(GlobalContext);
+  const { subjectsList, setSubjectsList, getSubjects } =
+    React.useContext(GlobalContext);
   const myRef = useRef<any>(null);
+  const [orderParameters, setOrderParameters] = useState({
+    criteria: "examGrade",
+    ascending: false,
+  });
   //=============================================================
   const sortFunc = (a: any, b: any) => {
-    return a - b;
+    if (orderParameters.ascending) {
+      return (
+        parseFloat(a[orderParameters.criteria]) -
+        parseFloat(b[orderParameters.criteria])
+      );
+    } else {
+      return (
+        parseFloat(b[orderParameters.criteria]) -
+        parseFloat(a[orderParameters.criteria])
+      );
+    }
   };
-  //=============================================================
-  useEffect(() => {
-    getSubjects();
-  }, []);
 
-  subjectsList.sort(sortFunc);
+  function teste() {
+    setSubjectsList(sortedList);
+  }
+  const sortedList = Array.from(subjectsList);
+  sortedList.sort(sortFunc);
+  //=============================================================
+  // useEffect(() => {
+  //   getSubjects();
+  // }, []);
+
   return (
     <div className="overflow-auto shadow-md sm:rounded-lg border-collapse">
-      {JSON.stringify(subjectsList)}
+      {/* {JSON.stringify(subjectsList)} */}
+      <button className="bg-red-500" onClick={teste}>
+        Sort
+      </button>
       <table
         className="text-base text-center rtl:text-right text-gray-900 w-full"
         ref={myRef}
