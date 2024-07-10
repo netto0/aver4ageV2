@@ -26,6 +26,8 @@ type GlobalContextType = {
     pim: number | null,
     rtk?: number | null
   ) => number | null | void;
+  sortParameters: any;
+  setSortParameters: Dispatch<any>;
 };
 
 function average(
@@ -59,6 +61,11 @@ const defaultForm = {
   retakeGrade: null,
 };
 
+const defaultSort = {
+  criteria: null,
+  ascending: true,
+};
+
 const initialValue = {
   subjectsList: [],
   setSubjectsList: () => {},
@@ -72,6 +79,8 @@ const initialValue = {
   defaultForm,
   closeModal: () => {},
   average: () => {},
+  sortParameters: defaultSort,
+  setSortParameters: () => {},
 };
 
 const successToast: ToastOptions = {
@@ -99,6 +108,7 @@ export const GlobalProvider = ({ children }: Props) => {
   const [activeModal, setActiveModal] = useState<boolean | string>(
     initialValue.activeModal
   );
+  const [sortParameters, setSortParameters] = useState(defaultSort);
 
   const getSubjects = async () => {
     const response = await getSubjectsService();
@@ -127,6 +137,8 @@ export const GlobalProvider = ({ children }: Props) => {
         defaultForm,
         closeModal,
         average,
+        sortParameters,
+        setSortParameters,
       }}
     >
       {children}

@@ -8,22 +8,13 @@ import { GlobalContext } from "../providers/GlobalContext";
 import { ToastContainer } from "react-toastify";
 
 export default function Body() {
-  const { activeModal, setActiveModal, formFields, getSubjects } =
+  const { activeModal, setActiveModal, formFields, getSubjects, sortParameters } =
     React.useContext(GlobalContext);
   const [search, setSearch] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
-
-  //   const logValues = () => {
-  //     let columns = document.querySelectorAll('.custom');
-  //     console.log(columns)
-  //     columns.forEach(c => c.addEventListener("click", (event) => {
-  //         console.log(event.target!)
-  //     }))
-  //   }
-  // logValues()
   useEffect(() => {
     getSubjects();
   }, []);
@@ -32,6 +23,7 @@ export default function Body() {
       <span className="z-50 text-red-600 pb-1">
         Modal: {activeModal ? activeModal : "false"} | Form:{" "}
         {JSON.stringify(formFields)}
+        {JSON.stringify(sortParameters)}
       </span>
       <div
         className={`absolute w-screen h-screen left-0 z-40 backdrop-blur-sm ${
