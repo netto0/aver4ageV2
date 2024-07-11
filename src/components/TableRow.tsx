@@ -42,45 +42,45 @@ export default function TableRow({ subject }: Props) {
   };
   return (
     <tr
-      className="bg-darkGray border-b border-gray-500 flex items-center h-14 text-center"
+      className="bg-darkGray text-gray-950 border-b border-gray-700 flex h-14"
       key={subject._id}
       ref={fatherRef}
       id={JSON.stringify(subject)}
     >
-      <td className="w-[88px] h-full border-x flex flex-col justify-center">
+      <td className="w-[10%] h-full flex items-center justify-center">
         {subject.semester}
       </td>
-      <td className="grow truncate h-full border-x flex flex-col justify-center text-left text-ellipsis overflow-auto">
-        {subject.name}
+      <td className="w-[30%] h-full flex items-center">
+        <p className="truncate">{subject.name}</p>
       </td>
-      <td className="relative w-[88px] h-full border-x flex flex-col justify-center">
+      <td className="relative w-[10%] h-full flex items-center justify-center">
         {!subject.avaGrade?.toFixed(2) ? "∅" : subject.avaGrade}
         {!subject.avaGrade && <Dot />}
       </td>
-      <td className="relative w-[88px] h-full border-x flex flex-col justify-center">
+      <td className="relative w-[10%] h-full flex items-center justify-center">
         {!subject.pimGrade?.toFixed(2) ? "∅" : subject.pimGrade}
         {!subject.pimGrade && <Dot />}
       </td>
-      <td className="relative w-[88px] h-full border-x flex flex-col justify-center">
+      <td className="relative w-[10%] h-full flex items-center justify-center">
         {!subject.examGrade?.toFixed(2) && <Dot />}
         {!subject.examGrade ? "∅" : subject.examGrade}
       </td>
-      <td className="relative w-[88px] h-full border-x flex flex-col justify-center">
+      <td className="relative w-[10%] h-full flex items-center justify-center">
         {!avg ? "∅" : avg.toFixed(2)}
         {!avg && <Dot />}
         {!approved() && <Dot color={"red"} />}
         {approved() && <Dot color={"green"} />}
       </td>
-      <td className="relative w-[88px] h-full border-x flex flex-col justify-center">
+      <td className="relative w-[10%] h-full flex items-center justify-center">
         {!subject.retakeGrade ? "x" : subject.retakeGrade}
       </td>
-      <td className="relative w-[100px] h-full flex flex-col justify-center">
+      <td className="relative w-[10%] h-full flex items-center justify-center">
         <div className="flex w-full max-w-24 self-center justify-around items-center h-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
-            className="bi bi-pencil-fill fill-gray-600  hover:cursor-pointer transition-all hover:fill-green-500"
+            className="bi bi-pencil-fill fill-gray-800  hover:cursor-pointer transition-all hover:fill-green-500"
             viewBox="0 0 16 16"
             onClick={() => handleClick("edit")}
           >
@@ -91,7 +91,7 @@ export default function TableRow({ subject }: Props) {
             width="20"
             height="20"
             fill="currentColor"
-            className="bi bi-trash-fill fill-gray-600 hover:cursor-pointer transition-all hover:fill-red-500"
+            className="bi bi-trash-fill fill-gray-800 hover:cursor-pointer transition-all hover:fill-red-500"
             viewBox="0 0 16 16"
             onClick={() => handleClick("del")}
           >

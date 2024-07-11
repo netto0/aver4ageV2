@@ -4,9 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        "darkGray": "#a1a1aa",
-        "darkerGray": "#6b7280",
+        "darkGray": "#4b5563",
+        "darkerGray": "#374151",
         "lightGray": "#d4d4d8",
+        "textColor": "#030712"
       },
     },
     classes: {

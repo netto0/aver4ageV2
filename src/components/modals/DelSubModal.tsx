@@ -34,7 +34,7 @@ export default function DelSubModal() {
     setActiveModal(false);
     setFormFields(defaultForm);
   };
-
+  
   return (
     <>
       <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">

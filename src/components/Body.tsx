@@ -8,8 +8,13 @@ import { GlobalContext } from "../providers/GlobalContext";
 import { ToastContainer } from "react-toastify";
 
 export default function Body() {
-  const { activeModal, setActiveModal, formFields, getSubjects, sortParameters } =
-    React.useContext(GlobalContext);
+  const {
+    activeModal,
+    setActiveModal,
+    formFields,
+    getSubjects,
+    sortParameters,
+  } = React.useContext(GlobalContext);
   const [search, setSearch] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,13 +23,21 @@ export default function Body() {
   useEffect(() => {
     getSubjects();
   }, []);
+
+  function clearUrl(url: string) {
+    const urlObj = new URL(url);
+    urlObj.search = "";
+    window.history.replaceState({}, "", urlObj.toString());
+  }
+  clearUrl(window.location.href);
+  
   return (
-    <main className="w-full bg-lightGray grow px-[8%] flex flex-col justify-center">
-      <span className="z-50 text-red-600 pb-1">
+    <main className="w-full bg-gray-800 grow px-[8%] flex flex-col justify-center">
+      {/* <span className="z-50 text-red-600 pb-1">
         Modal: {activeModal ? activeModal : "false"} | Form:{" "}
         {JSON.stringify(formFields)}
         {JSON.stringify(sortParameters)}
-      </span>
+      </span> */}
       <div
         className={`absolute w-screen h-screen left-0 z-40 backdrop-blur-sm ${
           !activeModal && "hidden"

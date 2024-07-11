@@ -79,14 +79,14 @@ export default function Table() {
   return (
     <div className="overflow-auto shadow-md sm:rounded-lg border-collapse">
       <table
-        className="text-base text-center rtl:text-right text-gray-900 w-full"
+        className="text-base text-center rtl:text-right text-textColor w-full"
         ref={myRef}
       >
-        <thead className="text-xs uppercase bg-darkerGray text-gray-900 drop-shadow-md">
+        <thead className="text-xs uppercase bg-darkerGray text-textColor drop-shadow-md select-none">
           <tr className="flex w-full">
             <th
               scope="col"
-              className={`px-6 border-x py-3 w-[88px] ${"custom"} hover:cursor-pointer flex`}
+              className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
               onClick={() => setCriteria("semester")}
             >
               <span>Sem.</span>
@@ -97,13 +97,13 @@ export default function Table() {
             </th>
             <th
               scope="col"
-              className={`px-6 border-x py-3 grow ${"custom"}`}
+              className={`py-3 w-[30%] ${"custom"} justify-center gap-1`}
             >
               <span>Matéria</span>
             </th>
             <th
               scope="col"
-              className={`px-6 border-x py-3 w-[88px] ${"custom"} hover:cursor-pointer flex`}
+              className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1 gap-1`}
               onClick={() => setCriteria("avaGrade")}
             >
               <span>Ava</span>
@@ -114,7 +114,7 @@ export default function Table() {
             </th>
             <th
               scope="col"
-              className={`px-6 border-x py-3 w-[88px] ${"custom"} hover:cursor-pointer flex`}
+              className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
               onClick={() => setCriteria("pimGrade")}
             >
               <span>Pim</span>
@@ -125,7 +125,7 @@ export default function Table() {
             </th>
             <th
               scope="col"
-              className={`px-6 border-x py-3 w-[88px] ${"custom"} hover:cursor-pointer flex`}
+              className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
               onClick={() => setCriteria("examGrade")}
             >
               <span>Prova</span>
@@ -136,7 +136,7 @@ export default function Table() {
             </th>
             <th
               scope="col"
-              className={`px-6 border-x py-3 w-[88px] ${"custom"} hover:cursor-pointer flex`}
+              className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
               onClick={() => setCriteria("average")}
             >
               <span>Média</span>
@@ -147,7 +147,7 @@ export default function Table() {
             </th>
             <th
               scope="col"
-              className={`px-6 border-x py-3 w-[88px] ${"custom"} hover:cursor-pointer flex`}
+              className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
               onClick={() => setCriteria("retakeGrade")}
             >
               <span>Exame</span>
@@ -158,7 +158,7 @@ export default function Table() {
             </th>
             <th
               scope="col"
-              className={`px-6 border-x py-3 w-[100px] ${"custom"}`}
+              className={`py-3 w-[10%] ${"custom"} justify-center gap-1`}
             >
               Ação
             </th>
@@ -166,7 +166,7 @@ export default function Table() {
         </thead>
         <tbody
           id="table"
-          className="block scroll overflow-y-auto h-[587px] no-scrollbar bg-darkerGray scroll-smooth"
+          className="block scroll overflow-y-auto h-[587px] no-scrollbar bg-gray-700 scroll-smooth"
         >
           {subjectsList.map((subject, i) => (
             <TableRow key={i} subject={subject} />

@@ -24,10 +24,9 @@ const validationSchema = yup.object({
     .required("Insira o nome da matéria!")
     .min(3, "O nome precisa ter 3 letras"),
   semester: yup
-  .number()
-  .required("Informe o semestre")
-  .min(1,"Informe um semestre válido")
-  
+    .number()
+    .required("Informe o semestre")
+    .min(1, "Informe um semestre válido"),
 });
 
 export default function AddSubModal({ edit }: Props) {
@@ -121,6 +120,8 @@ export default function AddSubModal({ edit }: Props) {
     }
   }, [formFields]);
 
+  let btnMsg;
+  edit ? (btnMsg = "Editar matéria") : (btnMsg = "Adicionar matéria");
   return (
     <>
       <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
@@ -204,7 +205,7 @@ export default function AddSubModal({ edit }: Props) {
               )}
             </div>
             <Button type="submit" color="green">
-              {loading ? <p>Enviando...</p> : <p>+ Adicionar Matéria</p>}
+              {loading ? <p>Enviando...</p> : <p>{btnMsg}</p>}
             </Button>
           </form>
         </div>
