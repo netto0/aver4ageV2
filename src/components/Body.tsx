@@ -13,7 +13,7 @@ export default function Body() {
     setActiveModal,
     formFields,
     getSubjects,
-    sortParameters,
+    // sortParameters,
   } = React.useContext(GlobalContext);
   const [search, setSearch] = useState("");
 
@@ -54,7 +54,6 @@ export default function Body() {
             value={search}
             placeholder="Digite o que deseja buscar..."
           />
-          {/* <Button clickFunc={logValues}>OK</Button> */}
           <Button clickFunc={() => console.log("Nada ainda")}>OK</Button>
         </div>
         <Table />

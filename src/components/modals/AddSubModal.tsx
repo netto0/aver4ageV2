@@ -127,7 +127,7 @@ export default function AddSubModal({ edit }: Props) {
   ]);
 
   let btnMsg;
-  edit ? (btnMsg = "Editar matéria") : (btnMsg = "Adicionar matéria");
+  edit ? (btnMsg = "Salvar") : (btnMsg = "Enviar");
   return (
     <>
       <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
@@ -147,7 +147,7 @@ export default function AddSubModal({ edit }: Props) {
                   label="Nome"
                   type="text"
                   handleChange={handleChange}
-                  autoFocus={true}
+                  autoFocus
                   placeholder="Digite o nome da matéria..."
                   error={errors.name}
                 />
@@ -203,7 +203,6 @@ export default function AddSubModal({ edit }: Props) {
                   label="Exame"
                   type="number"
                   handleChange={handleChange}
-                  placeholder="1"
                   error={errors.retakeGrade}
                   readOnly={!readInput}
                 />
@@ -214,19 +213,15 @@ export default function AddSubModal({ edit }: Props) {
                   name="avg"
                   label="Média"
                   type="number"
-                  // handleChange={handleChange}
-                  // placeholder="1"
                   error={errors.avg}
                   readOnly
                 />
               </div>
-              {/* {readInput && (
-              )} */}
             </div>
             <Button type="submit" color="green">
               {loading ? <p>Enviando...</p> : <p>{btnMsg}</p>}
             </Button>
-            {JSON.stringify(readInput)}
+            {/* {JSON.stringify(readInput)} */}
           </form>
         </div>
       </div>

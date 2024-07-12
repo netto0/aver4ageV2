@@ -10,9 +10,6 @@ export default {
         "textColor": "#030712"
       },
     },
-    classes: {
-      "readOnlyField": "bg-gray-600 border border-gray-500 text-white text-m font-semibold rounded-lg block w-full p-2.5 outline-none hover:cursor-auto"
-    }
   },
   plugins: [],
 };

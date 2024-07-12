@@ -64,8 +64,10 @@ export default function Table() {
     }
   };
 
-  const sortedList = Array.from(subjectsList);
-  const defaultList = Array.from(subjectsList);
+  // const sortedList = Array.from(subjectsList);
+  const sortedList = subjectsList.slice();
+  // const defaultList = Array.from(subjectsList);
+  const defaultList = subjectsList.slice();
   sortedList.sort(sortFunc);
 
   useEffect(() => {
@@ -78,6 +80,10 @@ export default function Table() {
 
   return (
     <div className="overflow-auto shadow-md sm:rounded-lg border-collapse">
+      {defaultList && defaultList.map((subject) => <p className="text-yellow-500">{subject["name"]}</p>)}
+      <p className="text-yellow-500">========================================</p>
+      {sortedList && sortedList.map((subject) => <p className="text-yellow-500">{subject["name"]}</p>)}
+      <p className="text-yellow-500">========================================</p>
       <table
         className="text-base text-center rtl:text-right text-textColor w-full"
         ref={myRef}
@@ -103,7 +109,7 @@ export default function Table() {
             </th>
             <th
               scope="col"
-              className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1 gap-1`}
+              className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
               onClick={() => setCriteria("avaGrade")}
             >
               <span>Ava</span>
