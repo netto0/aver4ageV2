@@ -137,12 +137,12 @@ export default function Table() {
             <th
               scope="col"
               className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
-              onClick={() => setCriteria("average")}
+              onClick={() => setCriteria("avg")}
             >
               <span>Média</span>
-              {sortParameters.criteria === "average" &&
+              {sortParameters.criteria === "avg" &&
                 sortParameters.ascending && <AscendingTrue />}
-              {sortParameters.criteria === "average" &&
+              {sortParameters.criteria === "avg" &&
                 !sortParameters.ascending && <AscendingFalse />}
             </th>
             <th

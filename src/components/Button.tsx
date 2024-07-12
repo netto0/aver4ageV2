@@ -16,19 +16,19 @@ export default function Button({
   switch (color) {
     case "gray":
       btnClass =
-        "text-white inline-flex items-center bg-gray-600 hover:bg-gray-700 focus:ring-2 focus:outline-none focus:ring-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm";
+        "text-textColor inline-flex items-center bg-gray-600 hover:bg-gray-700 focus:ring-2 focus:outline-none focus:ring-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm";
       break;
     case "green":
       btnClass =
-        "text-white inline-flex items-center bg-green-600 hover:bg-green-700 focus:ring-2 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm";
+        "text-textColor inline-flex items-center bg-green-600 hover:bg-green-700 focus:ring-2 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm";
       break;
     case "red":
       btnClass =
-        "text-white inline-flex items-center bg-red-600 hover:bg-red-700 focus:ring-2 focus:outline-none focus:ring-red-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm";
+        "text-textColor inline-flex items-center bg-red-600 hover:bg-red-700 focus:ring-2 focus:outline-none focus:ring-red-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm";
       break;
     default:
       btnClass =
-        "text-white inline-flex items-center bg-gray-600 hover:bg-gray-700 focus:ring-2 focus:outline-none focus:ring-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm";
+        "text-textColor inline-flex items-center bg-gray-600 hover:bg-gray-700 focus:ring-2 focus:outline-none focus:ring-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm";
   }
   return (
     <button type={type} className={btnClass} onClick={clickFunc} {...rest}>

@@ -33,11 +33,11 @@ export default function Body() {
   
   return (
     <main className="w-full bg-gray-800 grow px-[8%] flex flex-col justify-center">
-      {/* <span className="z-50 text-red-600 pb-1">
-        Modal: {activeModal ? activeModal : "false"} | Form:{" "}
+      <span className="z-50 text-yellow-600 pb-1">
+        {/* Modal: {activeModal ? activeModal : "false"} | Form:{" "} */}
         {JSON.stringify(formFields)}
-        {JSON.stringify(sortParameters)}
-      </span> */}
+        {/* {JSON.stringify(sortParameters)} */}
+      </span>
       <div
         className={`absolute w-screen h-screen left-0 z-40 backdrop-blur-sm ${
           !activeModal && "hidden"

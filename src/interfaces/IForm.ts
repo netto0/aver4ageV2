@@ -8,5 +8,6 @@ export default interface IForm {
     __v?: number,
     pimGrade: number | null,
     examGrade: number | null,
-    retakeGrade: number | null
+    retakeGrade: number | null,
+    avg?: number | null
   }

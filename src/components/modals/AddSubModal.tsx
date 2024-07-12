@@ -31,7 +31,7 @@ const validationSchema = yup.object({
 
 export default function AddSubModal({ edit }: Props) {
   const [loading, setLoading] = useState<boolean>(false);
-  const [showDiv, setShowDiv] = useState<boolean>(false);
+  const [readInput, setReadInput] = useState<boolean>(false);
 
   const {
     getSubjects,
@@ -104,21 +104,27 @@ export default function AddSubModal({ edit }: Props) {
       formFields.pimGrade!,
       formFields.retakeGrade!
     )!;
+    setFormFields({ ...formFields, avg: media });
     const rtkNull = !formFields.retakeGrade;
     if (!rtkNull) {
-      setShowDiv(true);
+      setReadInput(true);
     } else {
       if (media == null) {
-        setShowDiv(false);
+        setReadInput(false);
       } else {
         if (media > 7) {
-          setShowDiv(false);
+          setReadInput(false);
         } else {
-          setShowDiv(true);
+          setReadInput(true);
         }
       }
     }
-  }, [formFields]);
+  }, [
+    formFields.avaGrade,
+    formFields.examGrade,
+    formFields.pimGrade,
+    formFields.retakeGrade,
+  ]);
 
   let btnMsg;
   edit ? (btnMsg = "Editar matéria") : (btnMsg = "Adicionar matéria");
@@ -190,23 +196,37 @@ export default function AddSubModal({ edit }: Props) {
                   error={errors.examGrade}
                 />
               </div>
-              {showDiv && (
-                <div className="col-span-2 sm:col-span-1">
-                  <Input
-                    register={{ ...register("retakeGrade") }}
-                    name="retakeGrade"
-                    label="Exame"
-                    type="number"
-                    handleChange={handleChange}
-                    placeholder="1"
-                    error={errors.retakeGrade}
-                  />
-                </div>
-              )}
+              <div className="col-span-2 sm:col-span-1">
+                <Input
+                  register={{ ...register("retakeGrade") }}
+                  name="retakeGrade"
+                  label="Exame"
+                  type="number"
+                  handleChange={handleChange}
+                  placeholder="1"
+                  error={errors.retakeGrade}
+                  readOnly={!readInput}
+                />
+              </div>
+              <div className="col-span-2 sm:col-span-1">
+                <Input
+                  register={{ ...register("avg") }}
+                  name="avg"
+                  label="Média"
+                  type="number"
+                  // handleChange={handleChange}
+                  // placeholder="1"
+                  error={errors.avg}
+                  readOnly
+                />
+              </div>
+              {/* {readInput && (
+              )} */}
             </div>
             <Button type="submit" color="green">
               {loading ? <p>Enviando...</p> : <p>{btnMsg}</p>}
             </Button>
+            {JSON.stringify(readInput)}
           </form>
         </div>
       </div>

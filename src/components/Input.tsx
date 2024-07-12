@@ -17,7 +17,6 @@ export default function Input({
   name,
   label,
   type,
-  // readOnly,
   handleChange,
   value,
   register,
