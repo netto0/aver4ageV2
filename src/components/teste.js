@@ -27,6 +27,12 @@ const compareFunction = (a, b) => {
 };
 
 lista2.sort(compareFunction);
-lista2.forEach((item) =>
-  console.log(`=> ${item.nome} | ${item.idade} | ${item.nota}`)
-);
+console.log(lista2)
+const filtrada = lista2.filter((subject) => subject.nome.includes("M"))
+console.log(filtrada)
+console.log(filtrada[0].nome.toUpperCase())
+// const filtrada = lista2.filter((subject) => console.log(subject.nome))
+// JSON.stringify(filtrada)
+// lista2.forEach((item) =>
+//   console.log(`=> ${item.nome} | ${item.idade} | ${item.nota}`)
+// );

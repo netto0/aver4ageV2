@@ -28,6 +28,9 @@ type GlobalContextType = {
   ) => number | null | void;
   sortParameters: any;
   setSortParameters: Dispatch<any>;
+  defaultSubs: any;
+  searchStr: string;
+  setSearchStr: Dispatch<any>;
 };
 
 function average(
@@ -81,6 +84,9 @@ const initialValue = {
   average: () => {},
   sortParameters: defaultSort,
   setSortParameters: () => {},
+  defaultSubs: [],
+  searchStr: "",
+  setSearchStr: () => {}
 };
 
 const successToast: ToastOptions = {
@@ -109,11 +115,14 @@ export const GlobalProvider = ({ children }: Props) => {
     initialValue.activeModal
   );
   const [sortParameters, setSortParameters] = useState(defaultSort);
+  const [defaultSubs, setDefaultSubs] = useState([])
+  const [searchStr, setSearchStr] = useState("")
 
   const getSubjects = async () => {
     const response = await getSubjectsService();
     if (response) {
       setSubjectsList(response);
+      setDefaultSubs(response)
     }
   };
 
@@ -139,6 +148,9 @@ export const GlobalProvider = ({ children }: Props) => {
         average,
         sortParameters,
         setSortParameters,
+        defaultSubs,
+        searchStr,
+        setSearchStr
       }}
     >
       {children}

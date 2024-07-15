@@ -11,14 +11,15 @@ export default function Body() {
   const {
     activeModal,
     setActiveModal,
-    formFields,
+    searchStr,
+    setSearchStr,
+    // formFields,
     getSubjects,
     // sortParameters,
   } = React.useContext(GlobalContext);
-  const [search, setSearch] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+    setSearchStr(e.target.value);
   };
   useEffect(() => {
     getSubjects();
@@ -35,7 +36,7 @@ export default function Body() {
     <main className="w-full bg-gray-800 grow px-[8%] flex flex-col justify-center">
       <span className="z-50 text-yellow-600 pb-1">
         {/* Modal: {activeModal ? activeModal : "false"} | Form:{" "} */}
-        {JSON.stringify(formFields)}
+        {/* {JSON.stringify(formFields)} */}
         {/* {JSON.stringify(sortParameters)} */}
       </span>
       <div
@@ -51,7 +52,7 @@ export default function Body() {
             name="search"
             type="text"
             handleChange={handleChange}
-            value={search}
+            value={searchStr}
             placeholder="Digite o que deseja buscar..."
           />
           <Button clickFunc={() => console.log("Nada ainda")}>OK</Button>

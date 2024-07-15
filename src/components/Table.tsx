@@ -33,8 +33,14 @@ function AscendingFalse() {
 }
 
 export default function Table() {
-  const { subjectsList, setSubjectsList, sortParameters, setSortParameters } =
-    React.useContext(GlobalContext);
+  const {
+    subjectsList,
+    setSubjectsList,
+    sortParameters,
+    setSortParameters,
+    defaultSubs,
+    searchStr,
+  } = React.useContext(GlobalContext);
   const myRef = useRef<any>(null);
 
   const sortFunc = (a: any, b: any) => {
@@ -51,6 +57,21 @@ export default function Table() {
     }
   };
 
+useEffect(()=>{
+  // console.log(searchStr)
+  if(searchStr !== "") {
+    setSubjectsList(searchResult(searchStr))
+  } else {
+    setSubjectsList(defaultSubs)
+  }
+},[searchStr])
+
+  const searchResult = (chars: string) => {
+    console.log("SR: ",chars.normalize("NFD").replace(/[^a-zA-Z\s]/g, ""), "oi")
+    // return defaultSubs.filter((subject:any) => subject.name.includes(chars));
+    return defaultSubs.filter((subject:any) => subject.name.toUpperCase().normalize("NFD").replace(/[^a-zA-Z\s]/g, "").includes(chars.toUpperCase().normalize("NFD").replace(/[^a-zA-Z\s]/g, "")));
+  };
+
   const setCriteria = (value: string) => {
     const { criteria, ascending } = sortParameters;
     if (value !== criteria) {
@@ -64,26 +85,27 @@ export default function Table() {
     }
   };
 
-  // const sortedList = Array.from(subjectsList);
   const sortedList = subjectsList.slice();
-  // const defaultList = Array.from(subjectsList);
-  const defaultList = subjectsList.slice();
   sortedList.sort(sortFunc);
 
   useEffect(() => {
-    if (sortParameters.criteria === null) {
-      setSubjectsList(defaultList);
+    if (searchStr !== "") {
+      setSubjectsList(searchStr);
     } else {
-      setSubjectsList(sortedList);
+      if (sortParameters.criteria === null) {
+        setSubjectsList(defaultSubs);
+      } else {
+        setSubjectsList(sortedList);
+      }
     }
   }, [sortParameters]);
 
   return (
     <div className="overflow-auto shadow-md sm:rounded-lg border-collapse">
-      {defaultList && defaultList.map((subject) => <p className="text-yellow-500">{subject["name"]}</p>)}
+      {/* {defaultSubs && defaultSubs.map((subject:any) => <p className="text-yellow-500">{subject["name"]}</p>)}
       <p className="text-yellow-500">========================================</p>
       {sortedList && sortedList.map((subject) => <p className="text-yellow-500">{subject["name"]}</p>)}
-      <p className="text-yellow-500">========================================</p>
+      <p className="text-yellow-500">========================================</p> */}
       <table
         className="text-base text-center rtl:text-right text-textColor w-full"
         ref={myRef}
