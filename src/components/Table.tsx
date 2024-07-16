@@ -44,6 +44,17 @@ export default function Table() {
   const myRef = useRef<any>(null);
 
   const sortFunc = (a: any, b: any) => {
+    if (typeof a[sortParameters.criteria] == "string" && typeof b[sortParameters.criteria] == "string") {
+      if (sortParameters.ascending) {
+        return a[sortParameters.criteria].localeCompare(
+          b[sortParameters.criteria]
+        );
+      } else {
+        return b[sortParameters.criteria].localeCompare(
+          a[sortParameters.criteria]
+        );
+      }
+    }
     if (sortParameters.ascending) {
       return (
         parseFloat(a[sortParameters.criteria]) -
@@ -58,7 +69,6 @@ export default function Table() {
   };
 
   useEffect(() => {
-    // console.log(searchStr)
     if (searchStr !== "") {
       setSubjectsList(searchResult(searchStr));
     } else {
@@ -121,7 +131,7 @@ export default function Table() {
               scope="col"
               className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
               onClick={() => setCriteria("semester")}
-            >
+              >
               <span>Sem.</span>
               {sortParameters.criteria === "semester" &&
                 sortParameters.ascending && <AscendingTrue />}
@@ -130,9 +140,14 @@ export default function Table() {
             </th>
             <th
               scope="col"
-              className={`py-3 w-[30%] ${"custom"} justify-center gap-1`}
+              className={`py-3 w-[30%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
+              onClick={() => setCriteria("name")}
             >
               <span>Matéria</span>
+              {sortParameters.criteria === "name" &&
+                sortParameters.ascending && <AscendingTrue />}
+              {sortParameters.criteria === "name" &&
+                !sortParameters.ascending && <AscendingFalse />}
             </th>
             <th
               scope="col"
