@@ -44,6 +44,8 @@ export default function Table() {
   const myRef = useRef<any>(null);
 
   const sortFunc = (a: any, b: any) => {
+    // console.log(a[sortParameters.criteria])
+    // a[sortParameters.criteria] === null && a[sortParameters.criteria] = 0
     if (typeof a[sortParameters.criteria] == "string" && typeof b[sortParameters.criteria] == "string") {
       if (sortParameters.ascending) {
         return a[sortParameters.criteria].localeCompare(
@@ -57,13 +59,13 @@ export default function Table() {
     }
     if (sortParameters.ascending) {
       return (
-        parseFloat(a[sortParameters.criteria]) -
-        parseFloat(b[sortParameters.criteria])
+        parseFloat(a[sortParameters.criteria]) | 0 -
+        parseFloat(b[sortParameters.criteria]) | 0
       );
     } else {
       return (
-        parseFloat(b[sortParameters.criteria]) -
-        parseFloat(a[sortParameters.criteria])
+        parseFloat(b[sortParameters.criteria]) | 0 -
+        parseFloat(a[sortParameters.criteria]) | 0
       );
     }
   };
