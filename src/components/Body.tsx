@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Button from "./Button";
 import Input from "./Input";
 import Table from "./Table";
@@ -13,9 +13,7 @@ export default function Body() {
     setActiveModal,
     searchStr,
     setSearchStr,
-    // formFields,
     getSubjects,
-    // sortParameters,
   } = React.useContext(GlobalContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +29,7 @@ export default function Body() {
     window.history.replaceState({}, "", urlObj.toString());
   }
   clearUrl(window.location.href);
-  
+
   return (
     <main className="w-full bg-gray-800 grow px-[8%] flex flex-col justify-center">
       <span className="z-50 text-yellow-600 pb-1">
@@ -55,7 +53,6 @@ export default function Body() {
             value={searchStr}
             placeholder="Digite o que deseja buscar..."
           />
-          <Button clickFunc={() => console.log("Nada ainda")}>OK</Button>
         </div>
         <Table />
         {activeModal == "add" && <AddSubModal />}

@@ -43,9 +43,7 @@ function average(
     let regularMD: number;
     // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
     regularMD = (7 * exam + 2 * pim + ava) / 10;
-    // console.log("MD: ", regularMD)
     if (rtk) {
-      // console.log("MF: ", (regularMD + rtk) / 2)
       return (regularMD + rtk) / 2;
     } else {
       return regularMD;
@@ -86,7 +84,7 @@ const initialValue = {
   setSortParameters: () => {},
   defaultSubs: [],
   searchStr: "",
-  setSearchStr: () => {}
+  setSearchStr: () => {},
 };
 
 const successToast: ToastOptions = {
@@ -115,14 +113,14 @@ export const GlobalProvider = ({ children }: Props) => {
     initialValue.activeModal
   );
   const [sortParameters, setSortParameters] = useState(defaultSort);
-  const [defaultSubs, setDefaultSubs] = useState([])
-  const [searchStr, setSearchStr] = useState("")
+  const [defaultSubs, setDefaultSubs] = useState([]);
+  const [searchStr, setSearchStr] = useState("");
 
   const getSubjects = async () => {
     const response = await getSubjectsService();
     if (response) {
       setSubjectsList(response);
-      setDefaultSubs(response)
+      setDefaultSubs(response);
     }
   };
 
@@ -150,7 +148,7 @@ export const GlobalProvider = ({ children }: Props) => {
         setSortParameters,
         defaultSubs,
         searchStr,
-        setSearchStr
+        setSearchStr,
       }}
     >
       {children}

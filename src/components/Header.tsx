@@ -8,7 +8,8 @@ export default function Header() {
       </div>
       <nav className="h-full flex items-center grow">
         <ul className="flex justify-around w-full">
-          <li className="hover:cursor-pointer hover:scale-105 hover:text-orange-500 hover:font-semibold transition">
+          {/* <li className="hover:cursor-pointer hover:scale-105 hover:text-orange-500 hover:font-semibold transition underline decoration-orange-500"> */}
+          <li className="hover:cursor-pointer hover:scale-105 hover:text-orange-500 hover:font-semibold transition text-orange-500">
             <a>INÍCIO</a>
           </li>
           <li className="hover:cursor-pointer hover:scale-105 hover:text-orange-500 hover:font-semibold transition">

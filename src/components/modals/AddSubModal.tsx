@@ -157,61 +157,73 @@ export default function AddSubModal({ edit }: Props) {
                   register={{ ...register("semester") }}
                   name="semester"
                   label="Semestre"
+                  max={10}
+                  min={0}
                   type="number"
                   handleChange={handleChange}
-                  placeholder="1"
+                  placeholder="0"
                   error={errors.semester}
-                />
+                  />
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <Input
                   register={{ ...register("avaGrade") }}
                   name="avaGrade"
                   label="AVA"
+                  max={10}
+                  min={0}
                   type="number"
                   handleChange={handleChange}
-                  placeholder="1"
+                  placeholder="0"
                   error={errors.avaGrade}
-                />
+                  />
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <Input
                   register={{ ...register("pimGrade") }}
                   name="pimGrade"
                   label="PIM"
+                  max={10}
+                  min={0}
                   type="number"
                   handleChange={handleChange}
-                  placeholder="1"
+                  placeholder="0"
                   error={errors.pimGrade}
-                />
+                  />
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <Input
                   register={{ ...register("examGrade") }}
                   name="examGrade"
                   label="Prova"
+                  max={10}
+                  min={0}
                   type="number"
                   handleChange={handleChange}
-                  placeholder="1"
+                  placeholder="0"
                   error={errors.examGrade}
-                />
+                  />
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <Input
                   register={{ ...register("retakeGrade") }}
                   name="retakeGrade"
                   label="Exame"
+                  max={10}
+                  min={0}
                   type="number"
                   handleChange={handleChange}
                   error={errors.retakeGrade}
                   readOnly={!readInput}
-                />
+                  />
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <Input
                   register={{ ...register("avg") }}
                   name="avg"
                   label="Média"
+                  max={10}
+                  min={0}
                   type="number"
                   error={errors.avg}
                   readOnly
@@ -221,7 +233,6 @@ export default function AddSubModal({ edit }: Props) {
             <Button type="submit" color="green">
               {loading ? <p>Enviando...</p> : <p>{btnMsg}</p>}
             </Button>
-            {/* {JSON.stringify(readInput)} */}
           </form>
         </div>
       </div>

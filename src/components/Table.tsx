@@ -57,19 +57,34 @@ export default function Table() {
     }
   };
 
-useEffect(()=>{
-  // console.log(searchStr)
-  if(searchStr !== "") {
-    setSubjectsList(searchResult(searchStr))
-  } else {
-    setSubjectsList(defaultSubs)
-  }
-},[searchStr])
+  useEffect(() => {
+    // console.log(searchStr)
+    if (searchStr !== "") {
+      setSubjectsList(searchResult(searchStr));
+    } else {
+      setSubjectsList(defaultSubs);
+    }
+  }, [searchStr]);
 
   const searchResult = (chars: string) => {
-    console.log("SR: ",chars.normalize("NFD").replace(/[^a-zA-Z\s]/g, ""), "oi")
+    console.log(
+      "SR: ",
+      chars.normalize("NFD").replace(/[^a-zA-Z\s]/g, ""),
+      "oi"
+    );
     // return defaultSubs.filter((subject:any) => subject.name.includes(chars));
-    return defaultSubs.filter((subject:any) => subject.name.toUpperCase().normalize("NFD").replace(/[^a-zA-Z\s]/g, "").includes(chars.toUpperCase().normalize("NFD").replace(/[^a-zA-Z\s]/g, "")));
+    return defaultSubs.filter((subject: any) =>
+      subject.name
+        .toUpperCase()
+        .normalize("NFD")
+        .replace(/[^a-zA-Z\s]/g, "")
+        .includes(
+          chars
+            .toUpperCase()
+            .normalize("NFD")
+            .replace(/[^a-zA-Z\s]/g, "")
+        )
+    );
   };
 
   const setCriteria = (value: string) => {
@@ -102,15 +117,11 @@ useEffect(()=>{
 
   return (
     <div className="overflow-auto shadow-md sm:rounded-lg border-collapse">
-      {/* {defaultSubs && defaultSubs.map((subject:any) => <p className="text-yellow-500">{subject["name"]}</p>)}
-      <p className="text-yellow-500">========================================</p>
-      {sortedList && sortedList.map((subject) => <p className="text-yellow-500">{subject["name"]}</p>)}
-      <p className="text-yellow-500">========================================</p> */}
       <table
-        className="text-base text-center rtl:text-right text-textColor w-full"
+        className="text-base text-center rtl:text-right text-textColor w-full select-none"
         ref={myRef}
       >
-        <thead className="text-xs uppercase bg-darkerGray text-textColor drop-shadow-md select-none">
+        <thead className="text-xs uppercase bg-darkerGray text-textColor drop-shadow-md">
           <tr className="flex w-full">
             <th
               scope="col"

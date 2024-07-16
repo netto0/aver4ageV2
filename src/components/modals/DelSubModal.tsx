@@ -21,9 +21,9 @@ export default function DelSubModal() {
     setLoading(true);
     const response = await deleteSubjectService(formFields._id!);
     if (response) {
-      toast.success("Matéria excluída com sucesso", successToast);
       closeModal();
       getSubjects();
+      toast.success("Matéria excluída com sucesso", successToast);
       return response;
     } else {
       console.log("Algo deu errado");
