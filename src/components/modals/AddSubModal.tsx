@@ -21,12 +21,11 @@ interface Props {
 const validationSchema = yup.object({
   name: yup
     .string()
-    .required("Insira o nome da matéria!")
+    .required("Insira o nome da matéria.")
     .min(3, "O nome precisa ter 3 letras"),
   semester: yup
-    .number()
-    .required("Informe o semestre")
-    .min(1, "Informe um semestre válido"),
+    .string()
+    .required("Insira o semestre.")
 });
 
 export default function AddSubModal({ edit }: Props) {
@@ -163,7 +162,7 @@ export default function AddSubModal({ edit }: Props) {
                   handleChange={handleChange}
                   placeholder="0"
                   error={errors.semester}
-                  />
+                />
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <Input
@@ -176,7 +175,7 @@ export default function AddSubModal({ edit }: Props) {
                   handleChange={handleChange}
                   placeholder="0"
                   error={errors.avaGrade}
-                  />
+                />
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <Input
@@ -189,7 +188,7 @@ export default function AddSubModal({ edit }: Props) {
                   handleChange={handleChange}
                   placeholder="0"
                   error={errors.pimGrade}
-                  />
+                />
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <Input
@@ -202,7 +201,7 @@ export default function AddSubModal({ edit }: Props) {
                   handleChange={handleChange}
                   placeholder="0"
                   error={errors.examGrade}
-                  />
+                />
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <Input
@@ -215,7 +214,7 @@ export default function AddSubModal({ edit }: Props) {
                   handleChange={handleChange}
                   error={errors.retakeGrade}
                   readOnly={!readInput}
-                  />
+                />
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <Input
