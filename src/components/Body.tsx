@@ -54,6 +54,7 @@ export default function Body() {
             placeholder="Digite o que deseja buscar..."
           />
         </div>
+        
         <Table />
         {activeModal == "add" && <AddSubModal />}
         {activeModal == "del" && <DelSubModal />}

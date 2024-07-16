@@ -67,12 +67,6 @@ export default function Table() {
   }, [searchStr]);
 
   const searchResult = (chars: string) => {
-    console.log(
-      "SR: ",
-      chars.normalize("NFD").replace(/[^a-zA-Z\s]/g, ""),
-      "oi"
-    );
-    // return defaultSubs.filter((subject:any) => subject.name.includes(chars));
     return defaultSubs.filter((subject: any) =>
       subject.name
         .toUpperCase()

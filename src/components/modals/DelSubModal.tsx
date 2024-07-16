@@ -17,7 +17,8 @@ export default function DelSubModal() {
     defaultForm,
   } = React.useContext(GlobalContext);
 
-  const deleteSbj = async () => {
+  const deleteSbj = async (e:any) => {
+    e.preventDefault()
     setLoading(true);
     const response = await deleteSubjectService(formFields._id!);
     if (response) {
