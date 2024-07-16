@@ -26,17 +26,21 @@ export default function TableRow({ subject }: Props) {
   );
 
   const approved = () => {
-    if (subject.retakeGrade) {
-      if (avg! >= 5) {
-        return true;
-      } else {
-        return false;
-      }
+    if (avg == null) {
+      return undefined;
     } else {
-      if (avg! >= 7) {
-        return true;
+      if (subject.retakeGrade) {
+        if (avg! >= 5) {
+          return true;
+        } else {
+          return false;
+        }
       } else {
-        return false;
+        if (avg! >= 7) {
+          return true;
+        } else {
+          return false;
+        }
       }
     }
   };
@@ -68,7 +72,7 @@ export default function TableRow({ subject }: Props) {
       <td className="relative w-[10%] h-full flex items-center justify-center">
         {!avg ? "∅" : avg.toFixed(2)}
         {!avg && <Dot />}
-        {!approved() && <Dot color={"red"} />}
+        {approved() === false && <Dot color={"red"} />}
         {approved() && <Dot color={"green"} />}
       </td>
       <td className="relative w-[10%] h-full flex items-center justify-center">
