@@ -44,8 +44,6 @@ export default function Table() {
   const myRef = useRef<any>(null);
 
   const sortFunc = (a: any, b: any) => {
-    // console.log(a[sortParameters.criteria])
-    // a[sortParameters.criteria] === null && a[sortParameters.criteria] = 0
     if (typeof a[sortParameters.criteria] == "string" && typeof b[sortParameters.criteria] == "string") {
       if (sortParameters.ascending) {
         return a[sortParameters.criteria].localeCompare(

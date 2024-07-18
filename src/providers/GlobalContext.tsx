@@ -99,6 +99,7 @@ const successToast: ToastOptions = {
 };
 
 function resetScrollInsideTable() {
+  console.log("scroll")
   let tableBody = document.getElementById("table");
   tableBody!.scrollTo(0, tableBody!.scrollHeight);
 }

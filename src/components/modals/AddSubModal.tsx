@@ -57,13 +57,13 @@ export default function AddSubModal({ edit }: Props) {
       closeModal();
       getSubjects();
       toast.success("Matéria incluída com sucesso!", successToast);
-      setInterval(resetScrollInsideTable, 500);
+      setTimeout(resetScrollInsideTable, 500);
       return response;
     } else {
       console.log("Algo deu errado");
     }
   };
-
+  
   const editSubject = async (id: string) => {
     setLoading(true);
     const response = await updateSubjectService(id, formFields);
@@ -71,7 +71,7 @@ export default function AddSubModal({ edit }: Props) {
       closeModal();
       getSubjects();
       toast.success("Matéria alterada com sucesso!", successToast);
-      setInterval(resetScrollInsideTable, 500);
+      setTimeout(resetScrollInsideTable, 500);
       return response;
     } else {
       console.log("Algo deu errado");
