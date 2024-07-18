@@ -46,7 +46,7 @@ export default function TableRow({ subject }: Props) {
   };
   return (
     <tr
-      className="bg-darkGray text-gray-950 border-b border-gray-700 flex h-14 hover:cursor-pointer hover:bg-gray-500 transition-colors"
+      className="bg-darkGray text-gray-950 border-b border-gray-700 flex h-14 hover:cursor-pointer hover:bg-gray-500 transition-all group"
       key={subject._id}
       ref={fatherRef}
       id={JSON.stringify(subject)}
@@ -83,7 +83,7 @@ export default function TableRow({ subject }: Props) {
           width="16"
           height="16"
           fill="currentColor"
-          className="bi bi-x-circle-fill absolute top-1.5 right-1.5 size-3 text-gray-900 hover:text-red-500 transition-colors "
+          className="bi bi-x-circle-fill absolute top-1.5 right-1.5 size-3 text-gray-900 hover:text-red-500 transition-all opacity-0 group-hover:opacity-100"
           viewBox="0 0 16 16"
           onClick={(e) => {
             e.stopPropagation(), handleClick("del");

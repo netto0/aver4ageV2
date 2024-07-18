@@ -9,6 +9,7 @@ export default {
         "lightGray": "#d4d4d8",
         "textColor": "#030712"
       },
+      display: ["group-hover"],
     },
   },
   plugins: [],
