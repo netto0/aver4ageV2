@@ -140,7 +140,7 @@ export default function Table() {
             </th>
             <th
               scope="col"
-              className={`py-3 w-[30%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
+              className={`py-3 w-[40%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
               onClick={() => setCriteria("name")}
             >
               <span>Matéria</span>
@@ -204,12 +204,12 @@ export default function Table() {
               {sortParameters.criteria === "retakeGrade" &&
                 !sortParameters.ascending && <AscendingFalse />}
             </th>
-            <th
+            {/* <th
               scope="col"
               className={`py-3 w-[10%] ${"custom"} justify-center gap-1`}
             >
               Ação
-            </th>
+            </th> */}
           </tr>
         </thead>
         <tbody

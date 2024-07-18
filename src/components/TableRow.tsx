@@ -46,15 +46,16 @@ export default function TableRow({ subject }: Props) {
   };
   return (
     <tr
-      className="bg-darkGray text-gray-950 border-b border-gray-700 flex h-14"
+      className="bg-darkGray text-gray-950 border-b border-gray-700 flex h-14 hover:cursor-pointer hover:bg-gray-500 transition-colors"
       key={subject._id}
       ref={fatherRef}
       id={JSON.stringify(subject)}
+      onClick={() => handleClick("edit")}
     >
       <td className="w-[10%] h-full flex items-center justify-center">
         {subject.semester}
       </td>
-      <td className="w-[30%] h-full flex items-center">
+      <td className="w-[40%] h-full flex items-center">
         <p className="truncate">{subject.name}</p>
       </td>
       <td className="relative w-[10%] h-full flex items-center justify-center">
@@ -77,31 +78,19 @@ export default function TableRow({ subject }: Props) {
       </td>
       <td className="relative w-[10%] h-full flex items-center justify-center">
         {!subject.retakeGrade ? "x" : subject.retakeGrade}
-      </td>
-      <td className="relative w-[10%] h-full flex items-center justify-center">
-        <div className="flex w-full max-w-24 self-center justify-around items-center h-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            className="bi bi-pencil-fill fill-gray-800  hover:cursor-pointer transition-all hover:fill-green-500"
-            viewBox="0 0 16 16"
-            onClick={() => handleClick("edit")}
-          >
-            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="currentColor"
-            className="bi bi-trash-fill fill-gray-800 hover:cursor-pointer transition-all hover:fill-red-500"
-            viewBox="0 0 16 16"
-            onClick={() => handleClick("del")}
-          >
-            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-          </svg>
-        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          className="bi bi-x-circle-fill absolute top-1.5 right-1.5 size-3 text-gray-900 hover:text-red-500 transition-colors "
+          viewBox="0 0 16 16"
+          onClick={(e) => {
+            e.stopPropagation(), handleClick("del");
+          }}
+        >
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z" />
+        </svg>
       </td>
     </tr>
   );

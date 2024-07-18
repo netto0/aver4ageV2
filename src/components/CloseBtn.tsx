@@ -1,5 +1,5 @@
 interface IProps {
-  clickFunc: () => void;
+  clickFunc: (e?:any) => void;
 }
 export default function CloseBtn({ clickFunc }: IProps) {
   return (
