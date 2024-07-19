@@ -23,9 +23,7 @@ const validationSchema = yup.object({
     .string()
     .required("Insira o nome da matéria.")
     .min(3, "O nome precisa ter 3 letras"),
-  semester: yup
-    .string()
-    .required("Insira o semestre.")
+  semester: yup.string().required("Insira o semestre."),
 });
 
 export default function AddSubModal({ edit }: Props) {
@@ -63,7 +61,7 @@ export default function AddSubModal({ edit }: Props) {
       console.log("Algo deu errado");
     }
   };
-  
+
   const editSubject = async (id: string) => {
     setLoading(true);
     const response = await updateSubjectService(id, formFields);
@@ -88,10 +86,22 @@ export default function AddSubModal({ edit }: Props) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name != "name" && e.target.name != "semester") {
-      setFormFields({
-        ...formFields,
-        [e.target.name]: parseFloat(e.target.value),
-      });
+      if (parseFloat(e.target.value) >= 10) {
+        setFormFields({
+          ...formFields,
+          [e.target.name]: 10,
+        });
+      } else if (parseFloat(e.target.value) <= 0) {
+        setFormFields({
+          ...formFields,
+          [e.target.name]: 0,
+        });
+      } else {
+        setFormFields({
+          ...formFields,
+          [e.target.name]: parseFloat(e.target.value),
+        });
+      }
     } else {
       setFormFields({ ...formFields, [e.target.name]: e.target.value });
     }
@@ -101,7 +111,8 @@ export default function AddSubModal({ edit }: Props) {
       formFields.avaGrade!,
       formFields.examGrade!,
       formFields.pimGrade!,
-      formFields.retakeGrade!
+      formFields.retakeGrade!,
+      // true
     )!;
     setFormFields({ ...formFields, avg: media });
     const rtkNull = !formFields.retakeGrade;
