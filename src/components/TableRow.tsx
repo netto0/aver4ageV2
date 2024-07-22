@@ -46,7 +46,7 @@ export default function TableRow({ subject }: Props) {
   };
   return (
     <tr
-      className="bg-darkGray text-gray-950 border-b border-gray-700 flex h-14 hover:cursor-pointer hover:bg-gray-500 transition-all group"
+      className="bg-color3 text-color1 border-b border-color4 flex h-14 hover:cursor-pointer hover:bg-gray-500 transition-all group"
       key={subject._id}
       ref={fatherRef}
       id={JSON.stringify(subject)}

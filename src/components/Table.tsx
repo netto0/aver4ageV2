@@ -125,7 +125,7 @@ export default function Table() {
         className="text-base text-center rtl:text-right text-textColor w-full select-none"
         ref={myRef}
       >
-        <thead className="text-xs uppercase bg-darkerGray text-textColor drop-shadow-md">
+        <thead className="text-xs uppercase bg-color1 text-textColor drop-shadow-md">
           <tr className="flex w-full">
             <th
               scope="col"
@@ -204,17 +204,11 @@ export default function Table() {
               {sortParameters.criteria === "retakeGrade" &&
                 !sortParameters.ascending && <AscendingFalse />}
             </th>
-            {/* <th
-              scope="col"
-              className={`py-3 w-[10%] ${"custom"} justify-center gap-1`}
-            >
-              Ação
-            </th> */}
           </tr>
         </thead>
         <tbody
           id="table"
-          className="block scroll overflow-y-auto h-[587px] no-scrollbar bg-gray-700 scroll-smooth"
+          className="block scroll overflow-y-auto h-[587px] no-scrollbar bg-color4 scroll-smooth"
         >
           {subjectsList.map((subject, i) => (
             <TableRow key={i} subject={subject} />

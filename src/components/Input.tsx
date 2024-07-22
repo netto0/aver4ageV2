@@ -40,9 +40,9 @@ export default function Input({
   }
 
   const defaultClass =
-    "bg-gray-600 border border-gray-500 placeholder-gray-400 text-white text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5";
+    "bg-color3 border border-none placeholder-color2 text-white text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5";
   const readOnlyClass =
-    "bg-gray-600 border border-gray-500 text-gray-400 text-sm rounded-lg block w-full p-2.5 outline-none hover:cursor-auto";
+    "bg-color3 border border-none text-gray-400 text-sm rounded-lg block w-full p-2.5 outline-none hover:cursor-auto";
 
   return (
     <>

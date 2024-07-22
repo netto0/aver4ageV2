@@ -4,10 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        "darkGray": "#4b5563",
-        "darkerGray": "#374151",
-        "lightGray": "#d4d4d8",
-        "textColor": "#030712"
+        "color1": "#010E17",
+        "color2": "#07141E",
+        "color3": "#162F42",
+        "color4": "#132938",
+        "textColor": "#405869",
+        "customOrange": "#F45E0A"
       },
       display: ["group-hover"],
     },
