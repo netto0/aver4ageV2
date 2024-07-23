@@ -8,6 +8,7 @@ export default {
         "color2": "#07141E",
         "color3": "#162F42",
         "color4": "#132938",
+        "color5": "#1E415B",
         "textColor": "#405869",
         "customOrange": "#F45E0A"
       },

@@ -20,3 +20,27 @@
       }
 
 }
+
+@layer components {
+    .inputDarkModeOverride {
+      &:-webkit-autofill {
+        box-shadow: 0 0 0 30px #132938 inset;
+        -webkit-text-fill-color: #bfdbfe;
+    }
+    
+    &:-webkit-autofill:hover {
+        box-shadow: 0 0 0 30px #132938 inset;
+        -webkit-text-fill-color: #bfdbfe;
+    }
+    
+    &:-webkit-autofill:focus {
+        box-shadow: 0 0 0 30px #132938 inset;
+        -webkit-text-fill-color: #bfdbfe;
+    }
+    
+    &:-webkit-autofill:active {
+        box-shadow: 0 0 0 30px #132938 inset;
+        -webkit-text-fill-color: #bfdbfe;
+      }
+    }
+  }

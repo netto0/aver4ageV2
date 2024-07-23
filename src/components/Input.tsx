@@ -40,9 +40,9 @@ export default function Input({
   }
 
   const defaultClass =
-    "bg-color3 border border-none placeholder-color2 text-white text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5";
+    "bg-color4 border border-none placeholder-color1 text-blue-200 text-sm rounded-lg focus:ring-color5 focus:border-color5 block w-full p-2.5 inputDarkModeOverride";
   const readOnlyClass =
-    "bg-color3 border border-none text-gray-400 text-sm rounded-lg block w-full p-2.5 outline-none hover:cursor-auto";
+    "bg-color4 border border-none text-blue-200 text-sm rounded-lg block w-full p-2.5 outline-none hover:cursor-auto inputDarkModeOverride";
 
   return (
     <>
@@ -50,7 +50,7 @@ export default function Input({
         <label
           htmlFor={label}
           className={`block mb-2 text-sm ${
-            readOnly ? "text-gray-400" : "text-white"
+            readOnly ? "text-sky-800" : "text-blue-200"
           }`}
         >
           {label}
@@ -63,7 +63,7 @@ export default function Input({
         name={name}
         type={type}
         value={inputValue}
-        className={readOnly ? readOnlyClass : defaultClass}
+        className={readOnly ? readOnlyClass  : defaultClass}
         readOnly={readOnly}
         onChange={handleChange}
         {...rest}

@@ -141,9 +141,9 @@ export default function AddSubModal({ edit }: Props) {
   return (
     <>
       <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <div className="relative bg-color2 rounded-lg shadow">
+          <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-color3">
+            <h3 className="text-lg font-semibold text-blue-200">
               {edit ? "Editar matéria" : "Adicionar nova matéria"}
             </h3>
             <CloseBtn clickFunc={closeModal} />

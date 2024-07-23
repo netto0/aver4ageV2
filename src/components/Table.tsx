@@ -125,7 +125,7 @@ export default function Table() {
         className="text-base text-center rtl:text-right text-textColor w-full select-none"
         ref={myRef}
       >
-        <thead className="text-xs uppercase bg-color1 text-textColor drop-shadow-md">
+        <thead className="text-sm uppercase bg-color1 text-textColor drop-shadow-md">
           <tr className="flex w-full">
             <th
               scope="col"

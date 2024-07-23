@@ -16,7 +16,7 @@ export default function Button({
   switch (color) {
     case "gray":
       btnClass =
-        "text-color1 inline-flex items-center bg-color3 hover:bg-gray-700 focus:ring-2 focus:outline-none focus:ring-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm";
+        "text-color1 inline-flex items-center bg-color3 hover:bg-color5 focus:ring-2 focus:outline-none focus:ring-color5 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-sm";
       break;
     case "green":
       btnClass =
