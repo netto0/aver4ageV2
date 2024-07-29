@@ -120,7 +120,7 @@ export default function Table() {
   }, [sortParameters]);
 
   return (
-    <div className="overflow-auto shadow-md sm:rounded-lg border-collapse">
+    <div className="overflow-auto shadow-md border-collapse">
       <table
         className="text-base text-center rtl:text-right text-textColor w-full select-none"
         ref={myRef}

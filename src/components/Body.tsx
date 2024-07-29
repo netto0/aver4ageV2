@@ -14,8 +14,6 @@ export default function Body() {
     searchStr,
     setSearchStr,
     getSubjects,
-    // sortParameters,
-    // formFields,
   } = React.useContext(GlobalContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,12 +31,7 @@ export default function Body() {
   clearUrl(window.location.href);
 
   return (
-    <main className="w-full bg-color2 grow px-[8%] flex flex-col justify-center">
-      {/* <span className="z-50 text-yellow-600 pb-1">
-        Modal: {activeModal ? activeModal : "false"} | Form:{" "}
-        <p>{JSON.stringify(formFields)}</p>
-        {JSON.stringify(sortParameters)}
-      </span> */}
+    <main className="w-full bg-color2 grow px-[8%] hidden sm:flex flex-col justify-center">
       <div
         className={`absolute w-screen h-screen left-0 z-40 backdrop-blur-sm ${
           !activeModal && "hidden"

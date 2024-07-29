@@ -1,6 +1,7 @@
 export default function Header() {
   return (
-    <header className="bg-color1 h-20 flex justify-center items-center text-2xl text-textColor drop-shadow-sm shadow-black">
+    // <header className="bg-color1 h-20 flex justify-center items-center text-2xl text-textColor drop-shadow-sm shadow-black">
+    <header className="hidden bg-color1 sm:flex h-20 justify-center items-center text-2xl text-textColor drop-shadow-sm">
       <div className="px-12">
         <h1 className="font-bold text-3xl text-textColor hover:cursor-pointer hover:scale-110 transition-transform">
           AVER<span className="text-customOrange">4</span>AGE
