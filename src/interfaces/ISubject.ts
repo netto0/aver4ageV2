@@ -3,6 +3,7 @@ export default interface ISubject {
     name: string,
     semester: number,
     avaGrade: number | null,
+    avg: number | null,
     createdAt?: string,
     updatedAt?: string,
     __v?: number,

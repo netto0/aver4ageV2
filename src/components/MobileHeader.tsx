@@ -3,7 +3,6 @@ import avatarImage from '../assets/avatar-default.svg'
 
 export default function MobileHeader() {
   return (
-    // <header className="bg-color1 h-20 flex justify-center items-center text-2xl text-textColor drop-shadow-sm shadow-black">
     <header className="bg-[#01080e] flex sm:hidden justify-between align-middle text-textColor drop-shadow-sm py-4 px-6">
       <div className="flex self-center gap-5">
         <svg
