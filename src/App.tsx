@@ -12,7 +12,7 @@ function App() {
       <div className="h-screen flex flex-col bg-color2">
         <Header />
         {/* <div className="sticky top-0 z-50"> */}
-        <div className="sticky top-0 z-50">
+        <div className="sticky top-0 z-50 bg-color1">
           <MobileHeader />
           <MobileSubHeader />
         </div>
