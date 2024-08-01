@@ -10,9 +10,8 @@ import MobileSubHeader from "./components/MobileSubHeader";
 function App() {
   return (
     <>
-      <div className="h-fit-content flex flex-col bg-color2">
+      <div className="min-h-screen h-fit-content flex flex-col bg-color2">
         <Header />
-        {/* <div className="sticky top-0 z-50"> */}
         <div className="sticky top-0 z-50 bg-color1">
           <MobileHeader />
           <MobileSubHeader />
