@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import MobileAddButton from "./components/MobileAddButton";
 import MobileHeader from "./components/MobileHeader";
 import MobileList from "./components/MobileList";
+import MobileModal from "./components/MobileModal";
 import MobileSubHeader from "./components/MobileSubHeader";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         </div>
         <MobileList />
         <MobileAddButton />
+        <MobileModal />
         <Body />
         <Footer />
       </div>

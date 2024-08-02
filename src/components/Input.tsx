@@ -40,7 +40,7 @@ export default function Input({
   }
 
   const defaultClass =
-    "bg-color4 border border-none placeholder-color1 text-blue-200 text-sm rounded-lg focus:ring-color5 focus:border-color5 block w-full p-2.5 inputDarkModeOverride";
+    "bg-color2 sm:bg-color3 border-b border-textColor h-20 sm:h-fit sm:border sm:border-none placeholder-color1 text-blue-200 text-sm sm:rounded-lg focus:ring-color5 focus:border-color5 block w-full p-2.5 inputDarkModeOverride";
   const readOnlyClass =
     "bg-color4 border border-none text-blue-200 text-sm rounded-lg block w-full p-2.5 outline-none hover:cursor-auto inputDarkModeOverride";
 
