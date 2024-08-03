@@ -24,7 +24,12 @@ export default function MobileModal() {
         <button className="bg-customOrange font-semibold text-color1 py-2 px-4 rounded-full">Enviar</button>
       </div>
       <form>
-        <Input name="name" type="text"/>
+        <Input name="name" type="text" placeholder="Nome" autoComplete="off"/>
+        <Input name="name" type="text" placeholder="Semestre" autoComplete="off"/>
+        <Input name="name" type="text" placeholder="AVA" autoComplete="off"/>
+        <Input name="name" type="text" placeholder="PIM" autoComplete="off"/>
+        <Input name="name" type="text" placeholder="Prova" autoComplete="off"/>
+        <Input name="name" type="text" placeholder="Exame" autoComplete="off"/>
       </form>
     </div>
   );
