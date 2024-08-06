@@ -1,6 +1,7 @@
 import React from "react";
 import ISubject from "../interfaces/ISubject";
 import { GlobalContext } from "../providers/GlobalContext";
+import MobileAddButton from "./MobileAddButton";
 
 interface IItemProps {
   subject: ISubject;
@@ -39,6 +40,7 @@ export default function MobileList() {
       {subjectsList.map((sbj) => (
         <ListItem subject={sbj} />
       ))}
+      <MobileAddButton />
     </div>
   );
 }
