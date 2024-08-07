@@ -1,10 +1,6 @@
-import React from 'react';
 import avatarImage from '../assets/avatar-default.svg'
-import { GlobalContext } from '../providers/GlobalContext';
-
 
 export default function MobileHeader() {
-  const {activeModal, subjectsList} = React.useContext(GlobalContext)
   return (
     <header className="bg-[#01080e] flex sm:hidden justify-between align-middle text-textColor drop-shadow-sm py-4 px-6">
       <div className="flex self-center gap-5">
@@ -29,7 +25,6 @@ export default function MobileHeader() {
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
         </svg>
       </div>
-      <span className='text-yellow-300'>{JSON.stringify(subjectsList)}</span>
       <div className="bg-textColor w-11 h-11 rounded-full">
         <img src={avatarImage} alt="avatar" className='scale-75'/>
       </div>

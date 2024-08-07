@@ -27,7 +27,6 @@ const validationSchema = yup.object({
 });
 
 export default function AddSubModal({ edit }: Props) {
-  const [loading, setLoading] = useState<boolean>(false);
   const [readInput, setReadInput] = useState<boolean>(false);
 
   const {
@@ -38,6 +37,8 @@ export default function AddSubModal({ edit }: Props) {
     setFormFields,
     closeModal,
     average,
+    loading,
+    setLoading
   } = React.useContext(GlobalContext);
 
   const {
@@ -112,7 +113,6 @@ export default function AddSubModal({ edit }: Props) {
       formFields.examGrade!,
       formFields.pimGrade!,
       formFields.retakeGrade!,
-      // true
     )!;
     setFormFields({ ...formFields, avg: media });
     const rtkNull = !formFields.retakeGrade;

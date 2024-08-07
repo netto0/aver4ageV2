@@ -32,6 +32,8 @@ type GlobalContextType = {
   defaultSubs: any;
   searchStr: string;
   setSearchStr: Dispatch<any>;
+  loading: boolean;
+  setLoading: Dispatch<any>
 };
 
 function average(
@@ -98,6 +100,8 @@ const initialValue = {
   defaultSubs: [],
   searchStr: "",
   setSearchStr: () => {},
+  loading: false,
+  setLoading: () => {}
 };
 
 const successToast: ToastOptions = {
@@ -128,6 +132,7 @@ export const GlobalProvider = ({ children }: Props) => {
   const [sortParameters, setSortParameters] = useState(defaultSort);
   const [defaultSubs, setDefaultSubs] = useState([]);
   const [searchStr, setSearchStr] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getSubjects = async () => {
     const response = await getSubjectsService();
@@ -162,6 +167,8 @@ export const GlobalProvider = ({ children }: Props) => {
         defaultSubs,
         searchStr,
         setSearchStr,
+        loading,
+        setLoading
       }}
     >
       {children}
