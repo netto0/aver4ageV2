@@ -8,6 +8,7 @@ import MobileList from "./components/MobileList";
 import MobileModal from "./components/MobileModal";
 import MobileSubHeader from "./components/MobileSubHeader";
 import { GlobalContext } from "./providers/GlobalContext";
+import MobileDelModal from "./components/MobileDelModal";
 
 function App() {
   const { activeModal } = React.useContext(GlobalContext);
@@ -20,6 +21,7 @@ function App() {
           <MobileHeader />
           <MobileSubHeader />
         </div>
+        <MobileDelModal />
         {activeModal == "add" && <MobileModal />}
         {activeModal != "add" && <MobileList />}
         <Body />
