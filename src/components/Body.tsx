@@ -8,13 +8,8 @@ import { GlobalContext } from "../providers/GlobalContext";
 import { ToastContainer } from "react-toastify";
 
 export default function Body() {
-  const {
-    activeModal,
-    setActiveModal,
-    searchStr,
-    setSearchStr,
-    getSubjects,
-  } = React.useContext(GlobalContext);
+  const { activeModal, setActiveModal, searchStr, setSearchStr, getSubjects } =
+    React.useContext(GlobalContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchStr(e.target.value);
@@ -31,31 +26,33 @@ export default function Body() {
   clearUrl(window.location.href);
 
   return (
-    <main className="w-full bg-color2 grow px-[8%] hidden sm:flex flex-col justify-center">
+    <>
       <div
-        className={`absolute w-screen h-screen left-0 z-40 backdrop-blur-sm ${
+        className={`absolute w-full h-screen left-0 z-40 backdrop-blur-sm ${
           !activeModal && "hidden"
         }`}
         onClick={() => setActiveModal(false)}
       />
-      <div className="relative flex flex-col gap-4">
-        <div id="searchBarField" className="flex justify-around gap-4">
-          <Button clickFunc={() => setActiveModal("add")}>+</Button>
-          <Input
-            name="search"
-            type="text"
-            handleChange={handleChange}
-            value={searchStr}
-            placeholder="Digite o que deseja buscar..."
-          />
-        </div>
+      <main className="w-full bg-color2 grow px-[8%] hidden sm:flex flex-col justify-center">
+        <div className="relative flex flex-col gap-4">
+          <div id="searchBarField" className="flex justify-around gap-4">
+            <Button clickFunc={() => setActiveModal("add")}>+</Button>
+            <Input
+              name="search"
+              type="text"
+              handleChange={handleChange}
+              value={searchStr}
+              placeholder="Digite o que deseja buscar..."
+            />
+          </div>
 
-        <Table />
-        {activeModal == "add" && <AddSubModal />}
-        {activeModal == "del" && <DelSubModal />}
-        {activeModal == "edit" && <AddSubModal edit={true} />}
-      </div>
-      <ToastContainer />
-    </main>
+          <Table />
+          {activeModal == "add" && <AddSubModal />}
+          {activeModal == "del" && <DelSubModal />}
+          {activeModal == "edit" && <AddSubModal edit={true} />}
+        </div>
+        <ToastContainer />
+      </main>
+    </>
   );
 }

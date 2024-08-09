@@ -21,8 +21,8 @@ function App() {
           <MobileHeader />
           <MobileSubHeader />
         </div>
-        <MobileDelModal />
         {activeModal == "add" && <MobileModal />}
+        {activeModal == "del" && <MobileDelModal />}
         {activeModal != "add" && <MobileList />}
         <Body />
         <Footer />
