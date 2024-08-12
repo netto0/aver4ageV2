@@ -140,7 +140,7 @@ export default function AddSubModal({ edit }: Props) {
   edit ? (btnMsg = "Salvar") : (btnMsg = "Enviar");
   return (
     <>
-      <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
+      <div id="desktop" className="hidden sm:block absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
         <div className="relative bg-color2 rounded-lg shadow">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-color3">
             <h3 className="text-lg font-semibold text-blue-200">

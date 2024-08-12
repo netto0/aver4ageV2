@@ -32,6 +32,7 @@ function App() {
           {activeModal == "del" && <DelSubModal />}
           {activeModal == "add" && <AddSubModal />}
           {activeModal == "edit" && <AddSubModal edit={true} />}
+          {activeModal == "edit" && <MobileModal edit={true} />}
         </div>
         {activeModal == "add" && <MobileModal />}
         {activeModal != "add" && <MobileList />}

@@ -1,14 +1,21 @@
 import React from "react";
 import { GlobalContext } from "../providers/GlobalContext";
 import Input from "./Input";
-import { createSubjectService } from "../api/services/subjectServices";
+import {
+  createSubjectService,
+  updateSubjectService,
+} from "../api/services/subjectServices";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import IForm from "../interfaces/IForm";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-export default function MobileModal() {
+interface Props {
+  edit?: boolean;
+}
+
+export default function MobileModal({ edit }: Props) {
   const {
     formFields,
     setFormFields,
@@ -26,6 +33,20 @@ export default function MobileModal() {
       .min(3, "O nome precisa ter 3 letras"),
     semester: yup.string().required("Insira o semestre."),
   });
+
+  const editSubject = async (id: string) => {
+    setLoading(true);
+    const response = await updateSubjectService(id, formFields);
+    if (response) {
+      closeModal();
+      getSubjects();
+      toast.success("Matéria alterada com sucesso!", successToast);
+      setTimeout(resetScrollInsideTable, 500);
+      return response;
+    } else {
+      console.log("Algo deu errado");
+    }
+  };
 
   const {
     register,
@@ -50,7 +71,11 @@ export default function MobileModal() {
   };
 
   const onSubmit = handleSubmit(() => {
-    postSubject();
+    if (edit) {
+      editSubject(formFields._id!);
+    } else {
+      postSubject();
+    }
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,7 +102,8 @@ export default function MobileModal() {
   };
 
   return (
-    <div className="absolute sm:hidden bg-color2 z-50 w-full h-100%">
+    // <div className="absolute sm:hidden bg-color2 z-50 w-full h-100%">
+    <div className="fixed sm:hidden bg-color2 z-50 w-full h-screen">
       <div className="flex text-textColor justify-between items-center p-5 bg-color1 sticky top-0">
         <button
           className="hover:bg-color4 hover:text-color1 p-1 rounded-md transition-all"
@@ -95,9 +121,10 @@ export default function MobileModal() {
           </svg>
         </button>
 
-        <h1 className="text-xl font-semibold">Adicionar matéria</h1>
+        <h1 className="text-xl font-semibold">
+          {edit ? "Editar matéria" : "Adicionar nova matéria"}
+        </h1>
         <button
-          // type="submit"
           onClick={onSubmit}
           className="bg-customOrange font-semibold text-color1 py-2 px-4 rounded-full"
         >
@@ -150,15 +177,17 @@ export default function MobileModal() {
           autoComplete="off"
           error={errors.examGrade}
         />
-        <Input
-          register={{ ...register("retakeGrade") }}
-          name="retakeGrade"
-          type="text"
-          placeholder="Exame"
-          handleChange={handleChange}
-          autoComplete="off"
-          error={errors.retakeGrade}
-        />
+        {formFields.avg! < 7 && formFields.avg! != null && (
+          <Input
+            register={{ ...register("retakeGrade") }}
+            name="retakeGrade"
+            type="text"
+            placeholder="Exame"
+            handleChange={handleChange}
+            autoComplete="off"
+            error={errors.retakeGrade}
+          />
+        )}
       </form>
       <div className="w-fit ml-auto mr-2 mt-2 bg-color4 rounded-xl px-9 py-2 text-center text-textColor flex flex-col items-center">
         <span className="absolute">Média</span>
