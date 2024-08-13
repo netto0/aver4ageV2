@@ -3,6 +3,7 @@ import { GlobalContext } from "../providers/GlobalContext";
 
 export default function MobileAddButton() {
   const { setActiveModal } = React.useContext(GlobalContext);
+  
   return (
     <button
       className="sticky block sm:hidden bottom-6 ml-auto mr-6"

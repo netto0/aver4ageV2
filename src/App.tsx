@@ -13,13 +13,20 @@ import DelSubModal from "./components/modals/DelSubModal";
 
 function App() {
   const { activeModal } = React.useContext(GlobalContext);
+  // scrollBarPosition = document.documentElement.scrollTop || document.body.scrollTop;
+
   return (
     <>
-      <div className="min-h-screen h-fit-content flex flex-col bg-color2">
+      <div
+        id="teste"
+        className={`w-full h-screen flex flex-col ${
+          activeModal && "overflow-hidden"
+        }`}
+      >
         <Header />
-        <span className="text-yellow-300 absolute z-50 right-20 top-4">
+        {/* <span className="text-yellow-300 absolute z-50 right-20 top-4">
           {JSON.stringify(activeModal)}
-        </span>
+        </span> */}
         <div className="sticky top-0 z-30 bg-color1">
           <MobileHeader />
           <MobileSubHeader />

@@ -8,6 +8,11 @@
     --darkGray: "zinc-400"
 }
 
+html {
+    background-color: #07141E ;
+}
+
+
 @layer utilities {
     /* Hide scrollbar for Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
