@@ -1,4 +1,4 @@
-import avatarImage from '../assets/avatar-default.svg'
+import avatarImage from "../assets/avatar-default.svg";
 
 export default function MobileHeader() {
   return (
@@ -26,7 +26,7 @@ export default function MobileHeader() {
         </svg>
       </div>
       <div className="bg-textColor w-11 h-11 rounded-full">
-        <img src={avatarImage} alt="avatar" className='scale-75'/>
+        <img src={avatarImage} alt="avatar" className="scale-75" />
       </div>
     </header>
   );

@@ -33,7 +33,7 @@ type GlobalContextType = {
   searchStr: string;
   setSearchStr: Dispatch<any>;
   loading: boolean;
-  setLoading: Dispatch<any>
+  setLoading: Dispatch<any>;
 };
 
 function average(
@@ -101,7 +101,7 @@ const initialValue = {
   searchStr: "",
   setSearchStr: () => {},
   loading: false,
-  setLoading: () => {}
+  setLoading: () => {},
 };
 
 const successToast: ToastOptions = {
@@ -168,7 +168,7 @@ export const GlobalProvider = ({ children }: Props) => {
         searchStr,
         setSearchStr,
         loading,
-        setLoading
+        setLoading,
       }}
     >
       {children}

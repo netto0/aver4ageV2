@@ -13,10 +13,12 @@ import DelSubModal from "./components/modals/DelSubModal";
 
 function App() {
   const { activeModal } = React.useContext(GlobalContext);
-  // scrollBarPosition = document.documentElement.scrollTop || document.body.scrollTop;
 
   return (
     <>
+      {/* <span className="text-yellow-300 fixed left-1/2 top-3 z-50">
+        Modal: {JSON.stringify(activeModal)}
+      </span> */}
       <div
         id="teste"
         className={`w-full h-screen flex flex-col ${
@@ -24,15 +26,12 @@ function App() {
         }`}
       >
         <Header />
-        {/* <span className="text-yellow-300 absolute z-50 right-20 top-4">
-          {JSON.stringify(activeModal)}
-        </span> */}
         <div className="sticky top-0 z-30 bg-color1">
           <MobileHeader />
           <MobileSubHeader />
         </div>
         <div
-          className={`w-full h-screen backdrop-blur-sm fixed z-40 ${
+          className={`w-full h-screen backdrop-blur-sm fixed z-50 ${
             !activeModal && "hidden"
           }`}
         >
