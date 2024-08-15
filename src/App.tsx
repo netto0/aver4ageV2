@@ -10,6 +10,7 @@ import MobileSubHeader from "./components/MobileSubHeader";
 import { GlobalContext } from "./providers/GlobalContext";
 import AddSubModal from "./components/modals/AddSubModal";
 import DelSubModal from "./components/modals/DelSubModal";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const { activeModal } = React.useContext(GlobalContext);
@@ -44,6 +45,7 @@ function App() {
         {activeModal != "add" && <MobileList />}
         <Body />
         <Footer />
+        <ToastContainer />
       </div>
     </>
   );

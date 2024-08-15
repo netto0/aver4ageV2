@@ -112,7 +112,7 @@ const successToast: ToastOptions = {
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
-  theme: "light",
+  theme: "colored",
 };
 
 function resetScrollInsideTable() {
