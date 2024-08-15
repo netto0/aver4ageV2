@@ -3,7 +3,7 @@ import Button from "./Button";
 import Input from "./Input";
 import Table from "./Table";
 import { GlobalContext } from "../providers/GlobalContext";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 
 export default function Body() {
   const { setActiveModal, searchStr, setSearchStr, getSubjects } =
@@ -39,7 +39,7 @@ export default function Body() {
           </div>
           <Table />
         </div>
-        <ToastContainer />
+        {/* <ToastContainer /> */}
       </main>
     </>
   );

@@ -145,6 +145,7 @@ export const GlobalProvider = ({ children }: Props) => {
   const closeModal = () => {
     setActiveModal(false);
     setFormFields(defaultForm);
+    setLoading(false)
   };
 
   return (
