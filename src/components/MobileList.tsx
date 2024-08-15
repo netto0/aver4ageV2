@@ -30,6 +30,12 @@ function ListItem({ subject }: IItemProps) {
             {subject.semester}º Semestre
           </span>
           <h3 className="text-2xl truncate">{subject.name}</h3>
+          <span>{`${subject.avaGrade ? subject.avaGrade?.toFixed(2) : "x"} | 
+                  ${subject.pimGrade ? subject.pimGrade?.toFixed(2) : "x"} | 
+                  ${subject.examGrade ? subject.examGrade?.toFixed(2) : "x"} | 
+                  ${
+                    subject.retakeGrade ? subject.retakeGrade?.toFixed(2) : "x"
+                  }`}</span>
         </div>
         <span className="text-3xl w-fit px-3 text-left">
           {!subject.avg ? "S/M" : subject.avg!.toFixed(2)}
