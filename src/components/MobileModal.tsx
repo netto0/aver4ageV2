@@ -134,6 +134,7 @@ export default function MobileModal({ edit }: Props) {
       <form onSubmit={onSubmit}>
         <Input
           register={{ ...register("name") }}
+          label="Nome"
           name="name"
           type="text"
           placeholder="Nome"
@@ -143,6 +144,7 @@ export default function MobileModal({ edit }: Props) {
         />
         <Input
           register={{ ...register("semester") }}
+          label="Semestre"
           name="semester"
           type="text"
           placeholder="Semestre"
@@ -152,6 +154,7 @@ export default function MobileModal({ edit }: Props) {
         />
         <Input
           register={{ ...register("avaGrade") }}
+          label="AVA"
           name="avaGrade"
           type="text"
           placeholder="AVA"
@@ -161,6 +164,7 @@ export default function MobileModal({ edit }: Props) {
         />
         <Input
           register={{ ...register("pimGrade") }}
+          label="PIM"
           name="pimGrade"
           type="text"
           placeholder="PIM"
@@ -170,6 +174,7 @@ export default function MobileModal({ edit }: Props) {
         />
         <Input
           register={{ ...register("examGrade") }}
+          label="Prova"
           name="examGrade"
           type="text"
           placeholder="Prova"
@@ -180,6 +185,7 @@ export default function MobileModal({ edit }: Props) {
         {formFields.avg! < 7 && formFields.avg! != null && (
           <Input
             register={{ ...register("retakeGrade") }}
+            label="Exame"
             name="retakeGrade"
             type="text"
             placeholder="Exame"

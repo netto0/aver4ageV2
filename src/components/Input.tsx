@@ -41,7 +41,8 @@ export default function Input({
 
   const defaultClass =
     "bg-color2 sm:bg-color3 border-b border-textColor h-20 sm:h-fit sm:border sm:border-none placeholder-color3 sm:placeholder-color1 pl-6 sm:pl-3 text-blue-200 text-lg sm:text-sm sm:rounded-lg focus:ring-color5 focus:border-color5 block w-full p-2.5 inputDarkModeOverride";
-  const readOnlyClass =
+  
+    const readOnlyClass =
     "bg-color4 border border-none text-blue-200 text-sm rounded-lg block w-full p-2.5 outline-none hover:cursor-auto inputDarkModeOverride";
 
   return (
