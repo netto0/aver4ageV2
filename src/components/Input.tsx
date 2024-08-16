@@ -39,22 +39,23 @@ export default function Input({
       : "";
   }
 
-  const defaultClass =
-    "bg-color2 sm:bg-color3 border-b border-textColor h-20 sm:h-fit sm:border sm:border-none placeholder-color3 sm:placeholder-color1 pl-6 sm:pl-3 text-blue-200 text-lg sm:text-sm sm:rounded-lg focus:ring-color5 focus:border-color5 block w-full p-2.5 inputDarkModeOverride";
-  
-    const readOnlyClass =
+  const defaultClass = `bg-color2 sm:bg-color3 h-20 sm:h-fit sm:border sm:border-none placeholder-color3 
+    sm:placeholder-color1 pl-3 text-blue-200 text-lg sm:text-sm sm:rounded-lg block w-full p-2.5 inputDarkModeOverride`;
+
+  const readOnlyClass =
     "bg-color4 border border-none text-blue-200 text-sm rounded-lg block w-full p-2.5 outline-none hover:cursor-auto inputDarkModeOverride";
 
   return (
-    <>
+    <div className="w-full sm:block flex border-b border-color4 sm:border-none">
       {label && (
         <label
           htmlFor={label}
-          className={`block mb-2 text-sm ${
-            readOnly ? "text-sky-800" : "text-blue-200"
+          className={`flex gap-1 text-xl sm:text-sm items-center sm:px-0 pl-5 sm:w-fit w-fit ${
+            readOnly ? "text-sky-800" : "text-sky-600 sm:text-blue-300"
           }`}
         >
           {label}
+          <span className="sm:hidden">:</span>
         </label>
       )}
 
@@ -70,6 +71,6 @@ export default function Input({
         {...rest}
       />
       {error && <span className="text-red-500 text-sm">{error.message}</span>}
-    </>
+    </div>
   );
 }

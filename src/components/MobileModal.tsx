@@ -137,7 +137,6 @@ export default function MobileModal({ edit }: Props) {
           label="Nome"
           name="name"
           type="text"
-          placeholder="Nome"
           handleChange={handleChange}
           autoComplete="off"
           error={errors.name}
@@ -147,7 +146,6 @@ export default function MobileModal({ edit }: Props) {
           label="Semestre"
           name="semester"
           type="text"
-          placeholder="Semestre"
           handleChange={handleChange}
           autoComplete="off"
           error={errors.semester}
@@ -157,7 +155,6 @@ export default function MobileModal({ edit }: Props) {
           label="AVA"
           name="avaGrade"
           type="text"
-          placeholder="AVA"
           handleChange={handleChange}
           autoComplete="off"
           error={errors.avaGrade}
@@ -167,7 +164,6 @@ export default function MobileModal({ edit }: Props) {
           label="PIM"
           name="pimGrade"
           type="text"
-          placeholder="PIM"
           handleChange={handleChange}
           autoComplete="off"
           error={errors.pimGrade}
@@ -177,7 +173,6 @@ export default function MobileModal({ edit }: Props) {
           label="Prova"
           name="examGrade"
           type="text"
-          placeholder="Prova"
           handleChange={handleChange}
           autoComplete="off"
           error={errors.examGrade}
@@ -188,7 +183,6 @@ export default function MobileModal({ edit }: Props) {
             label="Exame"
             name="retakeGrade"
             type="text"
-            placeholder="Exame"
             handleChange={handleChange}
             autoComplete="off"
             error={errors.retakeGrade}
