@@ -1,5 +1,3 @@
-// import avatarImage from "../assets/avatar-default.svg";
-
 import React from "react";
 import { GlobalContext } from "../providers/GlobalContext";
 
@@ -44,9 +42,6 @@ export default function MobileHeader() {
           d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
         />
       </svg>
-      {/* <div className="bg-textColor w-11 h-11 rounded-full">
-        <img src={avatarImage} alt="avatar" className="scale-75" />
-      </div> */}
     </header>
   );
 }

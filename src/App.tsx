@@ -11,6 +11,7 @@ import { GlobalContext } from "./providers/GlobalContext";
 import AddSubModal from "./components/modals/AddSubModal";
 import DelSubModal from "./components/modals/DelSubModal";
 import { ToastContainer } from "react-toastify";
+import SideMenu from "./components/SideMenu";
 
 function App() {
   const { activeModal } = React.useContext(GlobalContext);
@@ -27,6 +28,7 @@ function App() {
         }`}
       >
         <Header />
+        <SideMenu />
         <div className="sticky top-0 z-30 bg-color1">
           <MobileHeader />
           <MobileSubHeader />
