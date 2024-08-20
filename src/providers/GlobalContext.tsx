@@ -34,6 +34,8 @@ type GlobalContextType = {
   setSearchStr: Dispatch<any>;
   loading: boolean;
   setLoading: Dispatch<any>;
+  completeOnly: boolean;
+  setCompleteOnly: Dispatch<any>;
 };
 
 function average(
@@ -102,6 +104,8 @@ const initialValue = {
   setSearchStr: () => {},
   loading: false,
   setLoading: () => {},
+  completeOnly: true,
+  setCompleteOnly: () => {},
 };
 
 const successToast: ToastOptions = {
@@ -132,7 +136,8 @@ export const GlobalProvider = ({ children }: Props) => {
   const [sortParameters, setSortParameters] = useState(defaultSort);
   const [defaultSubs, setDefaultSubs] = useState([]);
   const [searchStr, setSearchStr] = useState("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(initialValue.loading);
+  const [completeOnly, setCompleteOnly] = useState<boolean>(initialValue.completeOnly);
 
   const getSubjects = async () => {
     const response = await getSubjectsService();
@@ -145,7 +150,7 @@ export const GlobalProvider = ({ children }: Props) => {
   const closeModal = () => {
     setActiveModal(false);
     setFormFields(defaultForm);
-    setLoading(false)
+    setLoading(false);
   };
 
   return (
@@ -170,6 +175,8 @@ export const GlobalProvider = ({ children }: Props) => {
         setSearchStr,
         loading,
         setLoading,
+        completeOnly,
+        setCompleteOnly,
       }}
     >
       {children}

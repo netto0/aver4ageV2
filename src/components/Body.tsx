@@ -1,19 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "./Button";
 import Input from "./Input";
 import Table from "./Table";
 import { GlobalContext } from "../providers/GlobalContext";
 
 export default function Body() {
-  const { setActiveModal, searchStr, setSearchStr, getSubjects } =
+  const { setActiveModal, searchStr, setSearchStr } =
     React.useContext(GlobalContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchStr(e.target.value);
   };
-  useEffect(() => {
-    getSubjects();
-  }, []);
 
   function clearUrl(url: string) {
     const urlObj = new URL(url);

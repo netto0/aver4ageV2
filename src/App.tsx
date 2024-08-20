@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
@@ -14,7 +14,11 @@ import { ToastContainer } from "react-toastify";
 import SideMenu from "./components/SideMenu";
 
 function App() {
-  const { activeModal } = React.useContext(GlobalContext);
+  const { activeModal, getSubjects } = React.useContext(GlobalContext);
+
+  useEffect(() => {
+    getSubjects();
+  }, []);
 
   return (
     <>

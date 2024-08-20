@@ -60,12 +60,14 @@ function ListItem({ subject }: IItemProps) {
 }
 
 export default function MobileList() {
-  const { subjectsList } = React.useContext(GlobalContext);
+  const { subjectsList, completeOnly } = React.useContext(GlobalContext);
   return (
     <div className="sm:hidden select-none h-full overflow-scroll">
-      {subjectsList.map((sbj, i) => (
-        <ListItem subject={sbj} key={i} />
-      ))}
+      {!completeOnly
+        ? subjectsList.map((sbj, i) => <ListItem subject={sbj} key={i} />)
+        : subjectsList.map(
+            (sbj, i) => sbj.avg && <ListItem subject={sbj} key={i} />
+          )}
       <MobileAddButton />
     </div>
   );
