@@ -1,8 +1,12 @@
+import React from "react";
 import avatarImage from "../assets/avatar-default.svg";
+import { GlobalContext } from "../providers/GlobalContext";
 
 export default function SideMenu() {
+  const {closeModal } = React.useContext(GlobalContext)
+
   return (
-    <div className="absolute z-50 top-0 right-0 rounded-tl-xl w-4/6 bg-color2 text-textColor shadow-2xl">
+    <div className="sm:hidden absolute z-50 top-0 right-0 rounded-tl-xl w-4/6 bg-color2 text-textColor shadow-2xl">
       <div className="bg-color1 flex px-3 py-3 items-center justify-between rounded-tl-xl">
         <div className="flex items-center gap-3">
           <div className="bg-textColor w-9 h-9 rounded-full">
@@ -17,6 +21,7 @@ export default function SideMenu() {
           fill="currentColor"
           className="bi bi-x hover:cursor-pointer hover:text-color1 transition-all"
           viewBox="0 0 16 16"
+          onClick={closeModal}
         >
           <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
         </svg>
@@ -36,7 +41,7 @@ export default function SideMenu() {
             </svg>
             <span>Médias</span>
           </li>
-          <li className="flex items-center gap-3">
+          <li className="flex items-center gap-3 transition-colors hover:text-customOrange">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -49,7 +54,7 @@ export default function SideMenu() {
             </svg>
             <span>Gráficos</span>
           </li>
-          <li className="flex items-center gap-3">
+          <li className="flex items-center gap-3 transition-colors hover:text-customOrange">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -63,7 +68,7 @@ export default function SideMenu() {
             </svg>
             <span>Configurações</span>
           </li>
-          <li className="flex items-center gap-3">
+          <li className="flex items-center gap-3 transition-colors hover:text-customOrange">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"

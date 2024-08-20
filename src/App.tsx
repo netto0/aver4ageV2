@@ -28,7 +28,6 @@ function App() {
         }`}
       >
         <Header />
-        <SideMenu />
         <div className="sticky top-0 z-30 bg-color1">
           <MobileHeader />
           <MobileSubHeader />
@@ -40,6 +39,7 @@ function App() {
         >
           {activeModal == "del" && <DelSubModal />}
           {activeModal == "add" && <AddSubModal />}
+          {activeModal == "side" && <SideMenu />}
           {activeModal == "edit" && <AddSubModal edit={true} />}
           {activeModal == "edit" && <MobileModal edit={true} />}
         </div>

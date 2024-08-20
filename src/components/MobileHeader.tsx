@@ -2,7 +2,7 @@ import React from "react";
 import { GlobalContext } from "../providers/GlobalContext";
 
 export default function MobileHeader() {
-  const { searchStr, setSearchStr } = React.useContext(GlobalContext);
+  const { searchStr, setSearchStr, setActiveModal } = React.useContext(GlobalContext);
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchStr(e.target.value);
   }
@@ -34,8 +34,9 @@ export default function MobileHeader() {
         width="40"
         height="40"
         fill="currentColor"
-        className="bi bi-list"
+        className="bi bi-list hover:text-customOrange transition-colors"
         viewBox="0 0 16 16"
+        onClick={() => setActiveModal("side")}
       >
         <path
           fill-rule="evenodd"
