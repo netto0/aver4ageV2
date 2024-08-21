@@ -18,7 +18,7 @@ export default function Checkbox({ Ivalue, Ichecked }: IProps) {
           type="checkbox"
           value={Ivalue}
           className="hidden peer"
-          onClick={handleClick}
+          onChange={handleClick}
           checked={Ichecked}
         />
         <div

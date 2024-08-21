@@ -104,7 +104,7 @@ const initialValue = {
   setSearchStr: () => {},
   loading: false,
   setLoading: () => {},
-  completeOnly: true,
+  completeOnly: false,
   setCompleteOnly: () => {},
 };
 
@@ -137,7 +137,9 @@ export const GlobalProvider = ({ children }: Props) => {
   const [defaultSubs, setDefaultSubs] = useState([]);
   const [searchStr, setSearchStr] = useState("");
   const [loading, setLoading] = useState<boolean>(initialValue.loading);
-  const [completeOnly, setCompleteOnly] = useState<boolean>(initialValue.completeOnly);
+  const [completeOnly, setCompleteOnly] = useState<boolean>(
+    initialValue.completeOnly
+  );
 
   const getSubjects = async () => {
     const response = await getSubjectsService();
