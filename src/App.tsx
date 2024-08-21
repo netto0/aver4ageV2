@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
@@ -12,9 +12,15 @@ import AddSubModal from "./components/modals/AddSubModal";
 import DelSubModal from "./components/modals/DelSubModal";
 import { ToastContainer } from "react-toastify";
 import SideMenu from "./components/SideMenu";
+import SortMenu from "./components/SortMenu";
 
 function App() {
   const { activeModal, getSubjects } = React.useContext(GlobalContext);
+  const [showSortMenu, setShowSortMenu] = useState(true);
+
+  function toggleSortMenu() {
+    setShowSortMenu(!showSortMenu);
+  }
 
   useEffect(() => {
     getSubjects();
@@ -22,9 +28,6 @@ function App() {
 
   return (
     <>
-      {/* <span className="text-yellow-300 fixed left-1/2 top-3 z-50">
-        Modal: {JSON.stringify(activeModal)}
-      </span> */}
       <div
         id="teste"
         className={`w-full h-screen flex flex-col ${
@@ -34,7 +37,11 @@ function App() {
         <Header />
         <div className="sticky top-0 z-30 bg-color1">
           <MobileHeader />
-          <MobileSubHeader />
+          <MobileSubHeader
+            sortMenuFunc={toggleSortMenu}
+            showSort={showSortMenu}
+          />
+          <SortMenu show={showSortMenu} />
         </div>
         <div
           className={`w-full h-screen backdrop-blur-sm fixed z-50 ${

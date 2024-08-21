@@ -2,11 +2,23 @@ import React from "react";
 import Checkbox from "./Checkbox";
 import { GlobalContext } from "../providers/GlobalContext";
 
-export default function MobileSubHeader() {
+interface IProps {
+  sortMenuFunc: any;
+  showSort: boolean;
+}
+
+export default function MobileSubHeader({ sortMenuFunc, showSort }: IProps) {
   const { completeOnly } = React.useContext(GlobalContext);
   return (
-    <div className="bg-[#010e17] flex sm:hidden text-textColor py-3 px-5 justify-between text-lg">
-      <div className="flex items-center gap-1.5">
+    <div
+      className={`bg-color6 flex sm:hidden text-textColor py-3 px-5 justify-between text-lg select-none`}
+    >
+      <div
+        className={`flex items-center gap-1.5 transition-colors ${
+          showSort && "text-customOrange"
+        }`}
+        onClick={sortMenuFunc}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
