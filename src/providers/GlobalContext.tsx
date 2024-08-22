@@ -1,73 +1,13 @@
 import React, { useState, Dispatch } from "react";
+import { ToastOptions } from "react-toastify";
+import { getSubjectsService } from "../components/Table";
 import ISubject from "../interfaces/ISubject";
 import IForm from "../interfaces/IForm";
-import { getSubjectsService } from "../components/Table";
-import { ToastOptions } from "react-toastify";
 
-type Props = {
+import { resetScrollInsideTable, average } from "../utils/functions";
+
+interface IProps {
   children: React.ReactNode;
-};
-
-type GlobalContextType = {
-  subjectsList: ISubject[];
-  setSubjectsList: any;
-  getSubjects: () => void;
-  activeModal: boolean | string;
-  setActiveModal: (state: boolean | string) => void;
-  formFields: IForm;
-  setFormFields: Dispatch<IForm>;
-  successToast: object;
-  resetScrollInsideTable: () => void;
-  defaultForm: IForm;
-  closeModal: () => void;
-  average: (
-    ava: number | null,
-    exam: number | null,
-    pim: number | null,
-    rtk?: number | null,
-    log?: boolean
-  ) => number | null | void;
-  sortParameters: any;
-  setSortParameters: Dispatch<any>;
-  defaultSubs: any;
-  searchStr: string;
-  setSearchStr: Dispatch<any>;
-  loading: boolean;
-  setLoading: Dispatch<any>;
-  completeOnly: boolean;
-  setCompleteOnly: Dispatch<any>;
-};
-
-function average(
-  ava: number | null,
-  exam: number | null,
-  pim: number | null,
-  rtk?: number | null,
-  log?: boolean
-): number | null {
-  if (ava && exam && pim) {
-    let regularMD: number;
-    // CÁLCULO PARA MATRÍCULA A PARTIR DE 2023 - Cursos Tecnólógicos
-    if (log) {
-      console.log(`7 x ${exam} = ${7 * exam}`);
-      console.log(`2 x ${pim} = ${2 * pim}`);
-      console.log(
-        `${7 * exam} + ${2 * pim} + ${ava} = ${7 * exam + 2 * pim + ava}`
-      );
-      console.log(
-        `${7 * exam + 2 * pim + ava} / 10 = ${(7 * exam + 2 * pim + ava) / 10}`
-      );
-      console.log("==========================");
-    }
-    regularMD = (7 * exam + 2 * pim + ava) / 10;
-    if (rtk) {
-      return (regularMD + rtk) / 2;
-    } else {
-      return regularMD;
-    }
-  } else {
-    return null;
-  }
 }
 
 const defaultForm = {
@@ -82,6 +22,49 @@ const defaultForm = {
 const defaultSort = {
   criteria: null,
   ascending: true,
+};
+
+const successToast: ToastOptions = {
+  position: "top-center",
+  autoClose: 2000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "colored",
+};
+
+type GlobalContextType = {
+  subjectsList: ISubject[];
+  setSubjectsList: any;
+  formFields: IForm;
+  setFormFields: Dispatch<IForm>;
+  searchStr: string;
+  setSearchStr: Dispatch<any>;
+  loading: boolean;
+  setLoading: Dispatch<any>;
+  completeOnly: boolean;
+  setCompleteOnly: Dispatch<any>;
+  sortParameters: any;
+  setSortParameters: Dispatch<any>;
+  activeModal: boolean | string;
+  setActiveModal: (state: boolean | string) => void;
+
+  getSubjects: () => void;
+  resetScrollInsideTable: () => void;
+  closeModal: () => void;
+  average: (
+    ava: number | null,
+    exam: number | null,
+    pim: number | null,
+    rtk?: number | null,
+    log?: boolean
+  ) => number | null | void;
+
+  successToast: object;
+  defaultForm: IForm;
+  defaultSubs: any;
 };
 
 const initialValue = {
@@ -108,52 +91,40 @@ const initialValue = {
   setCompleteOnly: () => {},
 };
 
-const successToast: ToastOptions = {
-  position: "top-center",
-  autoClose: 2000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "colored",
-};
-
-function resetScrollInsideTable() {
-  let tableBody = document.getElementById("table");
-  tableBody!.scrollTo(0, tableBody!.scrollHeight);
-}
-
 export const GlobalContext =
   React.createContext<GlobalContextType>(initialValue);
 
-export const GlobalProvider = ({ children }: Props) => {
-  const [formFields, setFormFields] = useState<IForm>(defaultForm);
-  const [subjectsList, setSubjectsList] = useState<ISubject[]>([]);
+export const GlobalProvider = ({ children }: IProps) => {
+  const [formFields, setFormFields] = useState<IForm>(initialValue.formFields);
+  const [defaultSubs, setDefaultSubs] = useState(initialValue.defaultSubs);
+  const [searchStr, setSearchStr] = useState(initialValue.searchStr);
+  const [loading, setLoading] = useState<boolean>(initialValue.loading);
+  const [subjectsList, setSubjectsList] = useState<ISubject[]>(
+    initialValue.subjectsList
+  );
+  const [sortParameters, setSortParameters] = useState(
+    initialValue.sortParameters
+  );
   const [activeModal, setActiveModal] = useState<boolean | string>(
     initialValue.activeModal
   );
-  const [sortParameters, setSortParameters] = useState(defaultSort);
-  const [defaultSubs, setDefaultSubs] = useState([]);
-  const [searchStr, setSearchStr] = useState("");
-  const [loading, setLoading] = useState<boolean>(initialValue.loading);
   const [completeOnly, setCompleteOnly] = useState<boolean>(
     initialValue.completeOnly
   );
 
-  const getSubjects = async () => {
+  async function getSubjects() {
     const response = await getSubjectsService();
     if (response) {
       setSubjectsList(response);
       setDefaultSubs(response);
     }
-  };
+  }
 
-  const closeModal = () => {
+  function closeModal() {
     setActiveModal(false);
     setFormFields(defaultForm);
     setLoading(false);
-  };
+  }
 
   return (
     <GlobalContext.Provider
