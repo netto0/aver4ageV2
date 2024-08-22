@@ -16,7 +16,7 @@ import SortMenu from "./components/SortMenu";
 
 function App() {
   const { activeModal, getSubjects } = React.useContext(GlobalContext);
-  const [showSortMenu, setShowSortMenu] = useState(true);
+  const [showSortMenu, setShowSortMenu] = useState(false);
 
   function toggleSortMenu() {
     setShowSortMenu(!showSortMenu);

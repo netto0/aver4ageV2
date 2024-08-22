@@ -7,7 +7,7 @@ export default function SortMenu({ show }: IProps) {
     <div
       className={`bg-color1 ${
         !show && "hidden"
-      } flex items-center justify-center py-3 gap-3`}
+      } sm:hidden flex items-center justify-center py-3 gap-3`}
     >
       <select
         name="sortItem"
