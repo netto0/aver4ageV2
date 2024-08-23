@@ -121,16 +121,16 @@ const offlineList = [
   },
 ];
 
-const getSubjectsService = async () => {
+async function getSubjectsService() {
   try {
     const response = await axios.get(`${baseUrl}/subject`);
     return response.data;
   } catch (error) {
     return offlineList;
   }
-};
+}
 
-const createSubjectService = async (body: {}) => {
+async function createSubjectService(body: {}) {
   try {
     const response = await axios.post(`${baseUrl}/subject`, body);
     return response.data;
@@ -138,9 +138,9 @@ const createSubjectService = async (body: {}) => {
     console.log(error);
     return error;
   }
-};
+}
 
-const deleteSubjectService = async (id: string) => {
+async function deleteSubjectService(id: string) {
   try {
     const response = await axios.delete(`${baseUrl}/subject/${id}`);
     return response.data;
@@ -148,9 +148,9 @@ const deleteSubjectService = async (id: string) => {
     console.log(error);
     return error;
   }
-};
+}
 
-const updateSubjectService = async (id: string, body: {}) => {
+async function updateSubjectService(id: string, body: {}) {
   try {
     const response = await axios.patch(`${baseUrl}/subject/${id}`, body);
     return response.data;
@@ -158,7 +158,7 @@ const updateSubjectService = async (id: string, body: {}) => {
     console.log(error);
     return error;
   }
-};
+}
 
 getSubjectsService();
 export {

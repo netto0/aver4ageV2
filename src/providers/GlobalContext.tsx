@@ -50,6 +50,8 @@ type GlobalContextType = {
   setSortParameters: Dispatch<any>;
   activeModal: boolean | string;
   setActiveModal: (state: boolean | string) => void;
+  showSortMenu: boolean;
+  setShowSortMenu: Dispatch<any>;
 
   getSubjects: () => void;
   resetScrollInsideTable: () => void;
@@ -89,6 +91,8 @@ const initialValue = {
   setLoading: () => {},
   completeOnly: false,
   setCompleteOnly: () => {},
+  showSortMenu: false,
+  setShowSortMenu: () => {},
 };
 
 export const GlobalContext =
@@ -99,6 +103,9 @@ export const GlobalProvider = ({ children }: IProps) => {
   const [defaultSubs, setDefaultSubs] = useState(initialValue.defaultSubs);
   const [searchStr, setSearchStr] = useState(initialValue.searchStr);
   const [loading, setLoading] = useState<boolean>(initialValue.loading);
+  const [showSortMenu, setShowSortMenu] = useState<boolean>(
+    initialValue.showSortMenu
+  );
   const [subjectsList, setSubjectsList] = useState<ISubject[]>(
     initialValue.subjectsList
   );
@@ -150,6 +157,8 @@ export const GlobalProvider = ({ children }: IProps) => {
         setLoading,
         completeOnly,
         setCompleteOnly,
+        showSortMenu,
+        setShowSortMenu,
       }}
     >
       {children}

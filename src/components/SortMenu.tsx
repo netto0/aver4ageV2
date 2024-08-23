@@ -1,12 +1,12 @@
-interface IProps {
-  show: boolean;
-}
+import React from "react";
+import { GlobalContext } from "../providers/GlobalContext";
 
-export default function SortMenu({ show }: IProps) {
+export default function SortMenu() {
+  const { showSortMenu } = React.useContext(GlobalContext);
   return (
     <div
       className={`bg-color1 ${
-        !show && "hidden"
+        !showSortMenu && "hidden"
       } sm:hidden flex items-center justify-center py-3 gap-3`}
     >
       <select

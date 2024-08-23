@@ -1,15 +1,15 @@
+import { GlobalContext } from "../../providers/GlobalContext";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { GlobalContext } from "../../providers/GlobalContext";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Input from "../Input";
 import {
   createSubjectService,
   updateSubjectService,
 } from "../../api/services/subjectServices";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import Input from "../Input";
 import IForm from "../../interfaces/IForm";
 import CloseBtn from "../CloseBtn";
 import Button from "../Button";
@@ -38,7 +38,7 @@ export default function AddSubModal({ edit }: Props) {
     closeModal,
     average,
     loading,
-    setLoading
+    setLoading,
   } = React.useContext(GlobalContext);
 
   const {
@@ -107,12 +107,13 @@ export default function AddSubModal({ edit }: Props) {
       setFormFields({ ...formFields, [e.target.name]: e.target.value });
     }
   };
+
   useEffect(() => {
     let media = average(
       formFields.avaGrade!,
       formFields.examGrade!,
       formFields.pimGrade!,
-      formFields.retakeGrade!,
+      formFields.retakeGrade!
     )!;
     setFormFields({ ...formFields, avg: media });
     const rtkNull = !formFields.retakeGrade;
@@ -136,11 +137,12 @@ export default function AddSubModal({ edit }: Props) {
     formFields.retakeGrade,
   ]);
 
-  let btnMsg;
-  edit ? (btnMsg = "Salvar") : (btnMsg = "Enviar");
   return (
     <>
-      <div id="desktop" className="hidden sm:block absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
+      <div
+        id="desktop"
+        className="hidden sm:block absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]"
+      >
         <div className="relative bg-color2 rounded-lg shadow">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-color3">
             <h3 className="text-lg font-semibold text-blue-200">
@@ -241,7 +243,11 @@ export default function AddSubModal({ edit }: Props) {
               </div>
             </div>
             <Button type="submit" color="green">
-              {loading ? <p>Enviando...</p> : <p>{btnMsg}</p>}
+              {loading ? (
+                <p>Enviando...</p>
+              ) : (
+                <p>{edit ? "Salvar" : "Enviar"}</p>
+              )}
             </Button>
           </form>
         </div>

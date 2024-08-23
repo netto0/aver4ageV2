@@ -2,22 +2,22 @@ import React from "react";
 import Checkbox from "./Checkbox";
 import { GlobalContext } from "../providers/GlobalContext";
 
-interface IProps {
-  sortMenuFunc: any;
-  showSort: boolean;
-}
+export default function MobileSubHeader() {
+  const { completeOnly, showSortMenu, setShowSortMenu } =
+    React.useContext(GlobalContext);
 
-export default function MobileSubHeader({ sortMenuFunc, showSort }: IProps) {
-  const { completeOnly } = React.useContext(GlobalContext);
+  function toggleSortMenu() {
+    setShowSortMenu(!showSortMenu);
+  }
   return (
     <div
       className={`bg-color6 flex sm:hidden text-textColor py-3 px-5 justify-between text-lg select-none`}
     >
       <div
         className={`flex items-center gap-1.5 transition-colors ${
-          showSort && "text-customOrange"
+          showSortMenu && "text-customOrange"
         }`}
-        onClick={sortMenuFunc}
+        onClick={toggleSortMenu}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
