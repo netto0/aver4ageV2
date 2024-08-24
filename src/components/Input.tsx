@@ -26,6 +26,7 @@ export default function Input({
 }: Props) {
   const { formFields } = React.useContext(GlobalContext);
   let inputValue;
+
   if (value == null) {
     inputValue = "";
   } else {

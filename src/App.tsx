@@ -10,10 +10,11 @@ import SortMenu from "./components/SortMenu";
 import DelSubModal from "./components/modals/DelSubModal";
 import AddSubModal from "./components/modals/AddSubModal";
 import SideMenu from "./components/SideMenu";
-import MobileModal from "./components/MobileModal";
+// import MobileModal from "./components/MobileModal";
 import MobileList from "./components/MobileList";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
+import DebugScreen from "./components/DebugScreen";
 
 function App() {
   const { activeModal, getSubjects } = React.useContext(GlobalContext);
@@ -30,6 +31,7 @@ function App() {
         }`}
       >
         <Header />
+        <DebugScreen />
         <div className="sticky top-0 z-30 bg-color1">
           <MobileHeader />
           <MobileSubHeader />
@@ -40,10 +42,10 @@ function App() {
             !activeModal && "hidden"
           }`}
         >
-          <DelSubModal />
-          {activeModal == "add" && <><AddSubModal /> <MobileModal /></>}
+          {activeModal == "del" && <DelSubModal />}
+          {activeModal == "add" && <AddSubModal />}
           {activeModal == "side" && <SideMenu />}
-          {activeModal == "edit" && <><AddSubModal edit={true} /> <MobileModal edit={true} /></>}
+          {activeModal == "edit" && <AddSubModal edit={true} />}
         </div>
         {activeModal != "add" && <MobileList />}
         <Body />
