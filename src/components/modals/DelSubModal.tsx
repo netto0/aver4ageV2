@@ -9,14 +9,8 @@ import Button from "../Button";
 export default function DelSubModal() {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const {
-    getSubjects,
-    setActiveModal,
-    formFields,
-    setFormFields,
-    successToast,
-    defaultForm,
-  } = React.useContext(GlobalContext);
+  const { getSubjects, formFields, successToast, closeModal, activeModal } =
+    React.useContext(GlobalContext);
 
   async function deleteSbj(e: any) {
     e.preventDefault();
@@ -32,15 +26,12 @@ export default function DelSubModal() {
     }
   }
 
-  function closeModal() {
-    setActiveModal(false);
-    setFormFields(defaultForm);
-  }
-
   function MobileDelModal() {
-    const { closeModal, formFields } = React.useContext(GlobalContext);
     return (
-      <div className="sticky flex flex-col z-50 top-1/2 mx-auto translate-y-[-50%] bg-color3 rounded-lg text-sky-200 sm:hidden font-semibold w-80 text-center">
+      <div
+        id="DelModal"
+        className="sticky flex flex-col z-50 top-1/2 mx-auto translate-y-[-50%] bg-color3 rounded-lg text-sky-200 sm:hidden font-semibold w-80 text-center"
+      >
         <div className="bg-color4 rounded-t-lg py-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +64,10 @@ export default function DelSubModal() {
   function DesktopDelModal() {
     return (
       <>
-        <div className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] hidden sm:block">
+        <div
+          id="DelModal"
+          className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] hidden sm:block"
+        >
           <div className="relative bg-color2 rounded-lg shadow">
             <div className="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -99,8 +93,12 @@ export default function DelSubModal() {
 
   return (
     <>
-      <DesktopDelModal />
-      <MobileDelModal />
+      {activeModal == "del" && (
+        <>
+          <DesktopDelModal />
+          <MobileDelModal />
+        </>
+      )}
     </>
   );
 }
