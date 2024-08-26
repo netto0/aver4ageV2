@@ -68,22 +68,6 @@ export default function AddSubModal({ edit }: Props) {
     }
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IForm>({
-    resolver: yupResolver<any>(validationSchema),
-  });
-
-  const onSubmit = handleSubmit(() => {
-    if (edit) {
-      editSubject(formFields._id!);
-    } else {
-      postSubject();
-    }
-  });
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name != "name" && e.target.name != "semester") {
       if (parseFloat(e.target.value) >= 10) {
@@ -138,7 +122,23 @@ export default function AddSubModal({ edit }: Props) {
     formFields.retakeGrade,
   ]);
 
-  function DesktopVersion({ edit }: Props) {
+  function DesktopVersion() {
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm<IForm>({
+      resolver: yupResolver<any>(validationSchema),
+    });
+
+    const onSubmit = handleSubmit(() => {
+      if (edit) {
+        editSubject(formFields._id!);
+      } else {
+        postSubject();
+      }
+    });
+
     return (
       <>
         <div
@@ -258,7 +258,23 @@ export default function AddSubModal({ edit }: Props) {
     );
   }
 
-  function MobileVersion({ edit }: Props) {
+  function MobileVersion() {
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm<IForm>({
+      resolver: yupResolver<any>(validationSchema),
+    });
+
+    const onSubmit = handleSubmit(() => {
+      if (edit) {
+        editSubject(formFields._id!);
+      } else {
+        postSubject();
+      }
+    });
+
     return (
       <div className="fixed top-0 sm:hidden bg-color2 z-50 w-full h-screen">
         <div className="flex text-textColor justify-between items-center p-5 bg-color1 sticky top-0">
