@@ -5,7 +5,7 @@ export default function DebugScreen() {
   const { formFields, activeModal } = React.useContext(GlobalContext);
 
   return (
-    <div className="bg-black text-yellow-300 fixed top-20 left-10 z-[100] w-80 flex-wrap opacity-20">
+    <div className="bg-black text-yellow-300 fixed top-20 left-10 z-[100] w-80 flex-wrap opacity-40">
       <p>Nome: {formFields.name}</p>
       <p>Sem: {formFields.semester}</p>
       <p>AVA: {formFields.avaGrade}</p>

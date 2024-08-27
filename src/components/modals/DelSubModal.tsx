@@ -9,7 +9,7 @@ import Button from "../Button";
 export default function DelSubModal() {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { getSubjects, formFields, successToast, closeModal, activeModal } =
+  const { getSubjects, formFields, successToast, closeModal } =
     React.useContext(GlobalContext);
 
   async function deleteSbj(e: any) {
@@ -93,12 +93,8 @@ export default function DelSubModal() {
 
   return (
     <>
-      {activeModal == "del" && (
-        <>
-          <DesktopDelModal />
-          <MobileDelModal />
-        </>
-      )}
+      <DesktopDelModal />
+      <MobileDelModal />
     </>
   );
 }

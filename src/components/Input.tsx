@@ -61,7 +61,7 @@ export default function Input({
       )}
 
       <input
-        {...register}
+        // {...register}
         id={name}
         name={name}
         type={type}

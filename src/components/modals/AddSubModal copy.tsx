@@ -27,6 +27,7 @@ const validationSchema = yup.object({
 });
 
 export default function AddSubModal({ edit }: Props) {
+  console.log("ADDSUB");
   const [readInput, setReadInput] = useState<boolean>(false);
   const {
     getSubjects,
@@ -69,6 +70,7 @@ export default function AddSubModal({ edit }: Props) {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("HandleChange");
     if (e.target.name != "name" && e.target.name != "semester") {
       if (parseFloat(e.target.value) >= 10) {
         setFormFields({
@@ -87,13 +89,12 @@ export default function AddSubModal({ edit }: Props) {
         });
       }
     } else {
-      console.log("aaa");
-      console.log(e.target.value);
       setFormFields({ ...formFields, [e.target.name]: e.target.value });
     }
   };
 
   useEffect(() => {
+    console.log("UseEffect (Não é)");
     let media = average(
       formFields.avaGrade!,
       formFields.examGrade!,
@@ -276,7 +277,7 @@ export default function AddSubModal({ edit }: Props) {
     });
 
     return (
-      <div className="fixed top-0 sm:hidden bg-color2 z-50 w-full h-screen">
+      <div id="mobile" className="fixed top-0 sm:hidden bg-color2 z-50 w-full h-screen">
         <div className="flex text-textColor justify-between items-center p-5 bg-color1 sticky top-0">
           <button
             className="hover:bg-color4 hover:text-color1 p-1 rounded-md transition-all"

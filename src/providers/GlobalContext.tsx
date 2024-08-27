@@ -120,6 +120,7 @@ export const GlobalProvider = ({ children }: IProps) => {
   );
 
   async function getSubjects() {
+    console.log("getSubjects")
     const response = await getSubjectsService();
     if (response) {
       setSubjectsList(response);
