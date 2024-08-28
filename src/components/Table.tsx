@@ -125,9 +125,9 @@ export default function Table() {
   }, [sortParameters]);
 
   return (
-    <div className="overflow-auto shadow-md border-collapse">
+    <div className="overflow-auto shadow-md border-collapse rounded-md">
       <table
-        className="text-base text-center rtl:text-right text-textColor w-full select-none"
+        className="text-base text-center rtl:text-right text-textColor w-full h-full select-none"
         ref={myRef}
       >
         <thead className="text-sm uppercase bg-color1 text-textColor drop-shadow-md">

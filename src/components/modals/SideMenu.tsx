@@ -1,6 +1,6 @@
 import React from "react";
-import avatarImage from "../assets/avatar-default.svg";
-import { GlobalContext } from "../providers/GlobalContext";
+import avatarImage from "../../assets/avatar-default.svg";
+import { GlobalContext } from "../../providers/GlobalContext";
 
 export default function SideMenu() {
   const {closeModal } = React.useContext(GlobalContext)

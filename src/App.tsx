@@ -8,11 +8,11 @@ import MobileHeader from "./components/MobileHeader";
 import MobileSubHeader from "./components/MobileSubHeader";
 import SortMenu from "./components/SortMenu";
 import DelSubModal from "./components/modals/DelSubModal";
-import SideMenu from "./components/SideMenu";
+import SideMenu from "./components/modals/SideMenu";
 import MobileList from "./components/MobileList";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
-import DebugScreen from "./components/DebugScreen";
+// import DebugScreen from "./components/DebugScreen";
 import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
 
@@ -42,12 +42,10 @@ function App() {
             !activeModal && "hidden"
           }`}
         >
+          {activeModal == "add" && <><AddSubDesktop /> <AddSubMobile /></>}
+          {activeModal == "edit" && <><AddSubDesktop edit={true} /> <AddSubMobile edit={true} /></>}
           {activeModal == "del" && <DelSubModal />}
-          {activeModal == "add" && <AddSubDesktop />}
-          {activeModal == "add" && <AddSubMobile />}
           {activeModal == "side" && <SideMenu />}
-          {activeModal == "edit" && <AddSubDesktop edit={true} />}
-          {activeModal == "edit" && <AddSubMobile edit={true} />}
         </div>
         {activeModal != "add" && <MobileList />}
         <Body />

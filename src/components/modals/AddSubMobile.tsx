@@ -1,5 +1,5 @@
 import { GlobalContext } from "../../providers/GlobalContext";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -11,8 +11,6 @@ import {
 } from "../../api/services/subjectServices";
 import Input from "../Input";
 import IForm from "../../interfaces/IForm";
-import CloseBtn from "../CloseBtn";
-import Button from "../Button";
 
 interface Props {
   edit?: boolean;
@@ -27,7 +25,6 @@ const validationSchema = yup.object({
 });
 
 export default function AddSubMobile({ edit }: Props) {
-  const [readInput, setReadInput] = useState<boolean>(false);
   const {
     getSubjects,
     successToast,
@@ -98,20 +95,6 @@ export default function AddSubMobile({ edit }: Props) {
       formFields.retakeGrade!
     )!;
     setFormFields({ ...formFields, avg: media });
-    const rtkNull = !formFields.retakeGrade;
-    if (!rtkNull) {
-      setReadInput(true);
-    } else {
-      if (media == null) {
-        setReadInput(false);
-      } else {
-        if (media > 7) {
-          setReadInput(false);
-        } else {
-          setReadInput(true);
-        }
-      }
-    }
   }, [
     formFields.avaGrade,
     formFields.examGrade,

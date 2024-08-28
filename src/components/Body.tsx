@@ -21,9 +21,12 @@ export default function Body() {
 
   return (
     <>
-      <main className="w-full bg-color2 grow px-[8%] hidden sm:flex flex-col justify-center">
-        <div className="relative flex flex-col gap-4">
-          <div id="searchBarField" className="flex justify-around gap-4">
+      <main className="w-full bg-color2 grow px-[8%] hidden sm:flex flex-col py-4">
+        <div className="flex flex-col gap-4 h-full justify-center">
+          <div
+            id="searchBarField"
+            className="flex justify-around gap-4"
+          >
             <Button clickFunc={() => setActiveModal("add")}>+</Button>
             <Input
               name="search"
@@ -33,7 +36,9 @@ export default function Body() {
               placeholder="Digite o que deseja buscar..."
             />
           </div>
-          <Table />
+          <div className="overflow-hidden">
+            <Table />
+          </div>
         </div>
       </main>
     </>

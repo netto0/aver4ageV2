@@ -2,7 +2,8 @@ import React from "react";
 import { GlobalContext } from "../providers/GlobalContext";
 
 export default function MobileHeader() {
-  const { searchStr, setSearchStr, setActiveModal } = React.useContext(GlobalContext);
+  const { searchStr, setSearchStr, setActiveModal } =
+    React.useContext(GlobalContext);
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchStr(e.target.value);
   }
@@ -26,7 +27,7 @@ export default function MobileHeader() {
           value={searchStr}
           onChange={handleChange}
           placeholder="Digite o que deseja buscar..."
-          className="h-full bg-transparent focus:outline-none placeholder:text-sm placeholder:text-color4 text-textColor"
+          className="h-full bg-transparent focus:outline-none placeholder:text-sm placeholder:text-color4 text-textColor focus:text-customOrange"
         />
       </div>
       <svg
