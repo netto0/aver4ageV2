@@ -31,7 +31,7 @@ function App() {
         }`}
       >
         <Header />
-        <DebugScreen />
+        {/* <DebugScreen /> */}
         <div className="sticky top-0 z-30 bg-color1">
           <MobileHeader />
           <MobileSubHeader />

@@ -41,7 +41,7 @@ export default function Input({
   }
 
   const defaultClass = `bg-color2 sm:bg-color3 h-20 sm:h-fit truncate sm:border sm:border-none placeholder-color3 
-    sm:placeholder-color1 pl-3 text-blue-200 text-lg sm:text-sm sm:rounded-lg block w-full p-2.5 inputDarkModeOverride focus:outline-none`;
+    sm:placeholder-color1 pl-1.5 text-blue-200 text-lg sm:text-sm sm:rounded-lg block w-full p-2.5 inputDarkModeOverride focus:outline-none`;
 
   const readOnlyClass =
     "bg-color4 border border-none text-blue-200 text-sm rounded-lg block w-full p-2.5 outline-none hover:cursor-auto inputDarkModeOverride";
@@ -61,7 +61,7 @@ export default function Input({
       )}
 
       <input
-        // {...register}
+        {...register}
         id={name}
         name={name}
         type={type}

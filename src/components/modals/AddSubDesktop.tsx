@@ -68,6 +68,22 @@ export default function AddSubDesktop({ edit }: Props) {
     }
   };
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IForm>({
+    resolver: yupResolver<any>(validationSchema),
+  });
+
+  const onSubmit = handleSubmit(() => {
+    if (edit) {
+      editSubject(formFields._id!);
+    } else {
+      postSubject();
+    }
+  });
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name != "name" && e.target.name != "semester") {
       if (parseFloat(e.target.value) >= 10) {
@@ -119,22 +135,6 @@ export default function AddSubDesktop({ edit }: Props) {
     formFields.pimGrade,
     formFields.retakeGrade,
   ]);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IForm>({
-    resolver: yupResolver<any>(validationSchema),
-  });
-
-  const onSubmit = handleSubmit(() => {
-    if (edit) {
-      editSubject(formFields._id!);
-    } else {
-      postSubject();
-    }
-  });
 
   return (
     <>
