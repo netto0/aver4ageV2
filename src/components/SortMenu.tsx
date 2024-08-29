@@ -2,7 +2,20 @@ import React from "react";
 import { GlobalContext } from "../providers/GlobalContext";
 
 export default function SortMenu() {
-  const { showSortMenu } = React.useContext(GlobalContext);
+  const { showSortMenu, sortParameters, setSortParameters } = React.useContext(GlobalContext);
+
+  function handleChange(e:any) {
+      console.log(e.target.value)
+      if(e.target.name === "sortKey") {
+        setSortParameters({...sortParameters, criteria: e.target.value})
+      } else {
+        if(e.target.value === "ascending") {
+          setSortParameters({...sortParameters, ascending: true})
+        } else {
+          setSortParameters({...sortParameters, ascending: false})
+        }
+      }
+  }
   return (
     <div
       className={`bg-color1 ${
@@ -10,10 +23,12 @@ export default function SortMenu() {
       } sm:hidden flex items-center justify-center py-3 gap-3`}
     >
       <select
-        name="sortItem"
-        id="sortItem"
+        name="sortKey"
+        id="sortKey"
         className="bg-color2 px-2 py-1.5 rounded-md text-textColor focus:outline-none"
+        onChange={handleChange}
       >
+        <option value="emptyKey"></option>
         <option value="semester">Semestre</option>
         <option value="name">Nome</option>
         <option value="ava">AVA</option>
@@ -36,9 +51,10 @@ export default function SortMenu() {
         />
       </svg>
       <select
-        name="sortItem"
-        id="sortItem"
+        name="sortValue"
+        id="sortValue"
         className="bg-color2 px-2 py-1.5 rounded-md text-textColor focus:outline-none"
+        onChange={handleChange}
       >
         <option value="ascending">Crescente</option>
         <option value="descending">Decrescente</option>

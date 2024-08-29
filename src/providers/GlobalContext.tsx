@@ -67,6 +67,7 @@ type GlobalContextType = {
   successToast: object;
   defaultForm: IForm;
   defaultSubs: any;
+  sortedList: any;
 };
 
 const initialValue = {
@@ -93,6 +94,7 @@ const initialValue = {
   setCompleteOnly: () => {},
   showSortMenu: false,
   setShowSortMenu: () => {},
+  sortedList: [],
 };
 
 export const GlobalContext =
@@ -133,6 +135,45 @@ export const GlobalProvider = ({ children }: IProps) => {
     setLoading(false);
   }
 
+  function sortFunc(a: any, b: any) {
+    if (
+      typeof a[sortParameters.criteria!] == "string" &&
+      typeof b[sortParameters.criteria!] == "string"
+    ) {
+      if (sortParameters.ascending) {
+        return a[sortParameters.criteria!].localeCompare(
+          b[sortParameters.criteria!]
+        );
+      } else {
+        return b[sortParameters.criteria!].localeCompare(
+          a[sortParameters.criteria!]
+        );
+      }
+    } else {
+      if (sortParameters.ascending) {
+        return a[sortParameters.criteria!] - b[sortParameters.criteria!];
+      } else {
+        return b[sortParameters.criteria!] - a[sortParameters.criteria!];
+      }
+    }
+    // if (sortParameters.ascending) {
+    //   return (
+    //     parseFloat(a[sortParameters.criteria!]) |
+    //     (0 - parseFloat(b[sortParameters.criteria!])) |
+    //     0
+    //   );
+    // } else {
+    //   return (
+    //     parseFloat(b[sortParameters.criteria!]) |
+    //     (0 - parseFloat(a[sortParameters.criteria!])) |
+    //     0
+    //   );
+    // }
+  }
+
+  const sortedList = subjectsList.slice();
+  sortedList.sort(sortFunc);
+
   return (
     <GlobalContext.Provider
       value={{
@@ -159,6 +200,7 @@ export const GlobalProvider = ({ children }: IProps) => {
         setCompleteOnly,
         showSortMenu,
         setShowSortMenu,
+        sortedList,
       }}
     >
       {children}

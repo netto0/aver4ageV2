@@ -35,4 +35,17 @@ function average(
   }
 }
 
-export { resetScrollInsideTable, average };
+function setCriteria(value: string, sortParameters: any, setSort: any) {
+  const { criteria, ascending } = sortParameters;
+  if (value !== criteria) {
+    setSort({ criteria: value, ascending: true });
+  } else {
+    if (!ascending) {
+      setSort({ criteria: null, ascending: true });
+    } else {
+      setSort({ criteria: value, ascending: false });
+    }
+  }
+}
+
+export { resetScrollInsideTable, average, setCriteria };

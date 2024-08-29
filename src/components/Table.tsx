@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import TableRow from "./TableRow";
 import { getSubjectsService } from "../api/services/subjectServices";
 import { GlobalContext } from "../providers/GlobalContext";
+import { setCriteria } from "../utils/functions";
 
 function AscendingTrue() {
   return (
@@ -40,38 +41,39 @@ export default function Table() {
     setSortParameters,
     defaultSubs,
     searchStr,
+    sortedList,
   } = React.useContext(GlobalContext);
   const myRef = useRef<any>(null);
 
-  const sortFunc = (a: any, b: any) => {
-    if (
-      typeof a[sortParameters.criteria] == "string" &&
-      typeof b[sortParameters.criteria] == "string"
-    ) {
-      if (sortParameters.ascending) {
-        return a[sortParameters.criteria].localeCompare(
-          b[sortParameters.criteria]
-        );
-      } else {
-        return b[sortParameters.criteria].localeCompare(
-          a[sortParameters.criteria]
-        );
-      }
-    }
-    if (sortParameters.ascending) {
-      return (
-        parseFloat(a[sortParameters.criteria]) |
-        (0 - parseFloat(b[sortParameters.criteria])) |
-        0
-      );
-    } else {
-      return (
-        parseFloat(b[sortParameters.criteria]) |
-        (0 - parseFloat(a[sortParameters.criteria])) |
-        0
-      );
-    }
-  };
+  // const sortFunc = (a: any, b: any) => {
+  //   if (
+  //     typeof a[sortParameters.criteria] == "string" &&
+  //     typeof b[sortParameters.criteria] == "string"
+  //   ) {
+  //     if (sortParameters.ascending) {
+  //       return a[sortParameters.criteria].localeCompare(
+  //         b[sortParameters.criteria]
+  //       );
+  //     } else {
+  //       return b[sortParameters.criteria].localeCompare(
+  //         a[sortParameters.criteria]
+  //       );
+  //     }
+  //   }
+  //   if (sortParameters.ascending) {
+  //     return (
+  //       parseFloat(a[sortParameters.criteria]) |
+  //       (0 - parseFloat(b[sortParameters.criteria])) |
+  //       0
+  //     );
+  //   } else {
+  //     return (
+  //       parseFloat(b[sortParameters.criteria]) |
+  //       (0 - parseFloat(a[sortParameters.criteria])) |
+  //       0
+  //     );
+  //   }
+  // };
 
   useEffect(() => {
     if (searchStr !== "") {
@@ -96,21 +98,21 @@ export default function Table() {
     );
   };
 
-  const setCriteria = (value: string) => {
-    const { criteria, ascending } = sortParameters;
-    if (value !== criteria) {
-      setSortParameters({ criteria: value, ascending: true });
-    } else {
-      if (!ascending) {
-        setSortParameters({ criteria: null, ascending: true });
-      } else {
-        setSortParameters({ criteria: value, ascending: false });
-      }
-    }
-  };
+  // const setCriteria = (value: string) => {
+  //   const { criteria, ascending } = sortParameters;
+  //   if (value !== criteria) {
+  //     setSortParameters({ criteria: value, ascending: true });
+  //   } else {
+  //     if (!ascending) {
+  //       setSortParameters({ criteria: null, ascending: true });
+  //     } else {
+  //       setSortParameters({ criteria: value, ascending: false });
+  //     }
+  //   }
+  // };
 
-  const sortedList = subjectsList.slice();
-  sortedList.sort(sortFunc);
+  // const sortedList = subjectsList.slice();
+  // sortedList.sort(sortFunc);
 
   useEffect(() => {
     if (searchStr !== "") {
@@ -135,7 +137,7 @@ export default function Table() {
             <th
               scope="col"
               className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
-              onClick={() => setCriteria("semester")}
+              onClick={() => setCriteria("semester", sortParameters, setSortParameters)}
             >
               <span>Sem.</span>
               {sortParameters.criteria === "semester" &&
@@ -146,7 +148,7 @@ export default function Table() {
             <th
               scope="col"
               className={`py-3 w-[40%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
-              onClick={() => setCriteria("name")}
+              onClick={() => setCriteria("name", sortParameters, setSortParameters)}
             >
               <span>Matéria</span>
               {sortParameters.criteria === "name" &&
@@ -157,7 +159,7 @@ export default function Table() {
             <th
               scope="col"
               className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
-              onClick={() => setCriteria("avaGrade")}
+              onClick={() => setCriteria("avaGrade", sortParameters, setSortParameters)}
             >
               <span>Ava</span>
               {sortParameters.criteria === "avaGrade" &&
@@ -168,7 +170,7 @@ export default function Table() {
             <th
               scope="col"
               className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
-              onClick={() => setCriteria("pimGrade")}
+              onClick={() => setCriteria("pimGrade", sortParameters, setSortParameters)}
             >
               <span>Pim</span>
               {sortParameters.criteria === "pimGrade" &&
@@ -179,7 +181,7 @@ export default function Table() {
             <th
               scope="col"
               className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
-              onClick={() => setCriteria("examGrade")}
+              onClick={() => setCriteria("examGrade", sortParameters, setSortParameters)}
             >
               <span>Prova</span>
               {sortParameters.criteria === "examGrade" &&
@@ -190,7 +192,7 @@ export default function Table() {
             <th
               scope="col"
               className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
-              onClick={() => setCriteria("avg")}
+              onClick={() => setCriteria("avg", sortParameters, setSortParameters)}
             >
               <span>Média</span>
               {sortParameters.criteria === "avg" &&
@@ -201,7 +203,7 @@ export default function Table() {
             <th
               scope="col"
               className={`py-3 w-[10%] ${"custom"} hover:cursor-pointer flex justify-center gap-1`}
-              onClick={() => setCriteria("retakeGrade")}
+              onClick={() => setCriteria("retakeGrade", sortParameters, setSortParameters)}
             >
               <span>Exame</span>
               {sortParameters.criteria === "retakeGrade" &&
