@@ -12,7 +12,7 @@ import SideMenu from "./components/modals/SideMenu";
 import MobileList from "./components/MobileList";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
-import DebugScreen from "./components/DebugScreen";
+// import DebugScreen from "./components/DebugScreen";
 import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
 
