@@ -13,7 +13,7 @@ export default function MobileHeader() {
     <header className="bg-[#01080e] flex gap-9 sm:hidden justify-between align-middle text-textColor drop-shadow-sm py-4 px-6">
       <div className="relative flex w-full justify-end items-center border-2 border-green-500 border-transparent">
         <span
-          className={`absolute left-0 text-2xl font-semibold ${
+          className={`absolute left-0 text-2xl font-semibold select-none ${
             activeSearch && "hidden"
           }`}
         >
