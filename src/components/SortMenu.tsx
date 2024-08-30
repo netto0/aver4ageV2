@@ -28,7 +28,7 @@ export default function SortMenu() {
         className="bg-color2 px-2 py-1.5 rounded-md text-textColor focus:outline-none"
         onChange={handleChange}
       >
-        <option value="emptyKey"></option>
+        <option value={undefined}></option>
         <option value="semester">Semestre</option>
         <option value="name">Nome</option>
         <option value="ava">AVA</option>
