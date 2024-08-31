@@ -37,7 +37,7 @@ export default function MobileHeader({
             width="22"
             height="22"
             fill="currentColor"
-            className={`bi bi-search ml-3 w-10 hover:text-customOrange transition-colors border border-green-500 border-none ${activeSearch && "text-customOrange"} ${searchStr !== "" && "text-customOrange"} `}
+            className={`bi bi-search ml-3 w-10 transition-colors border border-green-500 border-none ${activeSearch && "text-customOrange"} ${searchStr !== "" && "text-customOrange"} `}
             viewBox="0 0 16 16"
             onClick={() => setActiveSearch(!activeSearch)}
           >
@@ -60,7 +60,7 @@ export default function MobileHeader({
         width="40"
         height="40"
         fill="currentColor"
-        className={`bi bi-list hover:text-customOrange transition-colors ${
+        className={`bi bi-list transition-colors ${
           subHeaderStatus && "text-customOrange"
         }`}
         viewBox="0 0 16 16"
@@ -76,7 +76,7 @@ export default function MobileHeader({
         width="30"
         height="30"
         fill="currentColor"
-        className="bi bi-three-dots-vertical hover:text-customOrange transition-colors"
+        className="bi bi-three-dots-vertical transition-colors"
         viewBox="0 0 16 16"
         onClick={() => setActiveModal("side")}
       >
