@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { GlobalContext } from "./providers/GlobalContext";
 
@@ -18,6 +18,10 @@ import AddSubMobile from "./components/modals/AddSubMobile";
 
 function App() {
   const { activeModal, getSubjects } = React.useContext(GlobalContext);
+  const [subHeader, setSubHeader] = useState(false);
+  function toggleSubHeader() {
+    setSubHeader(!subHeader);
+  }
 
   useEffect(() => {
     getSubjects();
@@ -33,8 +37,11 @@ function App() {
         <Header />
         {/* <DebugScreen /> */}
         <div className="sticky top-0 z-30 bg-color1">
-          <MobileHeader />
-          <MobileSubHeader />
+          <MobileHeader
+            toggleSubHeader={toggleSubHeader}
+            subHeaderStatus={subHeader}
+          />
+          {subHeader && <MobileSubHeader />}
           <SortMenu />
         </div>
         <div
@@ -42,8 +49,16 @@ function App() {
             !activeModal && "hidden"
           }`}
         >
-          {activeModal == "add" && <><AddSubDesktop /> <AddSubMobile /></>}
-          {activeModal == "edit" && <><AddSubDesktop edit={true} /> <AddSubMobile edit={true} /></>}
+          {activeModal == "add" && (
+            <>
+              <AddSubDesktop /> <AddSubMobile />
+            </>
+          )}
+          {activeModal == "edit" && (
+            <>
+              <AddSubDesktop edit={true} /> <AddSubMobile edit={true} />
+            </>
+          )}
           {activeModal == "del" && <DelSubModal />}
           {activeModal == "side" && <SideMenu />}
         </div>

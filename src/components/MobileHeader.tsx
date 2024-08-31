@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { GlobalContext } from "../providers/GlobalContext";
 
-export default function MobileHeader() {
+interface Props {
+  toggleSubHeader: () => void;
+  subHeaderStatus: boolean
+}
+
+export default function MobileHeader({ toggleSubHeader, subHeaderStatus }: Props) {
   const [activeSearch, setActiveSearch] = useState(false);
   const { searchStr, setSearchStr, setActiveModal } =
     React.useContext(GlobalContext);
@@ -10,7 +15,7 @@ export default function MobileHeader() {
   }
 
   return (
-    <header className="bg-[#01080e] flex gap-9 sm:hidden justify-between align-middle text-textColor drop-shadow-sm py-4 px-6">
+    <header className="bg-[#01080e] flex gap-3 sm:hidden justify-between items-center text-textColor drop-shadow-sm py-4 px-6  border-2 border-red-400 border-transparent">
       <div className="relative flex w-full justify-end items-center border-2 border-green-500 border-transparent">
         <span
           className={`absolute left-0 text-2xl font-semibold select-none ${
@@ -20,7 +25,7 @@ export default function MobileHeader() {
           AVER<span className="text-customOrange">4</span>GE
         </span>
         <div
-          className={`flex gap-3 pl-3 h-10 rounded-md items-center bg-color2 border-2 border-red-400 border-transparent transition-all ${
+          className={`flex gap-3 pl-3 h-10 rounded-md items-center bg-color2 transition-all border-2 border-red-400 border-transparent ${
             activeSearch ? "w-full" : "w-0 bg-transparent"
           }`}
         >
@@ -29,11 +34,9 @@ export default function MobileHeader() {
             width="22"
             height="22"
             fill="currentColor"
-            className={`bi bi-search absolute transition-colors ${
+            className={`bi bi-search absolute hover:text-customOrange transition-colors ${
               activeSearch && "text-customOrange"
-            } ${
-              searchStr !== "" && "text-customOrange"
-            }`}
+            } ${searchStr !== "" && "text-customOrange"} ${!activeSearch && "right-0"}`}
             viewBox="0 0 16 16"
             onClick={() => setActiveSearch(!activeSearch)}
           >
@@ -54,14 +57,25 @@ export default function MobileHeader() {
         width="40"
         height="40"
         fill="currentColor"
-        className="bi bi-list hover:text-customOrange transition-colors"
+        className={`bi bi-list hover:text-customOrange transition-colors ${subHeaderStatus && "text-customOrange"}`}
         viewBox="0 0 16 16"
-        onClick={() => setActiveModal("side")}
-      >
+          onClick={toggleSubHeader}
+        >
         <path
           fillRule="evenodd"
           d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-        />
+          />
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="30"
+        fill="currentColor"
+        className="bi bi-three-dots-vertical hover:text-customOrange transition-colors"
+        viewBox="0 0 16 16"
+        onClick={() => setActiveModal("side")}
+      >
+        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
       </svg>
     </header>
   );
