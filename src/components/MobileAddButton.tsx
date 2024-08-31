@@ -6,7 +6,7 @@ export default function MobileAddButton() {
   
   return (
     <button
-      className="fixed right-6 block sm:hidden bottom-6"
+      className="fixed right-6 block sm:hidden bottom-6 rounded-full shadow-lg bg-color2"
       onClick={() => setActiveModal("add")}
     >
       <svg

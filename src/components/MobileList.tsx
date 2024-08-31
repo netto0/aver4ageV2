@@ -68,6 +68,7 @@ export default function MobileList() {
         : subjectsList.map(
             (sbj, i) => sbj.avg && <ListItem subject={sbj} key={i} />
           )}
+      <div className="flex items-center justify-center text-color4 h-28"><span>Desenvolvido por Netto</span></div>
       <MobileAddButton />
     </div>
   );
