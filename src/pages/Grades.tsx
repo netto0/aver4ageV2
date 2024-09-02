@@ -1,11 +1,12 @@
 import React from "react";
-import Button from "./Button";
-import Input from "./Input";
-import Table from "./Table";
+import Button from "../components/Button";
+import Input from "../components/Input";
+import Table from "../components/Table";
 import { GlobalContext } from "../providers/GlobalContext";
+import MobileList from "../components/MobileList";
 
-export default function Body() {
-  const { setActiveModal, searchStr, setSearchStr } =
+export default function Grades() {
+  const { setActiveModal, searchStr, setSearchStr, activeModal } =
     React.useContext(GlobalContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,10 +24,7 @@ export default function Body() {
     <>
       <main className="w-full bg-color2 grow px-[8%] hidden sm:flex flex-col py-4">
         <div className="flex flex-col gap-4 h-full justify-center">
-          <div
-            id="searchBarField"
-            className="flex justify-around gap-4"
-          >
+          <div id="searchBarField" className="flex justify-around gap-4">
             <Button clickFunc={() => setActiveModal("add")}>+</Button>
             <Input
               name="search"
@@ -41,6 +39,7 @@ export default function Body() {
           </div>
         </div>
       </main>
+      {activeModal != "add" && <MobileList />}
     </>
   );
 }

@@ -9,19 +9,22 @@ import MobileSubHeader from "./components/MobileSubHeader";
 import SortMenu from "./components/SortMenu";
 import DelSubModal from "./components/modals/DelSubModal";
 import SideMenu from "./components/modals/SideMenu";
-import MobileList from "./components/MobileList";
-import Body from "./components/Body";
+import Grades from "./pages/Grades";
 import Footer from "./components/Footer";
 // import DebugScreen from "./components/DebugScreen";
 import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
+import Charts from "./pages/Charts";
+import Settings from "./pages/Settings";
+import Profile from "./pages/Profile";
 
 function App() {
-  const { activeModal, getSubjects, setShowSortMenu } = React.useContext(GlobalContext);
+  const { activeModal, getSubjects, setShowSortMenu } =
+    React.useContext(GlobalContext);
   const [subHeader, setSubHeader] = useState(false);
   function toggleSubHeader() {
-    if(subHeader) {
-      setShowSortMenu(false)
+    if (subHeader) {
+      setShowSortMenu(false);
     }
     setSubHeader(!subHeader);
   }
@@ -51,6 +54,7 @@ function App() {
           )}
         </div>
         <div
+          id="modals"
           className={`w-full h-screen backdrop-blur-sm fixed z-50 ${
             !activeModal && "hidden"
           }`}
@@ -68,8 +72,11 @@ function App() {
           {activeModal == "del" && <DelSubModal />}
           {activeModal == "side" && <SideMenu />}
         </div>
-        {activeModal != "add" && <MobileList />}
-        <Body />
+        <Grades />
+        {/* <Charts /> */}
+        {/* <Settings /> */}
+        {/* <Profile /> */}
+
         <Footer />
         <ToastContainer />
       </div>
