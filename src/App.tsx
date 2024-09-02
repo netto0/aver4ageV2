@@ -9,14 +9,35 @@ import MobileSubHeader from "./components/MobileSubHeader";
 import SortMenu from "./components/SortMenu";
 import DelSubModal from "./components/modals/DelSubModal";
 import SideMenu from "./components/modals/SideMenu";
-import Grades from "./pages/Grades";
+import Grades from "./routes/Grades";
 import Footer from "./components/Footer";
 // import DebugScreen from "./components/DebugScreen";
 import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
-import Charts from "./pages/Charts";
-import Settings from "./pages/Settings";
-import Profile from "./pages/Profile";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Charts from "./routes/Charts";
+import Settings from "./routes/Settings";
+import Profile from "./routes/Profile";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Grades />,
+  },
+  {
+    path: "/charts",
+    element: <Charts />,
+  },
+  {
+    path: "/settings",
+    element: <Settings />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+]);
 
 function App() {
   const { activeModal, getSubjects, setShowSortMenu } =
@@ -72,10 +93,7 @@ function App() {
           {activeModal == "del" && <DelSubModal />}
           {activeModal == "side" && <SideMenu />}
         </div>
-        <Grades />
-        {/* <Charts /> */}
-        {/* <Settings /> */}
-        {/* <Profile /> */}
+        <RouterProvider router={router} />
 
         <Footer />
         <ToastContainer />
