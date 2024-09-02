@@ -17,9 +17,12 @@ import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
 
 function App() {
-  const { activeModal, getSubjects } = React.useContext(GlobalContext);
+  const { activeModal, getSubjects, setShowSortMenu } = React.useContext(GlobalContext);
   const [subHeader, setSubHeader] = useState(false);
   function toggleSubHeader() {
+    if(subHeader) {
+      setShowSortMenu(false)
+    }
     setSubHeader(!subHeader);
   }
 
@@ -41,8 +44,11 @@ function App() {
             toggleSubHeader={toggleSubHeader}
             subHeaderStatus={subHeader}
           />
-          {subHeader && <MobileSubHeader />}
-          <SortMenu />
+          {subHeader && (
+            <>
+              <MobileSubHeader /> <SortMenu />
+            </>
+          )}
         </div>
         <div
           className={`w-full h-screen backdrop-blur-sm fixed z-50 ${
