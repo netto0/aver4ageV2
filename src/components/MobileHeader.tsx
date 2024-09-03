@@ -25,7 +25,9 @@ export default function MobileHeader({
             activeSearch && "hidden"
           }`}
         >
-          AVER<span className="text-customOrange">4</span>GE
+          <a href="/">
+            AVER<span className="text-customOrange">4</span>GE
+          </a>
         </span>
         <div
           className={`flex gap-3 h-10 rounded-md items-center bg-color2 transition-all border-2 border-red-400 border-none ${
@@ -37,7 +39,9 @@ export default function MobileHeader({
             width="22"
             height="22"
             fill="currentColor"
-            className={`bi bi-search ml-3 w-10 transition-colors border border-green-500 border-none ${activeSearch && "text-customOrange"} ${searchStr !== "" && "text-customOrange"} `}
+            className={`bi bi-search ml-3 w-10 transition-colors border border-green-500 border-none ${
+              activeSearch && "text-customOrange"
+            } ${searchStr !== "" && "text-customOrange"} `}
             viewBox="0 0 16 16"
             onClick={() => setActiveSearch(!activeSearch)}
           >

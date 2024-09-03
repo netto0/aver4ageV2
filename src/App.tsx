@@ -9,35 +9,12 @@ import MobileSubHeader from "./components/MobileSubHeader";
 import SortMenu from "./components/SortMenu";
 import DelSubModal from "./components/modals/DelSubModal";
 import SideMenu from "./components/modals/SideMenu";
-import Grades from "./routes/Grades";
 import Footer from "./components/Footer";
 // import DebugScreen from "./components/DebugScreen";
 import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
-
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Charts from "./routes/Charts";
-import Settings from "./routes/Settings";
-import Profile from "./routes/Profile";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Grades />,
-  },
-  {
-    path: "/charts",
-    element: <Charts />,
-  },
-  {
-    path: "/settings",
-    element: <Settings />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-]);
+import Routes from "./RoutesComponent";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   const { activeModal, getSubjects, setShowSortMenu } =
@@ -55,7 +32,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Router >
       <div
         className={`w-full h-screen flex flex-col ${
           activeModal && "overflow-hidden"
@@ -93,12 +70,12 @@ function App() {
           {activeModal == "del" && <DelSubModal />}
           {activeModal == "side" && <SideMenu />}
         </div>
-        <RouterProvider router={router} />
-
+     
+        <Routes />
         <Footer />
         <ToastContainer />
       </div>
-    </>
+    </Router>
   );
 }
 

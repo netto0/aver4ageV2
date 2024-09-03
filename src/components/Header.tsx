@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export default function Header() {
   return (
     <header className="hidden bg-color1 sm:flex min-h-20 justify-center items-center text-2xl text-textColor drop-shadow-sm">
@@ -11,18 +13,45 @@ export default function Header() {
       </div>
       <nav className="h-full flex items-center grow">
         <ul className="flex justify-around w-full">
-          <li className="hover:cursor-pointer hover:scale-105 hover:text-customOrange hover:font-semibold transition text-customOrange font-semibold">
-            <a href="/">MÉDIAS</a>
-            {/* <Link to={"/"}>MÉDIAS</Link> */}
+          <li className="hover:cursor-pointer hover:scale-105 hover:text-customOrange hover:font-semibold transition">
+            <NavLink
+              to={"/"}
+              className={({ isActive }) =>
+                isActive ? "text-customOrange font-semibold" : ""
+              }
+            >
+              MÉDIAS
+            </NavLink>
           </li>
           <li className="hover:cursor-pointer hover:scale-105 hover:text-customOrange hover:font-semibold transition">
-            <a href="/charts">GRÁFICOS</a>
+            <NavLink
+              to={"/charts"}
+              className={({ isActive }) =>
+                isActive ? "text-customOrange font-semibold" : ""
+              }
+            >
+              GRÁFICOS
+            </NavLink>
           </li>
           <li className="hover:cursor-pointer hover:scale-105 hover:text-customOrange hover:font-semibold transition">
-            <a href="/settings">CONFIGURAÇÕES</a>
+            <NavLink
+              to={"/settings"}
+              className={({ isActive }) =>
+                isActive ? "text-customOrange font-semibold" : ""
+              }
+            >
+              CONFIGURAÇÕES
+            </NavLink>
           </li>
           <li className="hover:cursor-pointer hover:scale-105 hover:text-customOrange hover:font-semibold transition">
-            <a href="/profile">PERFIL</a>
+            <NavLink
+              to={"/profile"}
+              className={({ isActive }) =>
+                isActive ? "text-customOrange font-semibold" : ""
+              }
+            >
+              PERFIL
+            </NavLink>
           </li>
         </ul>
       </nav>
