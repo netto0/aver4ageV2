@@ -27,7 +27,13 @@ function ListItem({ subject }: IItemProps) {
     >
       <div className="flex justify-between gap-5 items-center w-full">
         <div className="flex flex-col w-full overflow-hidden">
-          <span className="mb-[-4px] text-sm">
+          <span
+            className={`mb-[-4px] text-sm ${
+              sortParameters.criteria == "semester"
+                ? "text-customOrange"
+                : "text-textColor"
+            }`}
+          >
             {subject.semester}º Semestre
           </span>
           <h3 className="text-xl truncate">{subject.name}</h3>
@@ -70,11 +76,16 @@ function ListItem({ subject }: IItemProps) {
               }`}
             >
               {subject.retakeGrade ? subject.retakeGrade?.toFixed(2) : "xxxx"}
-            </span>{" "}
-            |{" "}
+            </span>
           </p>
         </div>
-        <span className="text-2xl w-fit px-3 text-left">
+        <span
+          className={`text-2xl w-fit px-3 text-left ${
+            sortParameters.criteria == "avg"
+              ? "text-customOrange"
+              : "text-textColor"
+          }`}
+        >
           {!subject.avg ? "S/M" : subject.avg!.toFixed(2)}
         </span>
       </div>

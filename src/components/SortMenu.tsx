@@ -35,7 +35,7 @@ export default function SortMenu() {
         <option value="pimGrade">PIM</option>
         <option value="examGrade">Prova</option>
         <option value="avg">Média</option>
-        <option value="rtkGrade">Exame</option>
+        <option value="retakeGrade">Exame</option>
       </select>
       <svg
         xmlns="http://www.w3.org/2000/svg"
