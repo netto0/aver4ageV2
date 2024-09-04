@@ -5,8 +5,6 @@ import { GlobalContext } from "./providers/GlobalContext";
 
 import Header from "./components/Header";
 import MobileHeader from "./components/MobileHeader";
-import MobileSubHeader from "./components/MobileSubHeader";
-import SortMenu from "./components/SortMenu";
 import DelSubModal from "./components/modals/DelSubModal";
 import SideMenu from "./components/modals/SideMenu";
 import Footer from "./components/Footer";
@@ -60,11 +58,6 @@ function App() {
             toggleSubHeader={toggleSubHeader}
             subHeaderStatus={subHeader}
           />
-          {subHeader && (
-            <>
-              <MobileSubHeader /> <SortMenu />
-            </>
-          )}
         </div>
         <div
           id="modals"
