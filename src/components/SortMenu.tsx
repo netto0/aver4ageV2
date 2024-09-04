@@ -31,11 +31,11 @@ export default function SortMenu() {
         <option value={undefined}></option>
         <option value="semester">Semestre</option>
         <option value="name">Nome</option>
-        <option value="ava">AVA</option>
-        <option value="pim">PIM</option>
-        <option value="exam">Prova</option>
+        <option value="avaGrade">AVA</option>
+        <option value="pimGrade">PIM</option>
+        <option value="examGrade">Prova</option>
         <option value="avg">Média</option>
-        <option value="rtk">Exame</option>
+        <option value="rtkGrade">Exame</option>
       </select>
       <svg
         xmlns="http://www.w3.org/2000/svg"

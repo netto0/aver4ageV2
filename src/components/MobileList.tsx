@@ -8,7 +8,8 @@ interface IItemProps {
 }
 
 function ListItem({ subject }: IItemProps) {
-  const { setActiveModal, setFormFields } = React.useContext(GlobalContext);
+  const { setActiveModal, setFormFields, sortParameters } =
+    React.useContext(GlobalContext);
   const fatherRef = useRef<any>(null);
 
   function handleClick(modalType: "del" | "edit") {
@@ -30,12 +31,48 @@ function ListItem({ subject }: IItemProps) {
             {subject.semester}º Semestre
           </span>
           <h3 className="text-xl truncate">{subject.name}</h3>
-          <span className="text-xs">{`${subject.avaGrade ? subject.avaGrade?.toFixed(2) : "x"} | 
-                  ${subject.pimGrade ? subject.pimGrade?.toFixed(2) : "x"} | 
-                  ${subject.examGrade ? subject.examGrade?.toFixed(2) : "x"} | 
-                  ${
-                    subject.retakeGrade ? subject.retakeGrade?.toFixed(2) : "x"
-                  }`}</span>
+          <p className="text-xs">
+            <span
+              className={`${
+                sortParameters.criteria == "avaGrade"
+                  ? "text-customOrange"
+                  : "text-textColor"
+              }`}
+            >
+              {subject.avaGrade ? subject.avaGrade?.toFixed(2) : "xxxx"}
+            </span>{" "}
+            |{" "}
+            <span
+              className={`${
+                sortParameters.criteria == "pimGrade"
+                  ? "text-customOrange"
+                  : "text-textColor"
+              }`}
+            >
+              {subject.pimGrade ? subject.pimGrade?.toFixed(2) : "xxxx"}
+            </span>{" "}
+            |{" "}
+            <span
+              className={`${
+                sortParameters.criteria == "examGrade"
+                  ? "text-customOrange"
+                  : "text-textColor"
+              }`}
+            >
+              {subject.examGrade ? subject.examGrade?.toFixed(2) : "xxxx"}
+            </span>{" "}
+            |{" "}
+            <span
+              className={`${
+                sortParameters.criteria == "retakeGrade"
+                  ? "text-customOrange"
+                  : "text-textColor"
+              }`}
+            >
+              {subject.retakeGrade ? subject.retakeGrade?.toFixed(2) : "xxxx"}
+            </span>{" "}
+            |{" "}
+          </p>
         </div>
         <span className="text-2xl w-fit px-3 text-left">
           {!subject.avg ? "S/M" : subject.avg!.toFixed(2)}
@@ -68,7 +105,9 @@ export default function MobileList() {
         : subjectsList.map(
             (sbj, i) => sbj.avg && <ListItem subject={sbj} key={i} />
           )}
-      <div className="flex items-center justify-center text-color4 h-28"><span>Desenvolvido por Netto</span></div>
+      <div className="flex items-center justify-center text-color4 h-28">
+        <span>Desenvolvido por Netto</span>
+      </div>
       <MobileAddButton />
     </div>
   );

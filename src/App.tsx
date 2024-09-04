@@ -14,7 +14,7 @@ import Footer from "./components/Footer";
 import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
 import Routes from "./RoutesComponent";
-import { BrowserRouter as Router, useLocation } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   const { activeModal, setActiveModal, getSubjects, setShowSortMenu } =
@@ -32,18 +32,13 @@ function App() {
     getSubjects();
   }, []);
 
-  // useEffect(() => {
-  //   console.log("abobrinha");
-  // }, [location]);
-
   let url = location.href;
   document.body.addEventListener(
     "click",
     () => {
       requestAnimationFrame(() => {
         if (url !== location.href) {
-          setActiveModal(false)
-          // console.log("url changed");
+          setActiveModal(false);
           url = location.href;
         }
       });
