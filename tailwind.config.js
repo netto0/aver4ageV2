@@ -10,7 +10,8 @@ export default {
         "color4": "#132938",
         "color5": "#1E415B",
         "color6": "#040d13",
-        "textColor": "#405869",
+        "textColor": "#5481a1",
+        // "textColor": "#405869",
         "customOrange": "#F45E0A"
       },
       display: ["group-hover"],

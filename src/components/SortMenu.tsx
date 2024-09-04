@@ -34,8 +34,8 @@ export default function SortMenu() {
         <option value="avaGrade">AVA</option>
         <option value="pimGrade">PIM</option>
         <option value="examGrade">Prova</option>
-        <option value="avg">Média</option>
         <option value="retakeGrade">Exame</option>
+        <option value="avg">Média</option>
       </select>
       <svg
         xmlns="http://www.w3.org/2000/svg"
