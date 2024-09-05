@@ -21,7 +21,7 @@ export default function MobileHeader({
 
   return (
     <>
-      <header className="bg-[#01080e] flex gap-3 sm:hidden justify-between items-center text-textColor drop-shadow-sm py-4 px-6  border-2 border-red-400 border-none">
+      <header className="bg-[#01080e] flex gap-3 sm:hidden justify-between items-center text-textColor drop-shadow-sm py-4 px-6 border-2 h-20 z-50 border-red-400 border-none absolute w-full">
         <div className="relative flex w-full justify-end items-center border-2 border-green-500 border-none">
           <span
             className={`absolute left-0 text-2xl font-semibold select-none ${
@@ -90,12 +90,14 @@ export default function MobileHeader({
           <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
         </svg>
       </header>
-      {subHeaderStatus && (
+      {/* {subHeaderStatus && (
         <>
           <MobileSubHeader />
           <SortMenu />
         </>
-      )}
+      )} */}
+      <MobileSubHeader show={subHeaderStatus}/>
+      <SortMenu />
     </>
   );
 }
