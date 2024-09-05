@@ -53,7 +53,7 @@ function App() {
       >
         <Header />
         {/* <DebugScreen /> */}
-        <div className="sticky top-0 z-30 bg-color1">
+        <div className="top-0 bg-color1">
           <MobileHeader
             toggleSubHeader={toggleSubHeader}
             subHeaderStatus={subHeader}

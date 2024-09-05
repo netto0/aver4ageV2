@@ -3,10 +3,10 @@ import Checkbox from "./Checkbox";
 import { GlobalContext } from "../providers/GlobalContext";
 
 interface Props {
-  show: boolean
+  show: boolean;
 }
 
-export default function MobileSubHeader({show}: Props) {
+export default function MobileSubHeader({ show }: Props) {
   const { completeOnly, showSortMenu, setShowSortMenu, sortParameters } =
     React.useContext(GlobalContext);
 
@@ -15,7 +15,9 @@ export default function MobileSubHeader({show}: Props) {
   }
   return (
     <div
-      className={`bg-color6 flex sm:hidden text-textColor py-3 px-5 h-12 justify-around text-lg select-none transition-all z-50 ${show ? "mt-20" : "mt-8"} border border-blue-400 border-none`}
+      className={`relative bg-color1 flex sm:hidden text-textColor py-3 px-5 h-12 z-40 justify-around text-lg select-none transition-all ${
+        show ? "mt-20" : "mt-8"
+      } border border-blue-400 border-none`}
     >
       <div
         className={`flex items-center gap-1.5 transition-colors ${
@@ -28,7 +30,9 @@ export default function MobileSubHeader({show}: Props) {
           width="18"
           height="18"
           fill="currentColor"
-          className={`bi bi-arrow-down-up ${sortParameters.criteria && "text-customOrange"}`}
+          className={`bi bi-arrow-down-up ${
+            sortParameters.criteria && "text-customOrange"
+          }`}
           viewBox="0 0 16 16"
         >
           <path

@@ -18,8 +18,8 @@ export default function SortMenu() {
   }
   return (
     <div
-      // className={`bg-color1 sm:hidden flex items-center justify-center py-3 gap-3 border h-12 border-red-400 z-20 ${showSortMenu ? "mt-20" : "-mt-12"}`}
-      className={`bg-color1 sm:hidden flex items-center justify-center py-3 gap-3 border h-12 border-red-400 ${showSortMenu ? "block" : "hidden"}`}
+      className={`bg-color1 sm:hidden flex items-center justify-center py-3 gap-3 h-12 z-10 transition-all ${showSortMenu ? "mt-0" : "-mt-12"}`}
+      // className={`bg-color1 sm:hidden flex items-center justify-center py-3 gap-3 border h-12 border-red-400 ${showSortMenu ? "block" : "hidden"}`}
     >
       <select
         name="sortKey"
