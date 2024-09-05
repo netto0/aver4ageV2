@@ -11,8 +11,8 @@ import Footer from "./components/Footer";
 // import DebugScreen from "./components/DebugScreen";
 import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
-import Routes from "./RoutesComponent";
 import { BrowserRouter as Router } from "react-router-dom";
+import RoutesComponent from "./RoutesComponent";
 
 function App() {
   const { activeModal, setActiveModal, getSubjects, setShowSortMenu } =
@@ -79,7 +79,7 @@ function App() {
           {activeModal == "side" && <SideMenu />}
         </div>
 
-        <Routes />
+        <RoutesComponent />
         <Footer />
         <ToastContainer />
       </div>
