@@ -9,14 +9,19 @@ import DelSubModal from "./components/modals/DelSubModal";
 import SideMenu from "./components/modals/SideMenu";
 import Footer from "./components/Footer";
 // import DebugScreen from "./components/DebugScreen";
-import AddSubDesktop from "./components/modals/AddSubDesktop";
+// import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
 import { BrowserRouter as Router } from "react-router-dom";
 import RoutesComponent from "./RoutesComponent";
 
 function App() {
-  const { activeModal, setActiveModal, getSubjects, setShowSortMenu } =
-    React.useContext(GlobalContext);
+  const {
+    activeModal,
+    setActiveModal,
+    getSubjects,
+    setShowSortMenu,
+    closeModal,
+  } = React.useContext(GlobalContext);
   const [subHeader, setSubHeader] = useState(false);
 
   function toggleSubHeader() {
@@ -60,24 +65,26 @@ function App() {
           />
         </div>
         <div
-          id="modals"
-          className={`w-full h-screen backdrop-blur-sm fixed z-50 ${
-            !activeModal && "hidden"
+          id="blur"
+          onClick={closeModal}
+          className={`w-full h-screen fixed transition-all duration-300 ${
+            activeModal ? "z-50 backdrop-blur-sm" : "z-0 backdrop-blur-none"
           }`}
-        >
-          {activeModal == "add" && (
+        ></div>
+        <AddSubMobile />
+        {/* {activeModal == "add" && (
             <>
-              <AddSubDesktop /> <AddSubMobile />
+              <AddSubDesktop /> 
             </>
-          )}
-          {activeModal == "edit" && (
+          )} */}
+        {/* <AddSubMobile edit={true} /> */}
+        {/* {activeModal == "edit" && (
             <>
-              <AddSubDesktop edit={true} /> <AddSubMobile edit={true} />
+              <AddSubDesktop edit={true} />
             </>
-          )}
-          {activeModal == "del" && <DelSubModal />}
-          {activeModal == "side" && <SideMenu />}
-        </div>
+          )} */}
+        {activeModal == "del" && <DelSubModal />}
+        <SideMenu />
 
         <RoutesComponent />
         <Footer />

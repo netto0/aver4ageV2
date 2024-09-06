@@ -4,10 +4,10 @@ import { GlobalContext } from "../../providers/GlobalContext";
 import { NavLink } from "react-router-dom";
 
 export default function SideMenu() {
-  const { closeModal } = React.useContext(GlobalContext);
+  const { closeModal, activeModal } = React.useContext(GlobalContext);
 
   return (
-    <div className="sm:hidden absolute z-50 top-0 right-0 rounded-tl-xl w-4/6 bg-color2 text-textColor shadow-2xl">
+    <div className={`sm:hidden absolute z-50 top-0 rounded-l-xl w-52 bg-color2 text-textColor shadow-2xl select-none transition-all ${activeModal == "side" ? "right-0" : "-right-56"}`}>
       <div className="bg-color1 flex px-3 py-3 items-center justify-between rounded-tl-xl">
         <div>
           <NavLink

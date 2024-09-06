@@ -6,7 +6,8 @@ import { GlobalContext } from "../providers/GlobalContext";
 import MobileList from "../components/MobileList";
 
 export default function Grades() {
-  const { setActiveModal, searchStr, setSearchStr, activeModal } =
+  // const { setActiveModal, searchStr, setSearchStr, activeModal } =
+  const { setActiveModal, searchStr, setSearchStr } =
     React.useContext(GlobalContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +40,8 @@ export default function Grades() {
           </div>
         </div>
       </main>
-      {activeModal != "add" && <MobileList />}
+      {/* {activeModal != "add" && <MobileList />} */}
+      <MobileList />
     </>
   );
 }
