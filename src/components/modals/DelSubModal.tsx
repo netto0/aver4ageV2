@@ -30,8 +30,9 @@ export default function DelSubModal() {
     return (
       <div
         id="DelModal"
-        className={`absolute flex flex-col z-50 left-[50%] opacity-95 translate-x-[-50%] top-[50%] translate-y-[-50%] bg-color3 rounded-lg text-sky-200 transition-all duration-300 sm:hidden font-semibold w-80 text-center ${
-          activeModal == "del" ? "top-0" : "-top-full"
+        className={`absolute flex flex-col z-50 left-[50%] opacity-95 translate-x-[-50%] bg-color3 rounded-lg text-sky-200 transition-all sm:hidden font-semibold w-80 text-center ${
+          // activeModal == "del" ? "top-1/3" : "-top-full"
+          activeModal == "del" ? "top-1/3" : "-top-full"
         }`}
       >
         <div className="bg-color4 rounded-t-lg py-2">
@@ -67,7 +68,6 @@ export default function DelSubModal() {
     return (
       <>
         <div
-          id="DelModal"
           className="absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] hidden sm:block"
         >
           <div className="relative bg-color2 rounded-lg shadow">

@@ -123,7 +123,7 @@ export default function AddSubMobile({ edit }: Props) {
       id="mobile"
       className={`absolute sm:hidden bg-color2 z-50 opacity-95 backdrop-blur-xl w-full h-screen transition-all duration-300 ${(activeModal == "add" || activeModal == "edit") ? "top-0" : "-top-full"}`}
     >
-      <div className="flex text-textColor justify-between items-center p-5 bg-color1 sticky top-0 rounded-t-lg">
+      <div className="flex text-textColor justify-between items-center p-5 bg-color1 rounded-t-lg">
         <button
           className="hover:bg-color4 hover:text-color1 p-1 rounded-md transition-all"
           onClick={closeModal}
@@ -141,7 +141,8 @@ export default function AddSubMobile({ edit }: Props) {
         </button>
 
         <h1 className="text-xl font-semibold">
-          {activeModal == "edit" ? "Editar matéria" : "Adicionar nova matéria"}
+          {activeModal == "edit" && "Editar matéria"}
+          {activeModal == "add" && "Adicionar matéria"}
         </h1>
         <button
           onClick={onSubmit}

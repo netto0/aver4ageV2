@@ -52,7 +52,7 @@ function App() {
   return (
     <Router>
       <div
-        className={`w-full h-screen flex flex-col ${
+        className={`w-full h-screen flex flex-col overflow-x-hidden ${
           activeModal && "overflow-hidden"
         }`}
       >
@@ -71,23 +71,12 @@ function App() {
             activeModal ? "z-50 backdrop-blur-sm" : "z-0 backdrop-blur-none"
           }`}
         ></div>
-        <AddSubMobile />
-        <AddSubDesktop /> 
-        {/* {activeModal == "add" && (
-            <>
-              <AddSubDesktop /> 
-            </>
-          )} */}
-        {/* <AddSubMobile edit={true} /> */}
-        {/* {activeModal == "edit" && (
-            <>
-              <AddSubDesktop edit={true} />
-            </>
-          )} */}
-        <DelSubModal />
-        <SideMenu />
 
-        <RoutesComponent />
+          <AddSubMobile />
+          <AddSubDesktop />
+          <DelSubModal />
+          <SideMenu />
+          <RoutesComponent />
         <Footer />
         <ToastContainer />
       </div>

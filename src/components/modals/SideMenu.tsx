@@ -7,7 +7,7 @@ export default function SideMenu() {
   const { closeModal, activeModal } = React.useContext(GlobalContext);
 
   return (
-    <div className={`sm:hidden absolute z-50 top-0 rounded-l-xl w-52 bg-color2 text-textColor shadow-2xl select-none transition-all ${activeModal == "side" ? "right-0" : "-right-56"}`}>
+    <div className={`sm:hidden absolute z-50 rounded-l-xl w-52 bg-color2 text-textColor shadow-2xl select-none transition-all right-0 ${activeModal == "side" ? "top-0" : "-top-full"}`}>
       <div className="bg-color1 flex px-3 py-3 items-center justify-between rounded-tl-xl">
         <div>
           <NavLink
