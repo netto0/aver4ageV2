@@ -34,7 +34,7 @@ export default function AddSubMobile({ edit }: Props) {
     closeModal,
     average,
     setLoading,
-    activeModal
+    activeModal,
   } = React.useContext(GlobalContext);
 
   const postSubject = async () => {
@@ -121,7 +121,11 @@ export default function AddSubMobile({ edit }: Props) {
   return (
     <div
       id="mobile"
-      className={`absolute sm:hidden bg-color2 z-50 opacity-95 backdrop-blur-xl w-full h-screen transition-all duration-300 ${(activeModal == "add" || activeModal == "edit") ? "top-0" : "-top-[1080px]"}`}
+      className={`absolute sm:hidden bg-color2 z-50 opacity-95 backdrop-blur-xl w-full h-screen transition-all duration-300 ${
+        activeModal == "add" || activeModal == "edit"
+          ? " top-[50%] translate-y-[-50%]"
+          : "-top-[1080px]"
+      }`}
     >
       <div className="flex text-textColor justify-between items-center p-5 bg-color1 rounded-t-lg">
         <button

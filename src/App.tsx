@@ -5,7 +5,7 @@ import { GlobalContext } from "./providers/GlobalContext";
 
 import Header from "./components/Header";
 import MobileHeader from "./components/MobileHeader";
-import DelSubModal from "./components/modals/DelSubModal";
+import DelSubMobile from "./components/modals/DelSubMobile";
 import SideMenu from "./components/modals/SideMenu";
 import Footer from "./components/Footer";
 // import DebugScreen from "./components/DebugScreen";
@@ -13,6 +13,7 @@ import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
 import { BrowserRouter as Router } from "react-router-dom";
 import RoutesComponent from "./RoutesComponent";
+import DelSubDesktop from "./components/modals/DelSubDesktop";
 
 function App() {
   const {
@@ -72,11 +73,12 @@ function App() {
           }`}
         ></div>
 
-          <AddSubMobile />
-          <AddSubDesktop />
-          <DelSubModal />
-          <SideMenu />
-          <RoutesComponent />
+        <AddSubMobile />
+        <AddSubDesktop />
+        <DelSubMobile />
+        <DelSubDesktop />
+        <SideMenu />
+        <RoutesComponent />
         <Footer />
         <ToastContainer />
       </div>
