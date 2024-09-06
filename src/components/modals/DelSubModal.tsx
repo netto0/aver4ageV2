@@ -9,7 +9,7 @@ import Button from "../Button";
 export default function DelSubModal() {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { getSubjects, formFields, successToast, closeModal } =
+  const { getSubjects, formFields, successToast, closeModal, activeModal } =
     React.useContext(GlobalContext);
 
   async function deleteSbj(e: any) {
@@ -30,7 +30,9 @@ export default function DelSubModal() {
     return (
       <div
         id="DelModal"
-        className="sticky flex flex-col z-50 top-1/2 mx-auto translate-y-[-50%] bg-color3 rounded-lg text-sky-200 sm:hidden font-semibold w-80 text-center"
+        className={`absolute flex flex-col z-50 left-[50%] opacity-95 translate-x-[-50%] top-[50%] translate-y-[-50%] bg-color3 rounded-lg text-sky-200 transition-all duration-300 sm:hidden font-semibold w-80 text-center ${
+          activeModal == "del" ? "top-0" : "-top-full"
+        }`}
       >
         <div className="bg-color4 rounded-t-lg py-2">
           <svg

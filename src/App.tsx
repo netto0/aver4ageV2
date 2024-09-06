@@ -9,7 +9,7 @@ import DelSubModal from "./components/modals/DelSubModal";
 import SideMenu from "./components/modals/SideMenu";
 import Footer from "./components/Footer";
 // import DebugScreen from "./components/DebugScreen";
-// import AddSubDesktop from "./components/modals/AddSubDesktop";
+import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
 import { BrowserRouter as Router } from "react-router-dom";
 import RoutesComponent from "./RoutesComponent";
@@ -72,6 +72,7 @@ function App() {
           }`}
         ></div>
         <AddSubMobile />
+        <AddSubDesktop /> 
         {/* {activeModal == "add" && (
             <>
               <AddSubDesktop /> 
@@ -83,7 +84,7 @@ function App() {
               <AddSubDesktop edit={true} />
             </>
           )} */}
-        {activeModal == "del" && <DelSubModal />}
+        <DelSubModal />
         <SideMenu />
 
         <RoutesComponent />
