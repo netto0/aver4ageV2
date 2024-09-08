@@ -123,7 +123,7 @@ export default function AddSubMobile({ edit }: Props) {
       id="mobile"
       className={`absolute sm:hidden bg-color2 z-50 opacity-95 backdrop-blur-xl w-full h-screen transition-all duration-300 ${
         activeModal == "add" || activeModal == "edit"
-          ? " top-[50%] translate-y-[-50%]"
+          ? "top-0"
           : "-top-[1080px]"
       }`}
     >
