@@ -71,7 +71,7 @@ function App() {
           className={`w-full h-screen fixed transition-all duration-300 ${
             activeModal ? "z-50 backdrop-blur-sm" : "z-0 backdrop-blur-none"
           }`}
-        ></div>
+        />
 
         <AddSubMobile />
         <AddSubDesktop />

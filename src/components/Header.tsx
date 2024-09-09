@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="hidden bg-color1 sm:flex min-h-20 justify-center items-center text-2xl text-textColor drop-shadow-sm">
+    <header className="hidden bg-color1 sm:flex min-h-20 justify-center items-center text-2xl z-10 text-textColor drop-shadow-sm">
       <div className="px-12">
         <a
           href="/"

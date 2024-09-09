@@ -156,19 +156,6 @@ export const GlobalProvider = ({ children }: IProps) => {
         return b[sortParameters.criteria!] - a[sortParameters.criteria!];
       }
     }
-    // if (sortParameters.ascending) {
-    //   return (
-    //     parseFloat(a[sortParameters.criteria!]) |
-    //     (0 - parseFloat(b[sortParameters.criteria!])) |
-    //     0
-    //   );
-    // } else {
-    //   return (
-    //     parseFloat(b[sortParameters.criteria!]) |
-    //     (0 - parseFloat(a[sortParameters.criteria!])) |
-    //     0
-    //   );
-    // }
   }
 
   const sortedList = subjectsList.slice();
