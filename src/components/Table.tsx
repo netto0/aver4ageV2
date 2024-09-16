@@ -45,36 +45,6 @@ export default function Table() {
   } = React.useContext(GlobalContext);
   const myRef = useRef<any>(null);
 
-  // const sortFunc = (a: any, b: any) => {
-  //   if (
-  //     typeof a[sortParameters.criteria] == "string" &&
-  //     typeof b[sortParameters.criteria] == "string"
-  //   ) {
-  //     if (sortParameters.ascending) {
-  //       return a[sortParameters.criteria].localeCompare(
-  //         b[sortParameters.criteria]
-  //       );
-  //     } else {
-  //       return b[sortParameters.criteria].localeCompare(
-  //         a[sortParameters.criteria]
-  //       );
-  //     }
-  //   }
-  //   if (sortParameters.ascending) {
-  //     return (
-  //       parseFloat(a[sortParameters.criteria]) |
-  //       (0 - parseFloat(b[sortParameters.criteria])) |
-  //       0
-  //     );
-  //   } else {
-  //     return (
-  //       parseFloat(b[sortParameters.criteria]) |
-  //       (0 - parseFloat(a[sortParameters.criteria])) |
-  //       0
-  //     );
-  //   }
-  // };
-
   useEffect(() => {
     if (searchStr !== "") {
       setSubjectsList(searchResult(searchStr));
@@ -97,22 +67,6 @@ export default function Table() {
         )
     );
   };
-
-  // const setCriteria = (value: string) => {
-  //   const { criteria, ascending } = sortParameters;
-  //   if (value !== criteria) {
-  //     setSortParameters({ criteria: value, ascending: true });
-  //   } else {
-  //     if (!ascending) {
-  //       setSortParameters({ criteria: null, ascending: true });
-  //     } else {
-  //       setSortParameters({ criteria: value, ascending: false });
-  //     }
-  //   }
-  // };
-
-  // const sortedList = subjectsList.slice();
-  // sortedList.sort(sortFunc);
 
   useEffect(() => {
     if (searchStr !== "") {

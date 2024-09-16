@@ -36,8 +36,7 @@ export default function DelSubDesktop() {
           <div className="relative bg-color2 rounded-lg shadow">
             <div className="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {/* Excluir matéria ? */}
-                AAAAAAAAA
+                Excluir matéria ?
               </h3>
               <CloseBtn clickFunc={closeModal} />
             </div>

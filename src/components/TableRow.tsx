@@ -52,31 +52,31 @@ export default function TableRow({ subject }: Props) {
       id={JSON.stringify(subject)}
       onClick={() => handleClick("edit")}
     >
-      <td className="w-[10%] h-full flex items-center justify-center">
+      <td className="w-[10%] h-full flex items-center justify-center z-40">
         {subject.semester}
       </td>
-      <td className="w-[40%] h-full flex items-center">
+      <td className="w-[40%] h-full flex items-center z-40">
         <p className="truncate">{subject.name}</p>
       </td>
-      <td className="relative w-[10%] h-full flex items-center justify-center">
+      <td className="relative w-[10%] h-full flex items-center justify-center z-40">
         {!subject.avaGrade?.toFixed(2) ? "∅" : subject.avaGrade}
         {!subject.avaGrade && <Dot />}
       </td>
-      <td className="relative w-[10%] h-full flex items-center justify-center">
+      <td className="relative w-[10%] h-full flex items-center justify-center z-40">
         {!subject.pimGrade?.toFixed(2) ? "∅" : subject.pimGrade}
         {!subject.pimGrade && <Dot />}
       </td>
-      <td className="relative w-[10%] h-full flex items-center justify-center">
+      <td className="relative w-[10%] h-full flex items-center justify-center z-40">
         {!subject.examGrade?.toFixed(2) && <Dot />}
         {!subject.examGrade ? "∅" : subject.examGrade}
       </td>
-      <td className="relative w-[10%] h-full flex items-center justify-center">
+      <td className="relative w-[10%] h-full flex items-center justify-center z-40">
         {!avg ? "∅" : avg.toFixed(2)}
         {!avg && <Dot />}
         {approved() === false && <Dot color={"red"} />}
         {approved() && <Dot color={"green"} />}
       </td>
-      <td className="relative w-[10%] h-full flex items-center justify-center">
+      <td className="relative w-[10%] h-full flex items-center justify-center z-40">
         {!subject.retakeGrade ? "x" : subject.retakeGrade}
         <svg
           xmlns="http://www.w3.org/2000/svg"

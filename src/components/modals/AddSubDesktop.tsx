@@ -14,10 +14,6 @@ import IForm from "../../interfaces/IForm";
 import CloseBtn from "../CloseBtn";
 import Button from "../Button";
 
-interface Props {
-  edit?: boolean;
-}
-
 const validationSchema = yup.object({
   name: yup
     .string()
@@ -26,7 +22,7 @@ const validationSchema = yup.object({
   semester: yup.string().required("Insira o semestre."),
 });
 
-export default function AddSubDesktop({ edit }: Props) {
+export default function AddSubDesktop() {
   const [readInput, setReadInput] = useState<boolean>(false);
   const {
     getSubjects,
@@ -78,7 +74,7 @@ export default function AddSubDesktop({ edit }: Props) {
   });
 
   const onSubmit = handleSubmit(() => {
-    if (edit) {
+    if (activeModal == "edit") {
       editSubject(formFields._id!);
     } else {
       postSubject();
@@ -251,7 +247,7 @@ export default function AddSubDesktop({ edit }: Props) {
               {loading ? (
                 <p>Enviando...</p>
               ) : (
-                <p>{edit ? "Salvar" : "Enviar"}</p>
+                <p>{activeModal == "edit" ? "Salvar" : "Enviar"}</p>
               )}
             </Button>
           </form>
