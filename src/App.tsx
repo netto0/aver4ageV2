@@ -8,7 +8,7 @@ import MobileHeader from "./components/MobileHeader";
 import DelSubMobile from "./components/modals/DelSubMobile";
 import SideMenu from "./components/modals/SideMenu";
 import Footer from "./components/Footer";
-// import DebugScreen from "./components/DebugScreen";
+import DebugScreen from "./components/DebugScreen";
 import AddSubDesktop from "./components/modals/AddSubDesktop";
 import AddSubMobile from "./components/modals/AddSubMobile";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -73,8 +73,9 @@ function App() {
           }`}
         />
 
+        {(activeModal == "add" || activeModal == "edit") && <AddSubDesktop />}
         <AddSubMobile />
-        <AddSubDesktop />
+        {/* <AddSubDesktop /> */}
         <DelSubMobile />
         <DelSubDesktop />
         <SideMenu />

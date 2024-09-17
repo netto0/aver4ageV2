@@ -137,11 +137,7 @@ export default function AddSubDesktop() {
     <>
       <div
         id="desktop"
-        className={`hidden sm:block absolute opacity-95 z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] transition-all ${
-          activeModal == "add" || activeModal == "edit"
-            ? " top-[50%] translate-y-[-50%]"
-            : "-top-full"
-        }`}
+        className={`hidden sm:block absolute opacity-95 z-50 w-full max-w-md max-h-full animate-dropDown transition-all ml-[50%] translate-x-[-50%] mt-[25%] translate-y-[-50%]`}
       >
         <div className="relative bg-color2 rounded-lg shadow">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-color3">
