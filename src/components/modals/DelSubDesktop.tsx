@@ -9,7 +9,7 @@ import Button from "../Button";
 export default function DelSubDesktop() {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { getSubjects, formFields, successToast, closeModal, activeModal } =
+  const { getSubjects, formFields, successToast, closeModal } =
     React.useContext(GlobalContext);
 
   async function deleteSbj(e: any) {
@@ -28,10 +28,9 @@ export default function DelSubDesktop() {
     return (
       <>
         <div
-          id="DelModal"
-          className={`absolute z-50 w-full max-w-md max-h-full left-[50%] translate-x-[-50%] hidden sm:block transition-all ${
-            activeModal == "del" ? "top-1/3" : "-top-full"
-          }`}
+          id="DelSubDesktop"
+          onClick={(e) => e.stopPropagation()}
+          className={`z-50 w-full max-w-md max-h-full hidden sm:block transition-all animate-dropDown backdrop-blur-sm`}
         >
           <div className="relative bg-color2 rounded-lg shadow">
             <div className="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">

@@ -120,12 +120,9 @@ export default function AddSubMobile({ edit }: Props) {
   });
   return (
     <div
-      id="mobile"
-      className={`absolute sm:hidden bg-color2 z-50 opacity-95 backdrop-blur-xl w-full h-screen transition-all duration-300 ${
-        activeModal == "add" || activeModal == "edit"
-          ? "top-0"
-          : "-top-[1080px]"
-      }`}
+      id="AddSubMobile"
+      onClick={(e) => e.stopPropagation()}
+      className={`absolute sm:hidden bg-color2 z-50 opacity-95 backdrop-blur-sm w-full h-screen transition-all animate-dropDown`}
     >
       <div className="flex text-textColor justify-between items-center p-5 bg-color1 rounded-t-lg">
         <button
@@ -161,6 +158,7 @@ export default function AddSubMobile({ edit }: Props) {
           label="Nome"
           name="name"
           type="text"
+          autoFocus={activeModal == "add" ? true : false}
           handleChange={handleChange}
           autoComplete="off"
           error={errors.name}

@@ -5,14 +5,12 @@ import { toast } from "react-toastify";
 import Button from "../Button";
 
 export default function DelSubMobile() {
-  // const [loading, setLoading] = useState<boolean>(false);
 
-  const { getSubjects, formFields, successToast, closeModal, activeModal } =
+  const { getSubjects, formFields, successToast, closeModal } =
     React.useContext(GlobalContext);
 
   async function deleteSbj(e: any) {
     e.preventDefault();
-    // setLoading(true);
     const response = await deleteSubjectService(formFields._id!);
     if (response) {
       closeModal();
@@ -25,10 +23,9 @@ export default function DelSubMobile() {
   }
   return (
     <div
-      id="DelModal"
-      className={`absolute flex flex-col z-50 left-[50%] translate-x-[-50%] opacity-95 bg-color2 rounded-lg text-sky-200 sm:hidden font-semibold w-80 text-center transition-all ${
-        activeModal == "del" ? "top-1/3" : "-top-full"
-      }`}
+      id="DelSubMobile"
+      onClick={(e) => e.stopPropagation()}
+      className={`relative flex flex-col z-50 opacity-95 bg-color2 rounded-lg text-sky-200 sm:hidden font-semibold w-80 text-center transition-all animate-dropDown select-none`}
     >
       <div className="rounded-t-lg py-2 bg-color1">
         <svg
@@ -36,7 +33,7 @@ export default function DelSubMobile() {
           width="25"
           height="25"
           fill="currentColor"
-          className="bi bi-x absolute right-1 top-1 hover:cursor-pointer hover:text-color1 transition-all"
+          className="bi bi-x absolute right-1 top-1 transition-all"
           viewBox="0 0 16 16"
           onClick={closeModal}
         >

@@ -5,24 +5,15 @@ import { GlobalContext } from "./providers/GlobalContext";
 
 import Header from "./components/Header";
 import MobileHeader from "./components/MobileHeader";
-import DelSubMobile from "./components/modals/DelSubMobile";
-import SideMenu from "./components/modals/SideMenu";
 import Footer from "./components/Footer";
-import DebugScreen from "./components/DebugScreen";
-import AddSubDesktop from "./components/modals/AddSubDesktop";
-import AddSubMobile from "./components/modals/AddSubMobile";
+// import DebugScreen from "./components/DebugScreen";
 import { BrowserRouter as Router } from "react-router-dom";
 import RoutesComponent from "./RoutesComponent";
-import DelSubDesktop from "./components/modals/DelSubDesktop";
+import ModalSection from "./components/ModalSection";
 
 function App() {
-  const {
-    activeModal,
-    setActiveModal,
-    getSubjects,
-    setShowSortMenu,
-    closeModal,
-  } = React.useContext(GlobalContext);
+  const { activeModal, setActiveModal, getSubjects, setShowSortMenu } =
+    React.useContext(GlobalContext);
   const [subHeader, setSubHeader] = useState(false);
 
   function toggleSubHeader() {
@@ -65,20 +56,7 @@ function App() {
             subHeaderStatus={subHeader}
           />
         </div>
-        <div
-          id="blur"
-          onClick={closeModal}
-          className={`w-full h-screen fixed transition-all duration-300 ${
-            activeModal ? "z-50 backdrop-blur-sm" : "z-0 backdrop-blur-none"
-          }`}
-        />
-
-        {(activeModal == "add" || activeModal == "edit") && <AddSubDesktop />}
-        <AddSubMobile />
-        {/* <AddSubDesktop /> */}
-        <DelSubMobile />
-        <DelSubDesktop />
-        <SideMenu />
+        {activeModal && <ModalSection />}
         <RoutesComponent />
         <Footer />
         <ToastContainer />

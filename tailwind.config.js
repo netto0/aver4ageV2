@@ -1,4 +1,4 @@
-import { transform } from 'typescript';
+import { transform } from "typescript";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -19,14 +19,24 @@ export default {
       display: ["group-hover"],
       keyframes: {
         dropDown: {
-          "0%": {transform: "translateY(-300%) translateX(-50%)", opacity: "0%"},
-          "100%": {transform: "translateY(-50%) translateX(-50%)", opacity: "100%"}
-        }
+          "0%": { transform: "translateY(-100%)", opacity: "0%" },
+          "100%": { transform: "translateY(0%)", opacity: "100%" },
+        },
+        slideLeft: {
+          "0%": { transform: "translateX(100%)", opacity: "0%" },
+          "100%": { transform: "translateX(0%)", opacity: "100%" },
+        },
+        fadeIn: {
+          "0%": { opacity: "0%" },
+          "100%": { opacity: "100%" },
+        },
       },
       animation: {
-        dropDown: 'dropDown .3s linear'
-        // dropDown: 'dropDown 1s linear'
-      }
+        dropDown: "dropDown .2s linear",
+        slideLeft: "slideLeft .2s linear",
+        fadeIn: "fadeIn .2s linear",
+        // dropDown: 'dropDown 3s linear'
+      },
     },
   },
   plugins: [],

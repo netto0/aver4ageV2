@@ -136,8 +136,9 @@ export default function AddSubDesktop() {
   return (
     <>
       <div
-        id="desktop"
-        className={`hidden sm:block absolute opacity-95 z-50 w-full max-w-md max-h-full animate-dropDown transition-all ml-[50%] translate-x-[-50%] mt-[25%] translate-y-[-50%]`}
+        id="AddSubDesktop"
+        onClick={(e) => e.stopPropagation()}
+        className={`hidden sm:block opacity-95 z-50 w-full max-w-md max-h-full animate-dropDown transition-all backdrop-blur-sm`}
       >
         <div className="relative bg-color2 rounded-lg shadow">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-color3">
