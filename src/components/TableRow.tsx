@@ -71,7 +71,7 @@ export default function TableRow({ subject }: Props) {
         {!subject.examGrade ? "∅" : subject.examGrade}
       </td>
       <td className="relative w-[10%] h-full flex items-center justify-center z-40">
-        {!avg ? "∅" : avg.toFixed(2)}
+        {!avg ? "∅" : avg.toFixed(1)}
         {!avg && <Dot />}
         {approved() === false && <Dot color={"red"} />}
         {approved() && <Dot color={"green"} />}

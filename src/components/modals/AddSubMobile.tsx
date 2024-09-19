@@ -167,7 +167,7 @@ export default function AddSubMobile({ edit }: Props) {
           register={{ ...register("semester") }}
           label="Semestre"
           name="semester"
-          type="text"
+          type="number"
           handleChange={handleChange}
           autoComplete="off"
           error={errors.semester}
@@ -176,7 +176,8 @@ export default function AddSubMobile({ edit }: Props) {
           register={{ ...register("avaGrade") }}
           label="AVA"
           name="avaGrade"
-          type="text"
+          type="number"
+          step=".001"
           handleChange={handleChange}
           autoComplete="off"
           error={errors.avaGrade}
@@ -185,7 +186,8 @@ export default function AddSubMobile({ edit }: Props) {
           register={{ ...register("pimGrade") }}
           label="PIM"
           name="pimGrade"
-          type="text"
+          type="number"
+          step=".001"
           handleChange={handleChange}
           autoComplete="off"
           error={errors.pimGrade}
@@ -194,7 +196,8 @@ export default function AddSubMobile({ edit }: Props) {
           register={{ ...register("examGrade") }}
           label="Prova"
           name="examGrade"
-          type="text"
+          type="number"
+          step=".001"
           handleChange={handleChange}
           autoComplete="off"
           error={errors.examGrade}
@@ -204,7 +207,8 @@ export default function AddSubMobile({ edit }: Props) {
             register={{ ...register("retakeGrade") }}
             label="Exame"
             name="retakeGrade"
-            type="text"
+            type="number"
+            step=".001"
             handleChange={handleChange}
             autoComplete="off"
             error={errors.retakeGrade}
@@ -214,7 +218,7 @@ export default function AddSubMobile({ edit }: Props) {
       <div className="w-fit ml-auto mr-2 mt-2 bg-color4 rounded-xl px-9 py-2 text-center text-textColor flex flex-col items-center">
         <span className="absolute">Média</span>
         <h1 className="text-4xl mt-5">
-          {formFields.avg ? formFields.avg.toFixed(2) : (0.0).toFixed(2)}
+          {formFields.avg ? formFields.avg.toFixed(2) : (0.0).toFixed(1)}
         </h1>
       </div>
     </div>

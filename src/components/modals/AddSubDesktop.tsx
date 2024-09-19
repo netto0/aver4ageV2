@@ -183,6 +183,7 @@ export default function AddSubDesktop() {
                   max={10}
                   min={0}
                   type="number"
+                  step=".001"
                   handleChange={handleChange}
                   placeholder="0"
                   error={errors.avaGrade}
@@ -196,6 +197,7 @@ export default function AddSubDesktop() {
                   max={10}
                   min={0}
                   type="number"
+                  step=".001"
                   handleChange={handleChange}
                   placeholder="0"
                   error={errors.pimGrade}
@@ -209,6 +211,7 @@ export default function AddSubDesktop() {
                   max={10}
                   min={0}
                   type="number"
+                  step=".001"
                   handleChange={handleChange}
                   placeholder="0"
                   error={errors.examGrade}
@@ -222,6 +225,7 @@ export default function AddSubDesktop() {
                   max={10}
                   min={0}
                   type="number"
+                  step=".001"
                   handleChange={handleChange}
                   error={errors.retakeGrade}
                   readOnly={!readInput}
@@ -234,7 +238,9 @@ export default function AddSubDesktop() {
                   label="Média"
                   max={10}
                   min={0}
+                  value={formFields.avg?.toFixed(1)}
                   type="number"
+                  step=".001"
                   error={errors.avg}
                   readOnly
                 />
