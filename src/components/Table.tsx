@@ -169,7 +169,7 @@ export default function Table() {
         </thead>
         <tbody
           id="table"
-          className="block scroll overflow-y-auto h-[587px] no-scrollbar bg-color4 scroll-smooth"
+          className="block scroll overflow-y-auto h-[587px] no-scrollbar bg-color3 scroll-smooth"
         >
           {subjectsList.map((subject, i) => (
             <TableRow key={i} subject={subject} />

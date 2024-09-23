@@ -33,8 +33,8 @@ export default function DelSubDesktop() {
           className={`z-50 w-full max-w-md max-h-full hidden sm:block transition-all animate-dropDown backdrop-blur-sm`}
         >
           <div className="relative bg-color2 rounded-lg shadow">
-            <div className="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <div className="flex items-center justify-between p-4 border-b rounded-t border-color3">
+              <h3 className="text-lg font-semibold text-gray-400">
                 Excluir matéria ?
               </h3>
               <CloseBtn clickFunc={closeModal} />

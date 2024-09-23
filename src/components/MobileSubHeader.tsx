@@ -15,7 +15,7 @@ export default function MobileSubHeader({ show }: Props) {
   }
   return (
     <div
-      className={`relative bg-color1 flex sm:hidden text-textColor py-3 px-5 h-12 z-40 justify-around text-lg select-none transition-all ${
+      className={`relative bg-color2 flex sm:hidden text-textColor py-3 px-5 h-12 z-40 justify-around text-lg select-none transition-all ${
         show ? "mt-20" : "mt-8"
       } border border-blue-400 border-none`}
     >

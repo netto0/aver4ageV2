@@ -20,7 +20,7 @@ function ListItem({ subject }: IItemProps) {
 
   return (
     <li
-      className="relative text-textColor bg-color2 border-b border-textColor list-none px-5 py-3 flex flex-col"
+      className="relative text-textColor bg-color1 border-b border-stone-950 list-none px-5 py-3 flex flex-col"
       ref={fatherRef}
       id={JSON.stringify(subject)}
       onClick={() => handleClick("edit")}

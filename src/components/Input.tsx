@@ -41,10 +41,10 @@ export default function Input({
   }
 
   const defaultClass = `bg-color2 sm:bg-color3 h-20 sm:h-fit truncate sm:border sm:border-none placeholder-color3 
-    sm:placeholder-color1 pl-1.5 sm:pl-2.5 text-blue-200 text-lg sm:text-sm sm:rounded-lg block w-full p-2.5 inputDarkModeOverride focus:outline-none`;
+    sm:placeholder-color1 sm:font-semibold pl-1.5 sm:pl-2.5 text-gray-300 text-lg sm:text-sm sm:rounded-lg block w-full p-2.5 inputDarkModeOverride focus:outline-none`;
 
   const readOnlyClass =
-    "bg-color4 border border-none text-blue-200 text-sm rounded-lg block w-full p-2.5 outline-none hover:cursor-auto inputDarkModeOverride";
+    "bg-color3 border border-none text-gray-500 text-sm rounded-lg block w-full p-2.5 outline-none hover:cursor-auto inputDarkModeOverride";
 
   return (
     <div className="w-full sm:block flex border-b border-color4 sm:border-none">
@@ -52,7 +52,8 @@ export default function Input({
         <label
           htmlFor={label}
           className={`flex gap-1 text-xl sm:text-sm items-center sm:px-0 pl-5 sm:w-fit w-fit ${
-            readOnly ? "text-sky-800" : "text-sky-600 sm:text-blue-300"
+            // readOnly ? "text-sky-800" : "text-sky-600 sm:text-blue-300"
+            readOnly ? "text-color4" : "text-textColor"
           }`}
         >
           {label}

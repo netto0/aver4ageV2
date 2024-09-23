@@ -9,7 +9,8 @@
 }
 
 html {
-    background-color: #07141E ;
+    /* background-color: #07141E ; */
+    background-color: #141414 ;
 }
 
 @layer utilities {

@@ -21,7 +21,7 @@ export default function MobileHeader({
 
   return (
     <>
-      <header className="bg-[#01080e] flex gap-3 sm:hidden justify-between items-center text-textColor drop-shadow-sm py-4 px-6 border-2 h-20 z-50 border-red-400 border-none absolute w-full">
+      <header className="bg-color1 flex gap-3 sm:hidden justify-between items-center text-textColor drop-shadow-sm py-4 px-6 border-b h-20 z-50 border-stone-950 absolute w-full">
         <div className="relative flex w-full justify-end items-center border-2 border-green-500 border-none">
           <span
             className={`absolute left-0 text-2xl font-semibold select-none ${

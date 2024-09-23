@@ -6,13 +6,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        color1: "#010E17",
-        color2: "#07141E",
-        color3: "#162F42",
-        color4: "#132938",
+        // color1: "#010E17",
+        color1: "#0C0C0C",
+        // color2: "#07141E",
+        color2: "#141414",
+        // color3: "#162F42",
+        color3: "#212121",
+        // color4: "#132938",
+        color4: "#2C2C2C",
         color5: "#1E415B",
         color6: "#040d13",
-        textColor: "#5481a1",
+        // textColor: "#5481a1",
+        textColor: "#5A5A5A",
         // "textColor": "#405869",
         customOrange: "#F45E0A",
       },

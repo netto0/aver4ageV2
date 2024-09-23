@@ -6,7 +6,7 @@ export default function MobileDelModal() {
   const { closeModal } = React.useContext(GlobalContext);
   return (
     <div className="sticky flex flex-col z-50 top-1/2 mx-auto translate-y-[-50%] bg-color3 rounded-lg text-sky-200 sm:hidden font-semibold w-80 text-center">
-      <div className="bg-color4 rounded-t-lg py-2">
+      <div className="bg-color3 rounded-t-lg py-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="25"
