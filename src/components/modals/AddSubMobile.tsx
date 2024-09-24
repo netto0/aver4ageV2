@@ -66,11 +66,16 @@ export default function AddSubMobile({ edit }: Props) {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name != "name" && e.target.name != "semester") {
-      if (parseFloat(e.target.value) >= 10) {
+    if (e.target.name != "name") {
+      let maxValue = 10
+      if (e.target.name == "semester"){
+        maxValue = 12
+      }
+      
+      if (parseFloat(e.target.value) >= maxValue) {
         setFormFields({
           ...formFields,
-          [e.target.name]: 10,
+          [e.target.name]: maxValue,
         });
       } else if (parseFloat(e.target.value) <= 0) {
         setFormFields({
@@ -83,7 +88,7 @@ export default function AddSubMobile({ edit }: Props) {
           [e.target.name]: parseFloat(e.target.value),
         });
       }
-    } else {
+    } else {  
       setFormFields({ ...formFields, [e.target.name]: e.target.value });
     }
   };

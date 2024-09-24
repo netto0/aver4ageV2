@@ -130,9 +130,11 @@ export const GlobalProvider = ({ children }: IProps) => {
   }
 
   function closeModal() {
-    setActiveModal(false);
-    setFormFields(defaultForm);
-    setLoading(false);
+    setTimeout(() => {
+      setActiveModal(false);
+      setFormFields(defaultForm);
+      setLoading(false);
+    }, 0);
   }
 
   function sortFunc(a: any, b: any) {

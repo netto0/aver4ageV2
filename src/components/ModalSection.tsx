@@ -8,7 +8,6 @@ import SideMenu from "./modals/SideMenu";
 
 export default function ModalSection() {
   const { activeModal, closeModal } = React.useContext(GlobalContext);
-
   return (
     <div
       id="ModalSection"

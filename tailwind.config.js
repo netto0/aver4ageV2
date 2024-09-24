@@ -17,8 +17,8 @@ export default {
         color5: "#1E415B",
         color6: "#040d13",
         // textColor: "#5481a1",
-        textColor: "#5A5A5A",
-        // "textColor": "#405869",
+        // textColor: "#5A5A5A",
+        textColor: "#727272",
         customOrange: "#F45E0A",
       },
       display: ["group-hover"],
@@ -40,7 +40,6 @@ export default {
         dropDown: "dropDown .2s linear",
         slideLeft: "slideLeft .2s linear",
         fadeIn: "fadeIn .2s linear",
-        // dropDown: 'dropDown 3s linear'
       },
     },
   },
