@@ -123,7 +123,11 @@ const offlineList = [
 
 async function getSubjectsService() {
   try {
-    const response = await axios.get(`${baseUrl}/subject`);
+    const response = await axios.get(`${baseUrl}/subject`, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
     return response.data;
   } catch (error) {
     return offlineList;
