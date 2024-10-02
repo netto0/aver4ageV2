@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000/average_api";
-// const baseUrl = "https://aver4age-api.vercel.app";
+// const baseUrl = "http://localhost:3000/average_api";
+const baseUrl = "http://averageapi.vercel.app/average_api";
 
 export { baseUrl };
